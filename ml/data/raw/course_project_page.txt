@@ -1,0 +1,97 @@
+Important Dates
+Deliverable | Weight (22% of overall course marks) | Due Date
+Group Registration on Canvas | 0 | September 19
+1. Project Proposal (PDF) | 2 | October 24
+2. Poster Presentation (LINK to Poster) | 10 | One day before your assigned Poster Presentation Session
+3. Video Trailer (LINK to Video) | 3 | November 30
+4. Final Report (PDF) | 7 |
+Except for the project presentation, all project delieverables are due by 23:59 Hong Kong Time on the specified date.
+
+Group Formation
+You should form a group of 4-5 members from the same lecture session. You can use the following links to find classmates. L1 helper sheet here.
+After forming your group, You need to register your group in Canvas Group by the deadline (see Important Dates). If you cannot form a group or your group has fewer than 4 members after this date, we will randomly assign you or your team to other students.
+
+Project Overview
+The Course Project is a group-based assignment that gives you and your teammates an opportunity to apply the knowledge and skills developed in this course to a meaningful real-world problem of your interest. Your project topic should be relevant to at least one of the following:
+HKUST: for example, improving campus life, learning experiences, sustainability, accessibility, student well-being, administrative processes, or university-community engagement.
+Your major or discipline: for example, addressing a practical challenge, investigating an emerging issue, developing a prototype, or applying course concepts in a professional or industry context.
+A Sample Project demo based on the idea from last year's project is here. Details for each component are in the tabs below.
+
+Final Report
+Extend the Progress Report to a final report summarizing your project.
+Format
+Template: template.docx
+Length: within 8 pages
+Title, References and Appendix: The 8-page limit does not include the title page, reference list and the appendix. You may include additional materials in the appendix after the references, but your work will be graded primarily on the first seven to eight pages.
+Suggested Report Structure
+1. Title and group information (Title page): Project title; names, student IDs, and contribution table.
+2. Problem and motivation (0.75 - 1 page): Define the problem clearly. Explain who is affected, why it matters, and its relevance to HKUST, the group members' major(s), or another real-world setting. Briefly describe existing approaches or alternatives, where relevant.
+3. Proposed AI solution (0.75 - 1 page): Explain the proposed solution and the role of AI. State the system input, output, target users, and expected use. Explain why AI is suitable for the problem and what the solution improves compared with an existing or non-AI approach. Include a workflow diagram if helpful.
+4. Data collection and preprocessing (1 - 1.5 pages): Describe the data used or proposed: source, type, size, format, and relevant variables or labels. Explain how data were collected, selected, generated, or accessed. Describe important preprocessing steps, such as cleaning, handling missing values, removing duplicates, anonymising data, labelling, tokenising text, resizing images, normalising values, encoding variables, or splitting data into training and test sets. Explain why these steps were necessary.
+5. Methods and implementation (1 - 1.5 pages): Describe the AI method, model, tool, or system design used. Explain the reasoning behind key design choices. State relevant software, platforms, models, prompts, libraries, or frameworks. For an implemented project, explain the main workflow and key implementation decisions. For a design-oriented project, explain how the system would operate and why the proposed method is technically feasible.
+6. Evaluation and results (1.5 - 2 pages): Explain how the solution was evaluated. Present evidence such as performance metrics, baseline comparisons, test cases, user feedback, usability results, error analysis, or prototype demonstrations. Interpret the results rather than only presenting numbers or screenshots. If the project was not fully implemented, evaluate the solution through a realistic validation method, such as a proof of concept, structured expert review, scenario-based testing, comparative analysis, or user feedback.
+7. Impact, limitations, and future work (0.7 - 1 page): Discuss the likely practical, educational, research, or social impact of the project. Explain what is original, adapted, or improved in your work. Identify limitations honestly, including data quality, limited sample size, technical constraints, generalisability, potential bias, privacy, accuracy, reliability, misuse, or deployment challenges. Propose specific next steps to improve or extend the project.
+8. Conclusion (0.25 - 0.5 page): Summarise the problem, the proposed AI solution, the main findings, and the project's contribution. Do not introduce new evidence in this section.
+References: Provide complete references for all sources, datasets, tools, models, libraries, images, and prior work cited in the report.
+Suggested Prototyping Tools
+Demonstrate the user experience of an AI app: Figma wireframe or clickable prototype
+Build a chatbot, document assistant, or workflow-based AI application: Dify
+Rapidly create a simple working web interface from a natural-language specification: Bolt or Lovable
+Build a more customised application involving code, APIs, data processing, or a model pipeline: Cursor or OpenCode, together with Python, Colab, or Jupyter Notebook
+Grading
+Novelty and relevance: Originality of the problem and solution; whether you collected or prepared your own data; and relevance to HKUST or your major(s).
+Technical quality: Appropriate use of AI models or tools, and a sound analysis of results.
+Organisation and clarity: A coherent structure, precise writing, and a report that is easy to follow.
+
+Submission
+Project deliverables should be submitted through Canvas. Do not email them to us.
+All the deliverables are due at 23:59 Hong Kong Time on the specified date. Late submissions will not be accepted!
+File Structure
+1. Proposal Report (Due October 24): teamX_proposal.pdf
+2. Final Report (Due November 30): teamX_report.pdf
+Replace X with your actual team number
+The teamX_report.pdf must include a link to your poster and a link to your video.
+Make sure the shared drive link has view access enabled so we can access your poster and video
+Academic Integrity and AI Policy
+Please refer to the Coursework page.
+
+Poster Presentation Session
+Each group will participate in a Poster Presentation Session (around Week 12-13) to communicate its AI project to the teaching team and fellow students. The session is designed as an interactive showcase: other classmates will approach your group, ask questions, and may request a demonstration of your prototype or proposed solution.
+Your group should be prepared to explain the project clearly to both technical and non-technical audiences, demonstrate the prototype where applicable, and answer questions about the problem, AI solution, data, methods, evaluation, limitations, and potential impact. Effective poster presentations use a logical visual flow, concise text, legible design, and interaction with the audience rather than treating the poster as a full report printed at a larger size.
+Poster Requirements
+Each group must prepare three A3-size poster panels. The three posters should work together as one coherent visual story.
+Poster size: A3 per panel.
+Number of panels: Three posters per group.
+Orientation: Portrait or landscape is permitted, but all three panels should use a consistent orientation and visual style where possible.
+Suggested Format: Print-ready PDF files may be required before the session; further submission arrangements will be announced separately.
+Opening pitch: A 30-second opening pitch that attracts attention and states the problem, AI solution, and expected benefit.
+Poster walkthrough: A 2-minute poster walkthrough covering the main visual story across the three panels.
+Demonstration: A 3-5 minute demonstration, where applicable, showing the prototype, workflow, sample input and output, or evaluation process.
+Q&A: Clear answers to likely questions about data sources, preprocessing, choice of AI approach, evaluation, limitations, responsible use, novelty, and impact.
+Content: Posters should use concise text, diagrams, screenshots, figures, tables, and visual examples. Do not copy the Final Report onto the posters.
+Demo: Groups may use a laptop, tablet, QR code, short video, or live prototype to support the presentation. The demonstration supplements the posters; it does not replace them.
+Participation: All group members should be present and able to explain the project and answer questions. Members may take turns presenting or demonstrating the prototype.
+Presentation Schedule
+Each team presents in one session and attends the next. The last session attends the first.
+Project Presentation I Nov 18: Presenting Team 1, 11, 17, 19, 20, 23, 24. Attending Team 4, 6, 7, 9, 12, 15, 27.
+Project Presentation II Nov 20: Presenting Team 4, 6, 7, 9, 12, 15, 27. Attending Team 2, 8, 14, 16, 18, 22, 29.
+Project Presentation III Nov 25: Presenting Team 2, 8, 14, 16, 18, 22, 29. Attending Team 3, 5, 10, 13, 25, 26, 28, 30.
+Project Presentation IV Nov 27: Presenting Team 3, 5, 10, 13, 25, 26, 28, 30. Attending Team 1, 11, 17, 19, 20, 23, 24.
+Grading
+Novelty: Is the problem or approach original?
+Understanding: Do you show a solid grasp of the problem and the AI techniques you apply?
+Poster: Quality of design, layout, and content.
+Demo: Does your solution actually work?
+Clarity: Can the audience understand what you're solving and how?
+
+Video Trailer
+Each group must create a short AI-generated or AI-assisted video trailer to introduce and promote its Course Project. The trailer should be engaging, accessible to a general audience, and designed to communicate the project's central idea, not to reproduce the full Final Report.
+The video should be approximately 1-2 minutes long. It should use AI tools for ideation, scriptwriting, narration, visuals, animation, music, video generation, editing, or subtitles. However, your group remains responsible for the accuracy, appropriateness, copyright compliance, and ethical use of all material included in the video.
+Submission Requirements
+Length: Approximately 2 minutes; recommended range: 1.5-2.5 minutes.
+Format: Upload the video to a ShareDrive.
+Visibility: Set appropriate permissions in the ShareDrive.
+Link submission: Include the ShareDrive URL in the title page of the Final Report.
+Grading
+Creativity: An original, engaging story that communicates the project idea to a general audience.
+Visual and media quality: Effective use of visuals, audio, pacing, and AI-assisted media.

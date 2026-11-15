@@ -1,0 +1,71 @@
+{
+ "source": "Course project page · Important Dates (weights are % of overall course marks; project total 22)",
+ "items": [
+  {
+   "key": "registration",
+   "name": "Group Registration",
+   "weight": 0,
+   "aliases": [
+    "registration",
+    "register"
+   ]
+  },
+  {
+   "key": "proposal",
+   "name": "Project Proposal",
+   "weight": 2,
+   "aliases": [
+    "proposal"
+   ]
+  },
+  {
+   "key": "poster",
+   "name": "Poster Presentation",
+   "weight": 10,
+   "aliases": [
+    "poster",
+    "presentation"
+   ]
+  },
+  {
+   "key": "video",
+   "name": "Video Trailer",
+   "weight": 3,
+   "aliases": [
+    "video",
+    "trailer"
+   ]
+  },
+  {
+   "key": "report",
+   "name": "Final Report",
+   "weight": 7,
+   "aliases": [
+    "report"
+   ]
+  }
+ ],
+ "no_weight_terms": [
+  "quiz",
+  "quizzes",
+  "assignment",
+  "assignments",
+  "midterm",
+  "exam",
+  "exams",
+  "participation",
+  "attendance",
+  "lab",
+  "labs",
+  "tutorial",
+  "tutorials"
+ ],
+ "demo_scores": {
+  "registration": 100,
+  "proposal": 85,
+  "poster": 90,
+  "video": 80,
+  "report": 80
+ },
+ "note": "Course-wide weights (quizzes, assignments, exams) are not in the source documents and are deliberately absent."
+}

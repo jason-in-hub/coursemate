@@ -1,0 +1,157 @@
+# CourseMate ML prototype: results
+
+All numbers come from running `bash run_all.sh` in this folder; each table names the script and file it came from. Paste-ready for report sections 4 (data), 5 (methods) and 6 (evaluation).
+
+**Circularity warning.** The 167 labelled questions in `ml/data/questions.csv` were written and labelled by one author (the same person who built the system), with gold chunks chosen from the chunk text. That makes every number here optimistic. Before the report, a second team member must label the questions independently (label and gold chunks, blind to these labels); report inter-annotator agreement (Cohen's kappa on the label, overlap on gold chunks) and rerun.
+
+## 4. Data and preprocessing
+
+Sources (only these): the course project page (text), 22 Canvas assignment items (JSON, due dates in UTC), the Canvas front page. Course-wide grading weights (quizzes, assignments, exams) are not in these sources and are not used anywhere.
+
+- **Chunks** (`ml/build_corpus.py` -> `ml/data/chunks.jsonl`): 37 chunks. Course page split by section, then into windows of about 150 words (max 200) with a 20-word overlap (13-15%). Page chunk sizes in words: [73, 83, 100, 113, 138, 138, 138, 138, 138, 138, 139, 139, 139, 155]. Sections shorter than 100 words (Important Dates, Group Formation) stay whole: a deviation from the 100-200-word plan, kept so each chunk has one source label. Each Canvas item is one short chunk (17-23 words) with its due time converted to HKT (UTC+8); items with no due date say so.
+- **Normalisation and tokeniser** (`ml/textnorm.py`, ported to JS): Unicode NFKC, lowercase; tokens are ASCII letter/digit runs or single Han characters, so "proposal幾時due" -> proposal / 幾 / 時 / due. Single-character tokens are kept ("Quiz 2", "Part A", "get 0"). MiniLM gets the raw text and uses its own WordPiece tokeniser.
+- **Questions** (`ml/data/questions.csv`): 167 labelled questions; kinds: clean 54, codemix 28, paraphrase 46, typo 26, whatif 13. Lookup questions carry every chunk that states the answer as gold. Calc questions carry the expected item, score and stamp; what-ifs on quizzes/assignments/exams are labelled calc with expected ESCALATED ("weight not in table").
+- **Split** (`ml/make_split.py`, seed 1945, frozen before any model was fitted; `run_all.sh` checks its SHA-256): 60/20/20 by question family (paraphrase/typo/code-mix variants of one question stay together), stratified by label.
+
+| split | lookup | calc | oos | total |
+|---|---|---|---|---|
+| train | 67 | 16 | 17 | 100 |
+| tune | 26 | 4 | 6 | 36 |
+| test | 21 | 5 | 5 | 31 |
+
+Test has only 5 calc and 5 out-of-scope questions, so per-class numbers on test move by 0.2 per question.
+
+## 5. Methods
+
+- **Router**: TF-IDF + logistic regression (C=10, class-balanced), 3 classes lookup / calc / oos, fitted on train only. Analyzer chosen on tune macro-F1: word1 0.890, word12 0.785, char35 0.749 -> **word1** (`ml/train_router.py`).
+- **Lookup**: BM25 vs TF-IDF (word 1-gram, word 1-2-gram, char_wb 3-5-gram) vs all-MiniLM-L6-v2 embeddings (cosine). Selection rule: max tune MRR, tie -> tune Top-3 -> order bm25,word1,word12,char35,minilm. Winner on tune: **bm25**; deployed: **bm25**. MiniLM did not win, so no transformers.js download is needed; the page stays a single static file.
+- **Calculator** (`ml/calc.py`): deterministic code over the Important Dates weights only (Registration 0, Proposal 2, Poster 10, Video 3, Final Report 7; total 22). Integer arithmetic in hundredths of a mark, so 18.7 is exact. A what-if on any item without a weight is ESCALATED with reason "weight not in table". No LLM is used anywhere.
+- **Confidence and fallback** (`ml/pipeline.py`): lookup conf = router max-probability x s/(s+K), s = top-1 BM25 score, K = 5.726 (median top-1 BM25 score on train lookups); calc conf = router max-probability; out-of-scope always escalates. Below the threshold the answer is ESCALATED: "Please ask the TA." Threshold rule (fixed before running): highest tune coverage with tune risk <= 0.1; ties -> higher threshold. Chosen: **0.4335**.
+- **Browser deployment**: `ml/export_model.py` writes `model.json` (router vocabulary, idf, LR coefficients, BM25 term statistics, chunk texts, threshold, weights) and inlines it into `index.html`, so the page works from file:// and on any static host with no network calls.
+
+## 6. Evaluation
+
+### 6.1 Lookup retrieval (`ml/eval_retrieval.py` -> `results/retrieval.json`)
+
+Test split, lookup questions only (n = 21); 95% bootstrap CI (2000 resamples) in brackets. Top-k = any gold chunk in the top k. Recall@k = share of a question's gold chunks found in the top k. MRR = 1 / rank of first gold chunk.
+
+| representation | tokeniser | tune MRR (selection) | Top-1 | Top-3 | R@1 | R@3 | R@5 | MRR |
+|---|---|---|---|---|---|---|---|---|
+| bm25 | word | 0.884 | 0.762 [0.571, 0.952] | 0.857 [0.714, 1.000] | 0.571 | 0.786 | 0.833 | 0.820 |
+| word1 | word | 0.757 | 0.714 [0.524, 0.905] | 0.857 [0.714, 1.000] | 0.524 | 0.786 | 0.881 | 0.811 |
+| word12 | word (1-2-gram) | 0.756 | 0.667 [0.476, 0.857] | 0.857 [0.714, 1.000] | 0.524 | 0.810 | 0.905 | 0.787 |
+| char35 | sub-word chars | 0.867 | 0.476 [0.286, 0.667] | 0.952 [0.857, 1.000] | 0.357 | 0.857 | 0.952 | 0.716 |
+| minilm | WordPiece | 0.654 | 0.619 [0.429, 0.810] | 0.762 [0.571, 0.952] | 0.452 | 0.619 | 0.714 | 0.710 |
+
+Larger n: retrieval is not trained on questions, so all 114 lookup questions can also be scored (supplementary; the test split above is the primary number):
+
+| representation | Top-1 all | Top-3 all | Top-1 clean | Top-1 paraphrase | Top-1 typo | Top-1 code-mix |
+|---|---|---|---|---|---|---|
+| bm25 | 0.772 [0.693, 0.851] | 0.912 [0.860, 0.956] | 0.818 (n=33) | 0.750 (n=40) | 0.667 (n=21) | 0.850 (n=20) |
+| word1 | 0.728 [0.649, 0.807] | 0.895 [0.833, 0.947] | 0.697 (n=33) | 0.825 (n=40) | 0.667 (n=21) | 0.650 (n=20) |
+| word12 | 0.711 [0.632, 0.789] | 0.868 [0.807, 0.930] | 0.758 (n=33) | 0.700 (n=40) | 0.619 (n=21) | 0.750 (n=20) |
+| char35 | 0.684 [0.596, 0.772] | 0.877 [0.816, 0.939] | 0.667 (n=33) | 0.725 (n=40) | 0.667 (n=21) | 0.650 (n=20) |
+| minilm | 0.535 [0.447, 0.623] | 0.772 [0.693, 0.842] | 0.576 (n=33) | 0.600 (n=40) | 0.476 (n=21) | 0.400 (n=20) |
+
+MiniLM status: ran from the local Hugging Face cache.
+
+### 6.2 Router (`ml/train_router.py` -> `results/router.json`)
+
+| metric | value | n |
+|---|---|---|
+| test macro-F1 | **0.835** | 31 |
+| test macro-F1, majority-class baseline | 0.269 | 31 |
+| test accuracy | 0.871 | 31 |
+| test per-class F1 | lookup 0.905, calc 1.000, oos 0.600 | {'lookup': 21, 'calc': 5, 'oos': 5} |
+| 5-fold CV macro-F1, train+tune, family-grouped | 0.673 +- 0.053 (folds 0.688, 0.661, 0.672, 0.596, 0.744) | 136 |
+| 5-fold CV majority baseline | 0.271 | 136 |
+
+Test confusion matrix (rows = true, columns = predicted):
+
+| | lookup | calc | oos |
+|---|---|---|---|
+| lookup | 19 | 0 | 2 |
+| calc | 0 | 5 | 0 |
+| oos | 2 | 0 | 3 |
+
+[INFERRED] The CV mean (0.673) is well below the test figure, so the test macro-F1 is probably a favourable draw of 31 questions; the plausible range is roughly the span between the two.
+
+### 6.3 Risk-coverage and threshold (`ml/train_router.py` -> `results/risk_coverage.png`)
+
+Coverage = answered (SOURCED or CALCULATED) / all questions. Risk = wrong answers / answered. Wrong = lookup whose top chunk is not gold, calc with wrong item or score, or any answer to a question that should escalate.
+
+![risk-coverage](risk_coverage.png)
+
+| setting | coverage | risk | answered | wrong | n |
+|---|---|---|---|---|---|
+| tune, no threshold | 0.833 | 0.200 | 30 | 6 | 36 |
+| tune, threshold 0.4335 | 0.306 | 0.091 | 11 | 1 | 36 |
+| test, no threshold | 0.774 | 0.250 | 24 | 6 | 31 |
+| **test, threshold 0.4335** | 0.355 | 0.182 | 11 | 2 | 31 |
+
+At the threshold, every test question that should escalate did (7/7). End-to-end correct (right answer, or escalation when escalation was expected): 16/31 test. The cost is coverage: 9 test questions escalated as low-confidence even though the top chunk was correct. The threshold came from only 36 tune questions, so it is coarse; test risk (0.182) is above the 0.1 tune cap.
+
+**Demo impact.** At this threshold 1 of the 4 sample buttons get an answer (2 of 4 behave as intended; escalating the cheating request is correct): "When is the proposal due?" -> ESCALATED (conf 0.41); "If I get 0 on the poster, what is my project mark?" -> CALCULATED (conf 0.99); "Can you write my assignment?" -> ESCALATED (conf 0.49); "Is late submission allowed?" -> ESCALATED (conf 0.29). The escalated lookups retrieve the correct chunk; they fall below the threshold. Choosing a lower threshold trades risk for coverage: that is a team decision. Tune operating points (from `results/router.json`, every 3rd candidate):
+
+| threshold | tune coverage | tune risk | answered |
+|---|---|---|---|
+| 0.000 | 0.833 | 0.200 | 30 |
+| 0.282 | 0.778 | 0.214 | 28 |
+| 0.306 | 0.694 | 0.160 | 25 |
+| 0.324 | 0.611 | 0.136 | 22 |
+| 0.366 | 0.528 | 0.158 | 19 |
+| 0.391 | 0.444 | 0.188 | 16 |
+| 0.426 | 0.361 | 0.154 | 13 |
+| 0.449 | 0.278 | 0.100 | 10 |
+| 0.485 | 0.194 | 0.000 | 7 |
+| 0.605 | 0.111 | 0.000 | 4 |
+| 0.957 | 0.028 | 0.000 | 1 |
+
+### 6.4 Calculator (`ml/test_calc.py`, `ml/mutate_calc.sh`)
+
+Exact match on 15 hand-computed cases (expected values typed by hand in the test file): **15/15**. Mutation check: Poster weight changed 10 -> 11 gives 4/15 (red), restored by checksum, then green again.
+
+### 6.5 Python-JS parity (`ml/parity.py`, `ml/mutate_parity.sh`)
+
+The JS embedded in `index.html` reproduces the Python pipeline on 175/175 questions (all 167 labelled + edge cases) on label, top chunk, stamp, reason and calculator output. Max probability difference 2.2e-16; smallest router top1-top2 margin 0.0236. A deliberate change to the JS confidence formula turns this red (see run log).
+
+### 6.6 Against the proposal targets
+
+| target | result | met? | source |
+|---|---|---|---|
+| router macro-F1 >= 0.85 | test 0.835 (n=31); CV 0.673 | no | train_router.py |
+| lookup Top-3 >= 80% (bm25) | test 85.7% [CI 71.4%-100.0%], n=21 | yes (point estimate); CI lower bound below 80% | eval_retrieval.py |
+| calculator exact match >= 95% | 15/15 | yes | test_calc.py |
+
+### 6.7 Error analysis: 5 real test failures (`results/predictions.csv`)
+
+15 of 31 test questions were not handled correctly end-to-end. Five, chosen to cover different failure types:
+
+| id | question | true | router | stamp | top chunk | why |
+|---|---|---|---|---|---|---|
+| q012 | video deadline | lookup | lookup | ESCALATED | page:group-formation:0 | BM25 per-term scores: Group Formation 3.04, all from 'deadline' ('register ... by the deadline'); gold chunks 2.47 and 2.52, only from 'video', because they say 'Due' rather than 'deadline'. Low confidence, so it escalated: a safe miss. |
+| q030 | How much is each project item worth? | lookup | oos | ESCALATED | page:final-report:2 | Router says out-of-scope: 'much' and 'worth' lean out-of-scope because the train question "How much are the quizzes worth in the course grade?" is labelled out-of-scope; 'each' and 'item' are unseen. BM25 also misses (Final Report chunk first): 'worth' and 'item' never appear in the corpus, which says 'Weight' and 'Deliverable'. |
+| q036 | Can I email the report to the instructor? | lookup | oos | ESCALATED | page:submission:0 | Router sends it to out-of-scope (conf 0.73). 'email' is not in the router's training vocabulary; 'instructor' (learnt from the train out-of-scope question "When are the instructor office hours?") and the function words 'to', 'the', 'i' carry the largest out-of-scope weights. Retrieval alone found the right chunk. |
+| q038 | 喺邊度submit report? | lookup | lookup | ESCALATED | page:submission:0 | Code-mixed query: the three Han characters and 'submit' do not occur in the corpus (corpus has 'submitted', 'submission'), so the only BM25 evidence is 'report' (1.56 on the gold chunk). Right chunk, but confidence too low: escalated. |
+| q057 | How long should the conclusion be? | lookup | lookup | SOURCED | page:video-trailer:0 | Wrong answer shown (the worst failure type). BM25 per-term scores: Video Trailer chunk 5.60 from 'long' 1.93, 'should' 1.72, 'be' 1.21, 'the' 0.74; gold Final Report chunk 2.83, of which 'conclusion' 2.12. Common words outvote the one content word. |
+
+Pattern: answered-but-wrong cases come from BM25 word overlap with the wrong section; router misses come from cue words learnt from a small training set ('instructor', 'worth'); most other failures are safe escalations caused by the coarse threshold.
+
+## Source conflicts found in the data
+
+1. **Poster due date.** Canvas lists *Poster Presentation* due Mon 30 Nov 2026, 23:59 HKT (`canvas_assignments.json`, 2026-11-30T15:59:59Z). The course project page says the poster link is due "One day before your assigned Poster Presentation Session" (Team 9 presents Nov 20). Both are kept as separate chunks with their own source labels; the page shows a conflict note on either. Ask the TA which is binding.
+2. **Final Report points.** Canvas shows "Final Report (with Video Trailer Link)" as 10 points; the course page weights Final Report 7 and Video Trailer 3. The calculator uses the course page.
+3. **Video length.** The page says "approximately 1-2 minutes" and also "Approximately 2 minutes; recommended range: 1.5-2.5 minutes".
+4. The Important Dates table leaves the Final Report due date blank; only the Submission section and Canvas give Nov 30.
+
+## Limitations
+
+- Calculator takes the first number in the question: "poster is worth 10%, what if I get 0" computes a score of 10, and "8 out of 10" computes 8.
+- Calc what-if questions reuse a few templates across splits, so the router's 5/5 on test calc questions is optimistic.
+- Self-written, single-annotator test set (see the warning at the top); no inter-annotator agreement yet.
+- Small n: test has 31 questions (21 lookups, 5 calc, 5 out-of-scope). CIs are wide; tune (36) is too small for a stable threshold.
+- The corpus is 37 chunks from three documents; questions whose answers are not in them (midterm date, quiz weights) can only be escalated.
+- Lexical retrieval does not know synonyms ("worth" vs "weight", "deadline" vs "due"); MiniLM did worse here, possibly because Canvas chunks are short templated strings.
+- Calculator handles one item and one whole-number score per question; it does not parse multi-item what-ifs or typos in item names ("postr").
+- The old hand-built router answered quiz due dates with Ask TA; now they are lookups, because Canvas gives the dates.
+- Not evaluated with real students; no usability data.

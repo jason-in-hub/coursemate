@@ -1,0 +1,201 @@
+[
+ {
+  "name": "Quiz 1 (L1)",
+  "due_at_utc": "2026-09-16T09:32:00Z",
+  "points_possible": 1,
+  "submission_types": [
+   "online_quiz"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/444379"
+ },
+ {
+  "name": "Quiz 2 (L1)",
+  "due_at_utc": "2026-10-02T09:36:00Z",
+  "points_possible": 1,
+  "submission_types": [
+   "online_quiz"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/444372"
+ },
+ {
+  "name": "Assignment 1 (Part A)",
+  "due_at_utc": "2026-10-03T15:59:59Z",
+  "points_possible": 66,
+  "submission_types": [
+   "online_upload"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/444385"
+ },
+ {
+  "name": "Assignment 1 (Part B)",
+  "due_at_utc": "2026-10-03T15:59:59Z",
+  "points_possible": 34,
+  "submission_types": [
+   "online_upload"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/444386"
+ },
+ {
+  "name": "Quiz 3 (L1)",
+  "due_at_utc": "2026-10-14T08:54:00Z",
+  "points_possible": 1,
+  "submission_types": [
+   "online_quiz"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/444373"
+ },
+ {
+  "name": "Assignment 2 (Part A)",
+  "due_at_utc": "2026-10-24T15:59:59Z",
+  "points_possible": 52,
+  "submission_types": [
+   "online_upload"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/444387"
+ },
+ {
+  "name": "Assignment 2 (Part B)",
+  "due_at_utc": "2026-10-24T15:59:59Z",
+  "points_possible": 48,
+  "submission_types": [
+   "online_upload"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/444388"
+ },
+ {
+  "name": "Proposal Report",
+  "due_at_utc": "2026-10-24T15:59:59Z",
+  "points_possible": 2,
+  "submission_types": [
+   "online_upload"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/444404"
+ },
+ {
+  "name": "Quiz 4 (L1)",
+  "due_at_utc": "2026-10-28T09:45:00Z",
+  "points_possible": 1,
+  "submission_types": [
+   "online_quiz"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/444380"
+ },
+ {
+  "name": "Assignment 3 (Part A1 - Comic Submission)",
+  "due_at_utc": "2026-11-07T15:59:59Z",
+  "points_possible": 8,
+  "submission_types": [
+   "online_upload"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/444389"
+ },
+ {
+  "name": "Assignment 3 (Part A2 - Avatar Submission)",
+  "due_at_utc": "2026-11-07T15:59:59Z",
+  "points_possible": 8,
+  "submission_types": [
+   "online_upload"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/444390"
+ },
+ {
+  "name": "Quiz 5 (L1)",
+  "due_at_utc": "2026-11-11T08:53:00Z",
+  "points_possible": 1,
+  "submission_types": [
+   "online_quiz"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/444378"
+ },
+ {
+  "name": "Assignment 3 (Part B - Image Evaluation)",
+  "due_at_utc": "2026-11-14T15:59:59Z",
+  "points_possible": 4,
+  "submission_types": [
+   "online_quiz"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/444382"
+ },
+ {
+  "name": "Assignment 3 (Part C - System Prompt)",
+  "due_at_utc": "2026-11-21T15:59:59Z",
+  "points_possible": 40,
+  "submission_types": [
+   "online_upload"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/444391"
+ },
+ {
+  "name": "Assignment 3 (Part D - Prompt Injection)",
+  "due_at_utc": "2026-11-21T15:59:59Z",
+  "points_possible": 40,
+  "submission_types": [
+   "online_upload"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/444392"
+ },
+ {
+  "name": "Final Report (with Video Trailer Link)",
+  "due_at_utc": "2026-11-30T15:59:59Z",
+  "points_possible": 10,
+  "submission_types": [
+   "online_upload"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/444400"
+ },
+ {
+  "name": "Poster Presentation",
+  "due_at_utc": "2026-11-30T15:59:59Z",
+  "points_possible": 10,
+  "submission_types": [
+   "online_url",
+   "online_upload"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/444403"
+ },
+ {
+  "name": "Activity Participation (1)",
+  "due_at_utc": null,
+  "points_possible": 1,
+  "submission_types": [
+   "none"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/447603"
+ },
+ {
+  "name": "Activity Participation (2)",
+  "due_at_utc": null,
+  "points_possible": 1,
+  "submission_types": [
+   "online_upload"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/447604"
+ },
+ {
+  "name": "Activity Participation (3)",
+  "due_at_utc": null,
+  "points_possible": 1,
+  "submission_types": [
+   "none"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/447605"
+ },
+ {
+  "name": "Activity Participation (4)",
+  "due_at_utc": null,
+  "points_possible": 1,
+  "submission_types": [
+   "online_upload"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/447606"
+ },
+ {
+  "name": "AI Talk Attendance",
+  "due_at_utc": null,
+  "points_possible": 1,
+  "submission_types": [
+   "none"
+  ],
+  "url": "https://canvas.ust.hk/courses/71877/assignments/444383"
+ }
+]

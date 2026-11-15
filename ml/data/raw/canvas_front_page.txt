@@ -1,0 +1,17 @@
+Welcome to COMP1945!
+This Canvas site is not the main COMP1945 website. The main website is here:
+https://course.cse.ust.hk/comp1945 [https://course.cse.ust.hk/comp1945]
+Please go there to get all the latest course information.
+You need to 'turn on' your Computer Science Department (CSD) account before you can get into the website when you are off-campus. Please follow the steps below:
+- Visit: https://password.cse.ust.hk:8443/pass.html [https://password.cse.ust.hk:8443/pass.html]
+- When you reach the "CSD Password Setting Service" page, type a new password and confirm it by typing it again. Please record/remember your password for accessing the course web off-campus in the future.
+- Check the options for "Unix account at UG domain" and "PC account at domain CSD", then click "Go UPDATE".
+- After 5-10 minutes, your CSD account will be activated.
+Lectures
+- COMP1945 lectures will be given face-to-face.
+- You can find the lecture videos here [https://canvas.ust.hk/courses/71877/pages] .
+Group Project
+- Form your group under People > Project Group (We will talk more about it in our first class).
+- Project deliverables are submitted via Canvas in the Assignments tab.
+Assignments
+- Assignments are submitted via Canvas in the Assignments tab.

@@ -1,0 +1,30 @@
+[
+ {
+  "q": "When is the proposal due?",
+  "stamp": "ESCALATED",
+  "reason": "low confidence",
+  "conf": 0.40515231354427006,
+  "top_chunk": "canvas:proposal-report"
+ },
+ {
+  "q": "If I get 0 on the poster, what is my project mark?",
+  "stamp": "CALCULATED",
+  "reason": null,
+  "conf": 0.9930920629847535,
+  "top_chunk": "page:important-dates:0"
+ },
+ {
+  "q": "Can you write my assignment?",
+  "stamp": "ESCALATED",
+  "reason": "out of scope",
+  "conf": 0.4948116238035991,
+  "top_chunk": "page:group-formation:0"
+ },
+ {
+  "q": "Is late submission allowed?",
+  "stamp": "ESCALATED",
+  "reason": "low confidence",
+  "conf": 0.28949368811596415,
+  "top_chunk": "page:submission:0"
+ }
+]

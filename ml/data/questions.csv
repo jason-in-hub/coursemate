@@ -1,0 +1,168 @@
+id,q,label,gold_chunk_ids,family,kind,calc_item,calc_score,expected_stamp
+q001,When is the proposal due?,lookup,page:important-dates:0;page:submission:0;canvas:proposal-report,L01,clean,,,SOURCED
+q002,proposal deadline?,lookup,page:important-dates:0;page:submission:0;canvas:proposal-report,L01,paraphrase,,,SOURCED
+q003,wen is the propsal due,lookup,page:important-dates:0;page:submission:0;canvas:proposal-report,L01,typo,,,SOURCED
+q004,proposal幾時due?,lookup,page:important-dates:0;page:submission:0;canvas:proposal-report,L01,codemix,,,SOURCED
+q005,What date do we have to hand in the project proposal?,lookup,page:important-dates:0;page:submission:0;canvas:proposal-report,L01,paraphrase,,,SOURCED
+q006,When is the final report due?,lookup,page:submission:0;canvas:final-report-with-video-trailer-link,L02,clean,,,SOURCED
+q007,final report deadline,lookup,page:submission:0;canvas:final-report-with-video-trailer-link,L02,paraphrase,,,SOURCED
+q008,final reprot due date?,lookup,page:submission:0;canvas:final-report-with-video-trailer-link,L02,typo,,,SOURCED
+q009,final report幾時交?,lookup,page:submission:0;canvas:final-report-with-video-trailer-link,L02,codemix,,,SOURCED
+q010,What's the last day to submit the report?,lookup,page:submission:0;canvas:final-report-with-video-trailer-link,L02,paraphrase,,,SOURCED
+q011,When is the video trailer due?,lookup,page:important-dates:0;canvas:final-report-with-video-trailer-link,L03,clean,,,SOURCED
+q012,video deadline,lookup,page:important-dates:0;canvas:final-report-with-video-trailer-link,L03,paraphrase,,,SOURCED
+q013,vidoe trailer due when,lookup,page:important-dates:0;canvas:final-report-with-video-trailer-link,L03,typo,,,SOURCED
+q014,條video trailer幾時要交?,lookup,page:important-dates:0;canvas:final-report-with-video-trailer-link,L03,codemix,,,SOURCED
+q015,When is the poster due?,lookup,page:important-dates:0;canvas:poster-presentation,L04,clean,,,SOURCED
+q016,Deadline for the poster link?,lookup,page:important-dates:0;canvas:poster-presentation,L04,paraphrase,,,SOURCED
+q017,postr link due date,lookup,page:important-dates:0;canvas:poster-presentation,L04,typo,,,SOURCED
+q018,poster幾時due?,lookup,page:important-dates:0;canvas:poster-presentation,L04,codemix,,,SOURCED
+q019,By when must we submit the poster?,lookup,page:important-dates:0;canvas:poster-presentation,L04,paraphrase,,,SOURCED
+q020,When does Team 9 present?,lookup,page:poster-presentation-session:3,L05,clean,,,SOURCED
+q021,Which presentation session is Team 9 presenting in?,lookup,page:poster-presentation-session:3,L05,paraphrase,,,SOURCED
+q022,wat day is team 9 poster presentaion,lookup,page:poster-presentation-session:3,L05,typo,,,SOURCED
+q023,team 9幾時present?,lookup,page:poster-presentation-session:3,L05,codemix,,,SOURCED
+q024,"Our group is team 9, which date do we present the poster?",lookup,page:poster-presentation-session:3,L05,paraphrase,,,SOURCED
+q025,Is late submission allowed?,lookup,page:submission:0,L06,clean,,,SOURCED
+q026,Can I get an extension if I submit late?,lookup,page:submission:0,L06,paraphrase,,,SOURCED
+q027,late submision accepted?,lookup,page:submission:0,L06,typo,,,SOURCED
+q028,遲交late submission得唔得?,lookup,page:submission:0,L06,codemix,,,SOURCED
+q029,What happens if we hand in the report late?,lookup,page:submission:0,L06,paraphrase,,,SOURCED
+q030,How much is each project item worth?,lookup,page:important-dates:0,L07,clean,,,SOURCED
+q031,What is the weight of the poster presentation?,lookup,page:important-dates:0,L07,paraphrase,,,SOURCED
+q032,how many percent is the vidio trailer worth,lookup,page:important-dates:0,L07,typo,,,SOURCED
+q033,proposal佔幾多% weight?,lookup,page:important-dates:0,L07,codemix,,,SOURCED
+q034,What percentage of the overall course marks is the project?,lookup,page:important-dates:0,L07,paraphrase,,,SOURCED
+q035,Where do we submit the project deliverables?,lookup,page:submission:0;canvas:front-page,L08,clean,,,SOURCED
+q036,Can I email the report to the instructor?,lookup,page:submission:0,L08,paraphrase,,,SOURCED
+q037,how to sumbit project deliverables,lookup,page:submission:0;canvas:front-page,L08,typo,,,SOURCED
+q038,喺邊度submit report?,lookup,page:submission:0;canvas:front-page,L08,codemix,,,SOURCED
+q039,What should the file name be?,lookup,page:submission:0,L09,clean,,,SOURCED
+q040,How do I name the proposal PDF file?,lookup,page:submission:0,L09,paraphrase,,,SOURCED
+q041,report file nmae format,lookup,page:submission:0,L09,typo,,,SOURCED
+q042,份report個file name點改?,lookup,page:submission:0,L09,codemix,,,SOURCED
+q043,What is the page limit for the report?,lookup,page:final-report:0,L10,clean,,,SOURCED
+q044,How many pages can the final report be?,lookup,page:final-report:0,L10,paraphrase,,,SOURCED
+q045,Does the 8-page limit include the references and appendix?,lookup,page:final-report:0,L10,paraphrase,,,SOURCED
+q046,final report可以寫幾多pages?,lookup,page:final-report:0,L10,codemix,,,SOURCED
+q047,page limt for final report,lookup,page:final-report:0,L10,typo,,,SOURCED
+q048,Is there a template for the final report?,lookup,page:final-report:0,L11,clean,,,SOURCED
+q049,report templete docx?,lookup,page:final-report:0,L11,typo,,,SOURCED
+q050,What should the data collection and preprocessing section include?,lookup,page:final-report:1,L12,clean,,,SOURCED
+q051,How long should the data and preprocessing section be?,lookup,page:final-report:1,L12,paraphrase,,,SOURCED
+q052,data preprocesing section requirements,lookup,page:final-report:1,L12,typo,,,SOURCED
+q053,What goes in the evaluation and results section?,lookup,page:final-report:2,L13,clean,,,SOURCED
+q054,How many pages for the evaluation and results section?,lookup,page:final-report:2,L13,paraphrase,,,SOURCED
+q055,evaluation and results section點寫?,lookup,page:final-report:2,L13,codemix,,,SOURCED
+q056,"What should the impact, limitations and future work section discuss?",lookup,page:final-report:3,L14,clean,,,SOURCED
+q057,How long should the conclusion be?,lookup,page:final-report:3,L14,paraphrase,,,SOURCED
+q058,limitatons section length,lookup,page:final-report:3,L14,typo,,,SOURCED
+q059,What size is the poster?,lookup,page:poster-presentation-session:0;page:poster-presentation-session:1,L15,clean,,,SOURCED
+q060,How many poster panels do we need?,lookup,page:poster-presentation-session:0;page:poster-presentation-session:1,L15,paraphrase,,,SOURCED
+q061,Can the posters be landscape orientation?,lookup,page:poster-presentation-session:1,L15,paraphrase,,,SOURCED
+q062,poster要幾大size?,lookup,page:poster-presentation-session:0;page:poster-presentation-session:1,L15,codemix,,,SOURCED
+q063,How long is the opening pitch?,lookup,page:poster-presentation-session:1,L16,clean,,,SOURCED
+q064,How long should the demonstration be at the poster session?,lookup,page:poster-presentation-session:1,L16,paraphrase,,,SOURCED
+q065,how long is the poster walkthru,lookup,page:poster-presentation-session:1,L16,typo,,,SOURCED
+q066,demonstration要幾耐minutes?,lookup,page:poster-presentation-session:1,L16,codemix,,,SOURCED
+q067,Do all group members need to be present at the poster session?,lookup,page:poster-presentation-session:2,L17,clean,,,SOURCED
+q068,Can we use a QR code or a short video for the demo?,lookup,page:poster-presentation-session:2,L17,paraphrase,,,SOURCED
+q069,全組members都要出席poster session?,lookup,page:poster-presentation-session:2,L17,codemix,,,SOURCED
+q070,How is the poster presentation graded?,lookup,page:poster-presentation-session:3,L18,clean,,,SOURCED
+q071,poster grading critera,lookup,page:poster-presentation-session:3,L18,typo,,,SOURCED
+q072,How long should the video trailer be?,lookup,page:video-trailer:0,L19,clean,,,SOURCED
+q073,What is the recommended length of the video?,lookup,page:video-trailer:0,L19,paraphrase,,,SOURCED
+q074,vid trailer how many minutes,lookup,page:video-trailer:0,L19,typo,,,SOURCED
+q075,段video要幾長?,lookup,page:video-trailer:0,L19,codemix,,,SOURCED
+q076,Where do we upload the video?,lookup,page:video-trailer:0,L20,clean,,,SOURCED
+q077,Where do we put the video link?,lookup,page:video-trailer:0;page:submission:0,L20,paraphrase,,,SOURCED
+q078,Do we have to use AI tools for the video trailer?,lookup,page:video-trailer:0,L20,paraphrase,,,SOURCED
+q079,How many members per group?,lookup,page:group-formation:0,L21,clean,,,SOURCED
+q080,Can a group have only 3 people?,lookup,page:group-formation:0,L21,paraphrase,,,SOURCED
+q081,grp size for project,lookup,page:group-formation:0,L21,typo,,,SOURCED
+q082,一組project group幾多人?,lookup,page:group-formation:0,L21,codemix,,,SOURCED
+q083,When was group registration due?,lookup,page:important-dates:0,L22,clean,,,SOURCED
+q084,How do we register our project group?,lookup,page:group-formation:0;canvas:front-page,L22,paraphrase,,,SOURCED
+q085,What topics are allowed for the project?,lookup,page:project-overview:0,L23,clean,,,SOURCED
+q086,Does the project topic need to relate to HKUST?,lookup,page:project-overview:0,L23,paraphrase,,,SOURCED
+q087,project topic requirment,lookup,page:project-overview:0,L23,typo,,,SOURCED
+q088,個project topic有咩要求?,lookup,page:project-overview:0,L23,codemix,,,SOURCED
+q089,When is Quiz 2 due?,lookup,canvas:quiz-2-l1,L24,clean,,,SOURCED
+q090,quiz 3 deadline,lookup,canvas:quiz-3-l1,L24,paraphrase,,,SOURCED
+q091,When was Quiz 1 due?,lookup,canvas:quiz-1-l1,L24,clean,,,SOURCED
+q092,qiuz 5 due time?,lookup,canvas:quiz-5-l1,L24,typo,,,SOURCED
+q093,quiz 4幾點due?,lookup,canvas:quiz-4-l1,L24,codemix,,,SOURCED
+q094,When is Assignment 1 Part A due?,lookup,canvas:assignment-1-part-a,L25,clean,,,SOURCED
+q095,Assignment 3 Part C deadline,lookup,canvas:assignment-3-part-c-system-prompt,L25,paraphrase,,,SOURCED
+q096,assignmnt 2 part b due?,lookup,canvas:assignment-2-part-b,L25,typo,,,SOURCED
+q097,assignment 3 part D幾時due?,lookup,canvas:assignment-3-part-d-prompt-injection,L25,codemix,,,SOURCED
+q098,When is the Assignment 3 comic submission due?,lookup,canvas:assignment-3-part-a1-comic-submission,L25,paraphrase,,,SOURCED
+q099,When is Assignment 3 Part B image evaluation due?,lookup,canvas:assignment-3-part-b-image-evaluation,L25,clean,,,SOURCED
+q100,Where is the main course website?,lookup,canvas:front-page,L26,clean,,,SOURCED
+q101,Where can I find the lecture videos?,lookup,canvas:front-page,L26,paraphrase,,,SOURCED
+q102,How do I activate my CSD account for off-campus access?,lookup,canvas:front-page,L26,paraphrase,,,SOURCED
+q103,lecture有冇videos睇?,lookup,canvas:front-page,L26,codemix,,,SOURCED
+q104,What prototyping tools are suggested?,lookup,page:final-report:4,L27,clean,,,SOURCED
+q105,Can we use Dify to build a chatbot prototype?,lookup,page:final-report:4,L27,paraphrase,,,SOURCED
+q106,sugested tools for prototype,lookup,page:final-report:4,L27,typo,,,SOURCED
+q107,How is the final report graded?,lookup,page:final-report:4,L28,clean,,,SOURCED
+q108,What are the grading criteria for the report?,lookup,page:final-report:4,L28,paraphrase,,,SOURCED
+q109,What links must the final report include?,lookup,page:submission:0;page:video-trailer:0,L29,clean,,,SOURCED
+q110,Does the report need a link to the poster?,lookup,page:submission:0,L29,paraphrase,,,SOURCED
+q111,What time of day are the deliverables due?,lookup,page:important-dates:0;page:submission:0,L30,clean,,,SOURCED
+q112,Is the deadline 23:59 Hong Kong time?,lookup,page:important-dates:0;page:submission:0,L30,paraphrase,,,SOURCED
+q113,Does AI Talk Attendance have a due date?,lookup,canvas:ai-talk-attendance,L31,clean,,,SOURCED
+q114,When is Activity Participation (2) due?,lookup,canvas:activity-participation-2,L31,paraphrase,,,SOURCED
+q115,"If I get 0 on the poster, what is my project mark?",calc,,C01,clean,poster,0,CALCULATED
+q116,poster拎0分project mark會點?,calc,,C01,codemix,poster,0,CALCULATED
+q117,what if I score 50 on the poster,calc,,C02,whatif,poster,50,CALCULATED
+q118,if i get 70 for the postr what is my mark,calc,,C02,typo,poster,70,CALCULATED
+q119,"Suppose our poster presentation gets 60, what is my project total?",calc,,C03,whatif,poster,60,CALCULATED
+q120,what if I fail the video,calc,,C04,whatif,video,0,CALCULATED
+q121,"If the video trailer gets zero, how much do I lose?",calc,,C04,paraphrase,video,0,CALCULATED
+q122,If our video trailer scores 75 what is my project mark?,calc,,C05,whatif,video,75,CALCULATED
+q123,video trailer得75分project會點?,calc,,C05,codemix,video,75,CALCULATED
+q124,what if the trailer gets full marks,calc,,C06,whatif,video,100,CALCULATED
+q125,"If the proposal got 90, what's my project mark?",calc,,C07,whatif,proposal,90,CALCULATED
+q126,what if i got 90 on the propasal,calc,,C07,typo,proposal,90,CALCULATED
+q127,proposal攞到100分project total幾多?,calc,,C08,codemix,proposal,100,CALCULATED
+q128,If the final report gets 55 what is my project score?,calc,,C09,whatif,report,55,CALCULATED
+q129,how much do I lose if the final report scores 55,calc,,C09,paraphrase,report,55,CALCULATED
+q130,what if I score 0 on the report,calc,,C10,whatif,report,0,CALCULATED
+q131,report得0分project mark幾多?,calc,,C10,codemix,report,0,CALCULATED
+q132,"If I got 0 for group registration, what's my project mark?",calc,,C11,whatif,registration,0,CALCULATED
+q133,"If I get 0 in Quiz 2, what is my final percentage?",calc,,C12,whatif,NONE,,ESCALATED
+q134,quiz 3得0分會點?,calc,,C12,codemix,NONE,,ESCALATED
+q135,what if I score 50 on assignment 1 part A,calc,,C13,whatif,NONE,,ESCALATED
+q136,"If I get 80 on Assignment 3 Part C, what's my course grade?",calc,,C13,paraphrase,NONE,,ESCALATED
+q137,if I fail the midterm what is my grade,calc,,C14,whatif,NONE,,ESCALATED
+q138,what if I get 30 in the final exam,calc,,C14,paraphrase,NONE,,ESCALATED
+q139,"If I score 40 on the poster and 60 on the video, what is my project mark?",calc,,C15,whatif,MULTI,,ESCALATED
+q140,Can you write my assignment?,oos,,O01,clean,,,ESCALATED
+q141,do my homework for me,oos,,O01,paraphrase,,,ESCALATED
+q142,Give me the answers to Quiz 5,oos,,O02,clean,,,ESCALATED
+q143,can u hack the quiz acess code,oos,,O02,typo,,,ESCALATED
+q144,Write the final report for our group,oos,,O03,clean,,,ESCALATED
+q145,幫我寫份report得唔得?,oos,,O03,codemix,,,ESCALATED
+q146,How can I copy another group's poster without getting caught?,oos,,O04,clean,,,ESCALATED
+q147,Tell me a joke,oos,,O05,clean,,,ESCALATED
+q148,What is the capital of France?,oos,,O06,clean,,,ESCALATED
+q149,Recommend a good restaurant near campus,oos,,O07,clean,,,ESCALATED
+q150,今晚食咩好?,oos,,O07,codemix,,,ESCALATED
+q151,What's the weather today?,oos,,O08,clean,,,ESCALATED
+q152,Who won the football match last night?,oos,,O09,clean,,,ESCALATED
+q153,How do I install Python on Windows?,oos,,O10,clean,,,ESCALATED
+q154,Explain quantum computing in simple terms,oos,,O11,clean,,,ESCALATED
+q155,wats the best phone to buy,oos,,O12,typo,,,ESCALATED
+q156,When is the midterm exam?,oos,,O13,clean,,,ESCALATED
+q157,midterm幾時考?,oos,,O13,codemix,,,ESCALATED
+q158,What is the final exam date?,oos,,O14,clean,,,ESCALATED
+q159,How much are the quizzes worth in the course grade?,oos,,O15,clean,,,ESCALATED
+q160,What is the grading breakdown for the assignments?,oos,,O15,paraphrase,,,ESCALATED
+q161,Which room is the lecture in?,oos,,O16,clean,,,ESCALATED
+q162,What is the TA's email address?,oos,,O17,clean,,,ESCALATED
+q163,When are the instructor office hours?,oos,,O18,clean,,,ESCALATED
+q164,Is there a lab this week?,oos,,O19,clean,,,ESCALATED
+q165,Can I switch to another lecture section?,oos,,O20,clean,,,ESCALATED
+q166,When is the progress report due?,oos,,O21,clean,,,ESCALATED
+q167,is ther a tutorial tmrw,oos,,O22,typo,,,ESCALATED
