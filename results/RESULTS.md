@@ -26,7 +26,7 @@ Test has only 5 calc and 5 out-of-scope questions, so per-class numbers on test 
 - **Router**: TF-IDF + logistic regression (C=10, class-balanced), 3 classes lookup / calc / oos, fitted on train only. Analyzer chosen on tune macro-F1: word1 0.890, word12 0.785, char35 0.749 -> **word1** (`ml/train_router.py`).
 - **Lookup**: BM25 vs TF-IDF (word 1-gram, word 1-2-gram, char_wb 3-5-gram) vs all-MiniLM-L6-v2 embeddings (cosine). Selection rule: max tune MRR, tie -> tune Top-3 -> order bm25,word1,word12,char35,minilm. Winner on tune: **bm25**; deployed: **bm25**. MiniLM did not win, so no transformers.js download is needed; the page stays a single static file.
 - **Calculator** (`ml/calc.py`): deterministic code over the Important Dates weights only (Registration 0, Proposal 2, Poster 10, Video 3, Final Report 7; total 22). Integer arithmetic in hundredths of a mark, so 18.7 is exact. A what-if on any item without a weight is ESCALATED with reason "weight not in table". No LLM is used anywhere.
-- **Confidence and fallback** (`ml/pipeline.py`): lookup conf = router max-probability x s/(s+K), s = top-1 BM25 score, K = 5.726 (median top-1 BM25 score on train lookups); calc conf = router max-probability; out-of-scope always escalates. Below the threshold the answer is ESCALATED: "Please ask the TA." Threshold rule (fixed before running): highest tune coverage with tune risk <= 0.1; ties -> higher threshold. Chosen: **0.4335**.
+- **Confidence and fallback** (`ml/pipeline.py`): deployed (v2) lookup conf = router p × min(1, top1 / Σ idf(query terms)); calc conf = router max-probability; out-of-scope always escalates. Below the threshold the answer is ESCALATED: "Please ask the TA." Threshold 0.4958, chosen on tune (see 6.3 for v1 vs v2).
 - **Browser deployment**: `ml/export_model.py` writes `model.json` (router vocabulary, idf, LR coefficients, BM25 term statistics, chunk texts, threshold, weights) and inlines it into `index.html`, so the page works from file:// and on any static host with no network calls.
 
 ## 6. Evaluation
@@ -78,34 +78,51 @@ Test confusion matrix (rows = true, columns = predicted):
 
 ### 6.3 Risk-coverage and threshold (`ml/train_router.py` -> `results/risk_coverage.png`)
 
-Coverage = answered (SOURCED or CALCULATED) / all questions. Risk = wrong answers / answered. Wrong = lookup whose top chunk is not gold, calc with wrong item or score, or any answer to a question that should escalate.
+Coverage = answered (SOURCED or CALCULATED) / all questions. Risk = wrong answers / answered. Wrong = lookup whose top chunk is not gold, calc with wrong item or score, or any answer to a question that should escalate. End-to-end = right answer, or escalation when escalation was expected.
+
+Two versions of the lookup confidence, both with the same threshold rule (highest tune coverage with tune risk <= 0.1; ties -> higher threshold):
+
+- **v1 (pre-registered)**: router p × s1/(s1+K), K = 5.726. Threshold 0.4335.
+- **v2 (deployed; post-hoc: the test split had been seen once (v1) before this change)**: v1 penalised short queries, because a raw BM25 score grows with the number of query terms. Three normalised candidates were compared on TUNE only, each with its own tune-chosen threshold; the candidate with the highest tune coverage won (tie -> lower tune risk). Test was scored once, after the choice.
+
+| v2 candidate (tune only) | threshold | tune coverage | tune risk | answered |
+|---|---|---|---|---|
+| router p × top1/(top1+top2) | 0.5040 | 0.167 | 0.000 | 6 |
+| router p × min(1, top1 / Σ idf(query terms)) **(chosen)** | 0.4958 | 0.583 | 0.095 | 21 |
+| router p | 0.9579 | 0.056 | 0.000 | 2 |
 
 ![risk-coverage](risk_coverage.png)
 
-| setting | coverage | risk | answered | wrong | n |
-|---|---|---|---|---|---|
-| tune, no threshold | 0.833 | 0.200 | 30 | 6 | 36 |
-| tune, threshold 0.4335 | 0.306 | 0.091 | 11 | 1 | 36 |
-| test, no threshold | 0.774 | 0.250 | 24 | 6 | 31 |
-| **test, threshold 0.4335** | 0.355 | 0.182 | 11 | 2 | 31 |
+| setting | coverage | risk | answered | wrong | n | end-to-end |
+|---|---|---|---|---|---|---|
+| tune, no threshold | 0.833 | 0.200 | 30 | 6 | 36 | - of 36 |
+| tune, v1 t=0.4335 | 0.306 | 0.091 | 11 | 1 | 36 | 17/36 |
+| tune, v2 t=0.4958 | 0.583 | 0.095 | 21 | 2 | 36 | 26/36 |
+| test, no threshold | 0.774 | 0.250 | 24 | 6 | 31 | - of 31 |
+| test, v1 t=0.4335 (seen first) | 0.355 | 0.182 | 11 | 2 | 31 | 16/31 |
+| **test, v2 t=0.4958 (post-hoc, scored once)** | 0.484 | 0.133 | 15 | 2 | 31 | 20/31 |
 
-At the threshold, every test question that should escalate did (7/7). End-to-end correct (right answer, or escalation when escalation was expected): 16/31 test. The cost is coverage: 9 test questions escalated as low-confidence even though the top chunk was correct. The threshold came from only 36 tune questions, so it is coarse; test risk (0.182) is above the 0.1 tune cap.
+v2 at its threshold: every test question that should escalate did (7/7); 5 test questions still escalate as low-confidence although their top chunk is correct. Test risk (0.133) is above the 0.1 tune cap; the threshold comes from 36 tune questions. Because v2 was designed after v1's test numbers were seen, the v2 test row is not a clean held-out estimate: see 6.8.
 
-**Demo impact.** At this threshold 1 of the 4 sample buttons get an answer (2 of 4 behave as intended; escalating the cheating request is correct): "When is the proposal due?" -> ESCALATED (conf 0.41); "If I get 0 on the poster, what is my project mark?" -> CALCULATED (conf 0.99); "Can you write my assignment?" -> ESCALATED (conf 0.49); "Is late submission allowed?" -> ESCALATED (conf 0.29). The escalated lookups retrieve the correct chunk; they fall below the threshold. Choosing a lower threshold trades risk for coverage: that is a team decision. Tune operating points (from `results/router.json`, every 3rd candidate):
+**Sample questions, v1: 3/5 as intended.** "When is the proposal due?" -> ESCALATED (low confidence), conf 0.41, not as intended (wanted SOURCED); "If I get 0 on the poster, what is my project mark?" -> CALCULATED, conf 0.99, ok; "Can you write my assignment?" -> ESCALATED (out of scope), conf 0.49, ok; "Is late submission allowed?" -> ESCALATED (low confidence), conf 0.29, not as intended (wanted SOURCED); "When is the poster link due?" -> SOURCED, conf 0.52, ok
+
+**Sample questions, v2: 4/5 as intended.** "When is the proposal due?" -> SOURCED, conf 0.55, ok; "If I get 0 on the poster, what is my project mark?" -> CALCULATED, conf 0.99, ok; "Can you write my assignment?" -> ESCALATED (out of scope), conf 0.49, ok; "Is late submission allowed?" -> ESCALATED (low confidence), conf 0.49, not as intended (wanted SOURCED); "When is the poster link due?" -> SOURCED, conf 0.74, ok
+
+v2 tune operating points (every 3rd candidate threshold; lowering the threshold trades risk for coverage, a team decision):
 
 | threshold | tune coverage | tune risk | answered |
 |---|---|---|---|
 | 0.000 | 0.833 | 0.200 | 30 |
-| 0.282 | 0.778 | 0.214 | 28 |
-| 0.306 | 0.694 | 0.160 | 25 |
-| 0.324 | 0.611 | 0.136 | 22 |
-| 0.366 | 0.528 | 0.158 | 19 |
-| 0.391 | 0.444 | 0.188 | 16 |
-| 0.426 | 0.361 | 0.154 | 13 |
-| 0.449 | 0.278 | 0.100 | 10 |
-| 0.485 | 0.194 | 0.000 | 7 |
-| 0.605 | 0.111 | 0.000 | 4 |
-| 0.957 | 0.028 | 0.000 | 1 |
+| 0.302 | 0.778 | 0.179 | 28 |
+| 0.430 | 0.694 | 0.160 | 25 |
+| 0.479 | 0.611 | 0.136 | 22 |
+| 0.520 | 0.528 | 0.105 | 19 |
+| 0.543 | 0.444 | 0.125 | 16 |
+| 0.622 | 0.361 | 0.077 | 13 |
+| 0.655 | 0.278 | 0.100 | 10 |
+| 0.740 | 0.194 | 0.000 | 7 |
+| 0.783 | 0.111 | 0.000 | 4 |
+| 0.958 | 0.056 | 0.000 | 2 |
 
 ### 6.4 Calculator (`ml/test_calc.py`, `ml/mutate_calc.sh`)
 
@@ -123,19 +140,23 @@ The JS embedded in `index.html` reproduces the Python pipeline on 175/175 questi
 | lookup Top-3 >= 80% (bm25) | test 85.7% [CI 71.4%-100.0%], n=21 | yes (point estimate); CI lower bound below 80% | eval_retrieval.py |
 | calculator exact match >= 95% | 15/15 | yes | test_calc.py |
 
-### 6.7 Error analysis: 5 real test failures (`results/predictions.csv`)
+### 6.7 Error analysis: 5 real test failures, deployed v2 (`results/predictions.csv`)
 
-15 of 31 test questions were not handled correctly end-to-end. Five, chosen to cover different failure types:
+11 of 31 test questions were not handled correctly end-to-end. Five, chosen to cover different failure types:
 
 | id | question | true | router | stamp | top chunk | why |
 |---|---|---|---|---|---|---|
-| q012 | video deadline | lookup | lookup | ESCALATED | page:group-formation:0 | BM25 per-term scores: Group Formation 3.04, all from 'deadline' ('register ... by the deadline'); gold chunks 2.47 and 2.52, only from 'video', because they say 'Due' rather than 'deadline'. Low confidence, so it escalated: a safe miss. |
-| q030 | How much is each project item worth? | lookup | oos | ESCALATED | page:final-report:2 | Router says out-of-scope: 'much' and 'worth' lean out-of-scope because the train question "How much are the quizzes worth in the course grade?" is labelled out-of-scope; 'each' and 'item' are unseen. BM25 also misses (Final Report chunk first): 'worth' and 'item' never appear in the corpus, which says 'Weight' and 'Deliverable'. |
-| q036 | Can I email the report to the instructor? | lookup | oos | ESCALATED | page:submission:0 | Router sends it to out-of-scope (conf 0.73). 'email' is not in the router's training vocabulary; 'instructor' (learnt from the train out-of-scope question "When are the instructor office hours?") and the function words 'to', 'the', 'i' carry the largest out-of-scope weights. Retrieval alone found the right chunk. |
-| q038 | 喺邊度submit report? | lookup | lookup | ESCALATED | page:submission:0 | Code-mixed query: the three Han characters and 'submit' do not occur in the corpus (corpus has 'submitted', 'submission'), so the only BM25 evidence is 'report' (1.56 on the gold chunk). Right chunk, but confidence too low: escalated. |
-| q057 | How long should the conclusion be? | lookup | lookup | SOURCED | page:video-trailer:0 | Wrong answer shown (the worst failure type). BM25 per-term scores: Video Trailer chunk 5.60 from 'long' 1.93, 'should' 1.72, 'be' 1.21, 'the' 0.74; gold Final Report chunk 2.83, of which 'conclusion' 2.12. Common words outvote the one content word. |
+| q012 | video deadline | lookup | lookup | SOURCED | page:group-formation:0 | BM25 per-term scores: Group Formation 3.04, all from 'deadline' ('register ... by the deadline'); gold chunks 2.47 and 2.52, only from 'video', because they say 'Due' rather than 'deadline'. Outcome: wrong answer shown (worst type). |
+| q030 | How much is each project item worth? | lookup | oos | ESCALATED | page:final-report:2 | Router says out-of-scope: 'much' and 'worth' lean out-of-scope because the train question "How much are the quizzes worth in the course grade?" is labelled out-of-scope; 'each' and 'item' are unseen. BM25 also misses (Final Report chunk first): 'worth' and 'item' never appear in the corpus, which says 'Weight' and 'Deliverable'. Outcome: escalated (out of scope). |
+| q036 | Can I email the report to the instructor? | lookup | oos | ESCALATED | page:submission:0 | Router sends it to out-of-scope (conf 0.73). 'email' is not in the router's training vocabulary; 'instructor' (learnt from the train out-of-scope question "When are the instructor office hours?") and the function words 'to', 'the', 'i' carry the largest out-of-scope weights. Retrieval alone found the right chunk. Outcome: escalated (out of scope). |
+| q057 | How long should the conclusion be? | lookup | lookup | ESCALATED | page:video-trailer:0 | BM25 per-term scores: Video Trailer chunk 5.60 from 'long' 1.93, 'should' 1.72, 'be' 1.21, 'the' 0.74; gold Final Report chunk 2.83, of which 'conclusion' 2.12. Common words outvote the one content word. Outcome: escalated as low confidence: a safe miss. |
+| q076 | Where do we upload the video? | lookup | lookup | SOURCED | page:submission:0 | Retrieved the Submission chunk, which talks about the video link but not where to upload; gold is the Video Trailer chunk ('Upload the video to a ShareDrive'). Partly a gold-labelling judgment call. Outcome: wrong answer shown (worst type). |
 
-Pattern: answered-but-wrong cases come from BM25 word overlap with the wrong section; router misses come from cue words learnt from a small training set ('instructor', 'worth'); most other failures are safe escalations caused by the coarse threshold.
+Pattern: answered-but-wrong cases come from BM25 word overlap with the wrong section; router misses come from cue words learnt from a small training set ('instructor', 'worth'); the remaining failures are safe escalations below the threshold.
+
+### 6.8 Fresh holdout (to do: a teammate)
+
+Every split here was written by the system's author, and v2 was designed after v1's test numbers were seen. For a clean estimate, a teammate who has not seen `questions.csv` or these results should write 30 new questions (roughly 18 lookup, 6 calc, 6 out-of-scope; include paraphrases, typos and Cantonese-English mix) in `ml/data/holdout.csv`, copied from `ml/data/holdout_template.csv` (columns q, label, gold_chunk_ids; gold ids from `ml/data/chunks.jsonl`). Then run `.venv/bin/python eval_holdout.py` (from `ml/`): it scores the deployed model once, with no refitting. Report that number as the headline and these numbers as development results.
 
 ## Source conflicts found in the data
 

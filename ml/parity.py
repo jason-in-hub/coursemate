@@ -21,7 +21,7 @@ KEYS = ["label", "top_chunk", "stamp", "reason", "item", "score", "before", "aft
 
 def main():
     m = pickle.load((ART / "model.pkl").open("rb"))
-    cm = CourseMate(m["router_vec"], m["lr"], m["retriever"], load_chunks(), m["K"], m["threshold"])
+    cm = CourseMate.from_pickle(m, load_chunks())
     qs = load_questions()
     extra = ["What if I get 0 on the poster?", "proposal幾時due", "ＱＵＩＺ　２ due?", "", "!!!", "report 55.5",
              "team 9 poster 70", "What is the meaning of life?"]  # edge cases beyond the labelled set

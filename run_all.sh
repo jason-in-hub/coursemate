@@ -15,6 +15,7 @@ echo "== 5. test_calc.py";      $PY test_calc.py | tail -1
 echo "== 6. mutate_calc.sh";    ./mutate_calc.sh | grep -e "---" -e "exact match"
 echo "== 7. parity.py";         $PY parity.py
 echo "== 8. mutate_parity.sh";  ./mutate_parity.sh | grep -e "---" -e MISMATCH -e "parity:" | head -8
-echo "== 9. node test.mjs";     (cd .. && node test.mjs | grep -e KNOWN -e FAIL -e "sample buttons" -e GREEN -e RED)
-echo "== 10. make_results.py";  $PY make_results.py
+echo "== 9. node test.mjs";     (cd .. && node test.mjs | grep -e KNOWN -e FAIL -e "sample questions" -e conf_mode -e GREEN -e RED)
+echo "== 10. eval_holdout.py";  $PY eval_holdout.py
+echo "== 11. make_results.py";  $PY make_results.py
 echo "ALL DONE"

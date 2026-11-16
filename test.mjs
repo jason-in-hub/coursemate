@@ -16,6 +16,7 @@ ok(M.MODEL && M.MODEL.chunks.length === 37, "inline model loaded, 37 chunks (got
 ok(W.items.reduce((a, i) => a + i.weight, 0) === 22, "project weights sum to 22");
 ok(JSON.stringify(W.items.map(i => [i.key, i.weight])) === JSON.stringify([["registration", 0], ["proposal", 2], ["poster", 10], ["video", 3], ["report", 7]]),
   "weights table = Important Dates (Registration 0, Proposal 2, Poster 10, Video 3, Final Report 7)");
+ok(typeof M.MODEL.conf_formula === "string" && ["v1", "margin", "ideal", "p", "meta"].includes(M.MODEL.conf_mode), "conf_mode " + M.MODEL.conf_mode + ": " + M.MODEL.conf_formula);
 ok(typeof M.MODEL.threshold === "number" && M.MODEL.threshold > 0 && M.MODEL.threshold < 1, "threshold in (0,1): " + M.MODEL.threshold.toFixed(4));
 ok(JSON.stringify(M.MODEL) === JSON.stringify(JSON.parse(readFileSync(fileURLToPath(new URL("./model.json", import.meta.url)), "utf8"))), "inline model == model.json");
 // 3. sample buttons: never a wrong answer. ESCALATED is allowed (risk control); an answer must be the right one.
@@ -24,6 +25,7 @@ const gold = {
   "Is late submission allowed?": ["SOURCED", ["page:submission:0"]],
   "If I get 0 on the poster, what is my project mark?": ["CALCULATED"],
   "Can you write my assignment?": ["ESCALATED"],
+  "When is the poster link due?": ["SOURCED", ["page:important-dates:0", "canvas:poster-presentation"]],
 };
 for (const [q, [want, chunks]] of Object.entries(gold)) {
   const r = M.answer(q);
@@ -41,6 +43,6 @@ ok(M.calc("what if the trailer gets full marks").after === "19.3", "trailer full
 ok(M.calc("If I get 0 in Quiz 2, what is my final percentage?").reason === "weight not in table", "quiz what-if -> ESCALATED, weight not in table");
 ok(M.calc("tell me a joke").stamp === "ESCALATED", "calc escalates without a project item");
 ok(M.answer("When is the midterm exam?").stamp === "ESCALATED", "midterm date (not in docs) -> ESCALATED");
-console.log("sample buttons answered as intended: " + (4 - known) + "/4 (" + known + " known miss: safe escalation)");
+console.log("sample questions answered as intended: " + (5 - known) + "/5 (" + known + " known miss: safe escalation)");
 console.log(fails ? "\nRED: " + fails + " failing" : "\nGREEN: all passed");
 process.exit(fails ? 1 : 0);

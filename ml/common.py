@@ -20,11 +20,24 @@ def load_chunks():
     return [json.loads(l) for l in (DATA / "chunks.jsonl").open(encoding="utf-8") if l.strip()]
 
 
-def load_questions():
+def load_questions(aug=False):
+    """The 167 frozen questions. aug=True also returns data/train_aug.csv as split "aug" (v3 training
+    data, written without sight of questions.csv). An aug row is dropped if its token string equals
+    that of any tune/test question or any holdout question, so no evaluation question is trained on."""
     rows = list(csv.DictReader((DATA / "questions.csv").open(encoding="utf-8")))
     split = {r["id"]: r["split"] for r in csv.DictReader((DATA / "split.csv").open(encoding="utf-8"))}
     for r in rows:
         r["split"] = split[r["id"]]
+    if aug and (DATA / "train_aug.csv").exists():
+        key = lambda s: " ".join(word1(s))
+        banned = {key(r["q"]) for r in rows if r["split"] != "train"}
+        if (DATA / "holdout.csv").exists():
+            banned |= {key(r["q"]) for r in csv.DictReader((DATA / "holdout.csv").open(encoding="utf-8"))}
+        for r in csv.DictReader((DATA / "train_aug.csv").open(encoding="utf-8")):
+            if key(r["q"]) not in banned:
+                r["split"] = "aug"
+                rows.append(r)
+    for r in rows:
         r["gold"] = [g for g in r["gold_chunk_ids"].split(";") if g]
     return rows
 
@@ -51,9 +64,14 @@ class TfidfRetriever:
 class BM25Retriever:
     name = "bm25"
 
-    def fit(self, texts):
+    def fit(self, texts, extra=None):
+        """extra (v3): per chunk, a list of training questions whose gold includes that chunk; their
+        tokens are appended to the chunk's document, so the index learns student vocabulary."""
         from rank_bm25 import BM25Okapi
-        self.bm = BM25Okapi([word1(t) for t in texts])  # k1=1.5, b=0.75, same tokeniser as word1
+        docs = [word1(t) for t in texts]
+        if extra:
+            docs = [d + [w for x in e for w in word1(x)] for d, e in zip(docs, extra)]
+        self.bm = BM25Okapi(docs)  # k1=1.5, b=0.75, same tokeniser as word1
         return self
 
     def scores(self, q):

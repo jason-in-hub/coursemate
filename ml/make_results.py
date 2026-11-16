@@ -7,6 +7,7 @@ import subprocess
 from collections import Counter
 
 from common import RESULTS, load_chunks, load_questions
+from train_router import CONF_FORMULA
 
 R = json.loads((RESULTS / "retrieval.json").read_text())
 T = json.loads((RESULTS / "router.json").read_text())
@@ -19,12 +20,12 @@ pc = lambda x: f"{100 * x:.1f}%"
 ci = lambda d, k: f"{f3(d[k])} [{f3(d[k + '_ci'][0])}, {f3(d[k + '_ci'][1])}]"
 
 NOTES = {  # hand-written diagnosis for failures, keyed by question id (shown only if that id still fails)
-    "q057": "Wrong answer shown (the worst failure type). BM25 per-term scores: Video Trailer chunk 5.60 from 'long' 1.93, 'should' 1.72, 'be' 1.21, 'the' 0.74; gold Final Report chunk 2.83, of which 'conclusion' 2.12. Common words outvote the one content word.",
+    "q057": "BM25 per-term scores: Video Trailer chunk 5.60 from 'long' 1.93, 'should' 1.72, 'be' 1.21, 'the' 0.74; gold Final Report chunk 2.83, of which 'conclusion' 2.12. Common words outvote the one content word.",
     "q076": "Retrieved the Submission chunk, which talks about the video link but not where to upload; gold is the Video Trailer chunk ('Upload the video to a ShareDrive'). Partly a gold-labelling judgment call.",
     "q036": "Router sends it to out-of-scope (conf 0.73). 'email' is not in the router's training vocabulary; 'instructor' (learnt from the train out-of-scope question \"When are the instructor office hours?\") and the function words 'to', 'the', 'i' carry the largest out-of-scope weights. Retrieval alone found the right chunk.",
     "q030": "Router says out-of-scope: 'much' and 'worth' lean out-of-scope because the train question \"How much are the quizzes worth in the course grade?\" is labelled out-of-scope; 'each' and 'item' are unseen. BM25 also misses (Final Report chunk first): 'worth' and 'item' never appear in the corpus, which says 'Weight' and 'Deliverable'.",
-    "q012": "BM25 per-term scores: Group Formation 3.04, all from 'deadline' ('register ... by the deadline'); gold chunks 2.47 and 2.52, only from 'video', because they say 'Due' rather than 'deadline'. Low confidence, so it escalated: a safe miss.",
-    "q038": "Code-mixed query: the three Han characters and 'submit' do not occur in the corpus (corpus has 'submitted', 'submission'), so the only BM25 evidence is 'report' (1.56 on the gold chunk). Right chunk, but confidence too low: escalated.",
+    "q012": "BM25 per-term scores: Group Formation 3.04, all from 'deadline' ('register ... by the deadline'); gold chunks 2.47 and 2.52, only from 'video', because they say 'Due' rather than 'deadline'.",
+    "q038": "Code-mixed query: the three Han characters and 'submit' do not occur in the corpus (corpus has 'submitted', 'submission'), so the only BM25 evidence is 'report' (1.56 on the gold chunk). Right chunk, low BM25 evidence.",
 }
 
 
@@ -70,9 +71,8 @@ def main():
           + (R["deploy_note"] or "MiniLM did not win, so no transformers.js download is needed; the page stays a single static file."),
           "- **Calculator** (`ml/calc.py`): deterministic code over the Important Dates weights only (Registration 0, Proposal 2, Poster 10, Video 3, Final Report 7; total 22). "
           "Integer arithmetic in hundredths of a mark, so 18.7 is exact. A what-if on any item without a weight is ESCALATED with reason \"weight not in table\". No LLM is used anywhere.",
-          f"- **Confidence and fallback** (`ml/pipeline.py`): lookup conf = router max-probability x s/(s+K), s = top-1 BM25 score, K = {T['K']:.3f} (median top-1 BM25 score on train lookups); "
-          f"calc conf = router max-probability; out-of-scope always escalates. Below the threshold the answer is ESCALATED: \"Please ask the TA.\" "
-          f"Threshold rule (fixed before running): highest tune coverage with tune risk <= {T['risk_cap']}; ties -> higher threshold. Chosen: **{T['threshold']:.4f}**.",
+          f"- **Confidence and fallback** (`ml/pipeline.py`): deployed (v2) lookup conf = {T['conf_formula']}; calc conf = router max-probability; "
+          f"out-of-scope always escalates. Below the threshold the answer is ESCALATED: \"Please ask the TA.\" Threshold {T['threshold']:.4f}, chosen on tune (see 6.3 for v1 vs v2).",
           "- **Browser deployment**: `ml/export_model.py` writes `model.json` (router vocabulary, idf, LR coefficients, BM25 term statistics, chunk texts, threshold, weights) "
           "and inlines it into `index.html`, so the page works from file:// and on any static host with no network calls.", ""]
     # ---------------- evaluation
@@ -107,25 +107,39 @@ def main():
         L.append(f"| {lab} | " + " | ".join(map(str, row)) + " |")
     L += ["", f"[INFERRED] The CV mean ({f3(T['cv5_train_tune']['mean'])}) is well below the test figure, so the test macro-F1 is probably a favourable draw of {tt['n']} questions; the plausible range is roughly the span between the two.", ""]
     a, b = T["test_at_threshold"], T["tune_at_threshold"]
+    V1 = T["v1"]
+    a1, b1 = V1["test_at_threshold"], V1["tune_at_threshold"]
+    SB = json.loads((RESULTS / "sample_buttons.json").read_text())
+    row = lambda name, d: f"| {name} | {f3(d['coverage'])} | {f3(d['risk'])} | {d['answered']} | {d['wrong']} | {d['n']} | {d['end_to_end_correct']}/{d['n']} |"
     L += ["### 6.3 Risk-coverage and threshold (`ml/train_router.py` -> `results/risk_coverage.png`)", "",
           "Coverage = answered (SOURCED or CALCULATED) / all questions. Risk = wrong answers / answered. Wrong = lookup whose top chunk is not gold, "
-          "calc with wrong item or score, or any answer to a question that should escalate.", "",
-          "![risk-coverage](risk_coverage.png)", "",
-          "| setting | coverage | risk | answered | wrong | n |", "|---|---|---|---|---|---|"]
-    for name, d in (("tune, no threshold", T["tune_no_threshold"]), (f"tune, threshold {T['threshold']:.4f}", b),
-                    ("test, no threshold", T["test_no_threshold"]), (f"**test, threshold {T['threshold']:.4f}**", a)):
-        L.append(f"| {name} | {f3(d['coverage'])} | {f3(d['risk'])} | {d['answered']} | {d['wrong']} | {d['n']} |")
+          "calc with wrong item or score, or any answer to a question that should escalate. End-to-end = right answer, or escalation when escalation was expected.", "",
+          "Two versions of the lookup confidence, both with the same threshold rule (highest tune coverage with tune risk <= "
+          f"{T['risk_cap']}; ties -> higher threshold):", "",
+          f"- **v1 (pre-registered)**: {V1['conf_formula']}, K = {T['K']:.3f}. Threshold {V1['threshold']:.4f}.",
+          f"- **v2 (deployed; post-hoc: the test split had been seen once (v1) before this change)**: v1 penalised short queries, because a raw BM25 score "
+          "grows with the number of query terms. Three normalised candidates were compared on TUNE only, each with its own tune-chosen threshold; "
+          "the candidate with the highest tune coverage won (tie -> lower tune risk). Test was scored once, after the choice.", "",
+          "| v2 candidate (tune only) | threshold | tune coverage | tune risk | answered |", "|---|---|---|---|---|"]
+    for mname, d in T["v2_selection_tune"].items():
+        L.append(f"| {CONF_FORMULA[mname]}{' **(chosen)**' if mname == T['conf_mode'] else ''} | {d['threshold']:.4f} | {f3(d['coverage'])} | {f3(d['risk'])} | {d['answered']} |")
+    L += ["", "![risk-coverage](risk_coverage.png)", "",
+          "| setting | coverage | risk | answered | wrong | n | end-to-end |", "|---|---|---|---|---|---|---|",
+          row("tune, no threshold", {**T["tune_no_threshold"], "end_to_end_correct": "-"}).replace("| -/", "| - of "),
+          row(f"tune, v1 t={V1['threshold']:.4f}", b1), row(f"tune, v2 t={T['threshold']:.4f}", b),
+          row("test, no threshold", {**T["test_no_threshold"], "end_to_end_correct": "-"}).replace("| -/", "| - of "),
+          row(f"test, v1 t={V1['threshold']:.4f} (seen first)", a1), row(f"**test, v2 t={T['threshold']:.4f} (post-hoc, scored once)**", a), ""]
     over = [r for r in pred if r["split"] == "test" and r["stamp"] == "ESCALATED" and r["reason"] == "low confidence" and r["top_chunk"] in r["gold"].split(";")]
-    L += ["", f"At the threshold, every test question that should escalate did ({a['escalated_of_those']}/{a['should_escalate']}). "
-          f"End-to-end correct (right answer, or escalation when escalation was expected): {a['end_to_end_correct']}/{a['n']} test. "
-          f"The cost is coverage: {len(over)} test questions escalated as low-confidence even though the top chunk was correct. "
-          f"The threshold came from only {b['n']} tune questions, so it is coarse; test risk ({f3(a['risk'])}) is above the {T['risk_cap']} tune cap.", ""]
-    SB = json.loads((RESULTS / "sample_buttons.json").read_text())
-    L += [f"**Demo impact.** At this threshold {sum(s['stamp'] != 'ESCALATED' for s in SB)} of the {len(SB)} sample buttons get an answer "
-          f"({len(SB) - sum(s['stamp'] == 'ESCALATED' and 'lookup' not in s.get('reason', '') and s['reason'] == 'low confidence' for s in SB)} of {len(SB)} behave as intended; escalating the cheating request is correct): " +
-          "; ".join(f"\"{s['q']}\" -> {s['stamp']} (conf {s['conf']:.2f})" for s in SB) +
-          ". The escalated lookups retrieve the correct chunk; they fall below the threshold. Choosing a lower threshold trades risk for coverage: "
-          "that is a team decision. Tune operating points (from `results/router.json`, every 3rd candidate):", "",
+    L += [f"v2 at its threshold: every test question that should escalate did ({a['escalated_of_those']}/{a['should_escalate']}); "
+          f"{len(over)} test questions still escalate as low-confidence although their top chunk is correct. "
+          f"Test risk ({f3(a['risk'])}) is above the {T['risk_cap']} tune cap; the threshold comes from {b['n']} tune questions. "
+          "Because v2 was designed after v1's test numbers were seen, the v2 test row is not a clean held-out estimate: see 6.8.", ""]
+    for ver in ("v1", "v2"):
+        L.append(f"**Sample questions, {ver}: {sum(s['intended'] for s in SB[ver])}/{len(SB[ver])} as intended.** " +
+                 "; ".join(f"\"{s['q']}\" -> {s['stamp']}{' (' + s['reason'] + ')' if s.get('reason') else ''}, conf {s['conf']:.2f}, "
+                           f"{'ok' if s['intended'] else 'not as intended (wanted ' + s['want'] + ')'}" for s in SB[ver]))
+        L.append("")
+    L += ["v2 tune operating points (every 3rd candidate threshold; lowering the threshold trades risk for coverage, a team decision):", "",
           "| threshold | tune coverage | tune risk | answered |", "|---|---|---|---|"]
     for p in T["curves"]["tune"][::3]:
         L.append(f"| {p['t']:.3f} | {f3(p['coverage'])} | {f3(p['risk'])} | {p['answered']} |")
@@ -145,14 +159,23 @@ def main():
     # ---------------- error analysis
     fails = [r for r in pred if r["split"] == "test" and r["correct"] == "0"]
     pick = [r for r in fails if r["id"] in NOTES][:5]
-    L += ["### 6.7 Error analysis: 5 real test failures (`results/predictions.csv`)", "",
+    L += ["### 6.7 Error analysis: 5 real test failures, deployed v2 (`results/predictions.csv`)", "",
           f"{len(fails)} of {len(pred) and sum(r['split'] == 'test' for r in pred)} test questions were not handled correctly end-to-end. Five, chosen to cover different failure types:", "",
           "| id | question | true | router | stamp | top chunk | why |", "|---|---|---|---|---|---|---|"]
     for r in pick:
-        L.append(f"| {r['id']} | {r['q']} | {r['label']} | {r['pred']} | {r['stamp']} | {r['top_chunk']} | {NOTES[r['id']]} |")
+        outcome = ("wrong answer shown (worst type)" if r["stamp"] != "ESCALATED" else
+                   "escalated as low confidence: a safe miss" if r["reason"] == "low confidence" else f"escalated ({r['reason']})")
+        L.append(f"| {r['id']} | {r['q']} | {r['label']} | {r['pred']} | {r['stamp']} | {r['top_chunk']} | {NOTES[r['id']]} Outcome: {outcome}. |")
     L += ["", "Pattern: answered-but-wrong cases come from BM25 word overlap with the wrong section; router misses come from cue words learnt from a small training set "
-          "('instructor', 'worth'); most other failures are safe escalations caused by the coarse threshold.", ""]
+          "('instructor', 'worth'); the remaining failures are safe escalations below the threshold.", ""]
     # ---------------- discrepancies + limitations
+    L += ["### 6.8 Fresh holdout (to do: a teammate)", "",
+          "Every split here was written by the system's author, and v2 was designed after v1's test numbers were seen. "
+          "For a clean estimate, a teammate who has not seen `questions.csv` or these results should write 30 new questions "
+          "(roughly 18 lookup, 6 calc, 6 out-of-scope; include paraphrases, typos and Cantonese-English mix) in `ml/data/holdout.csv`, "
+          "copied from `ml/data/holdout_template.csv` (columns q, label, gold_chunk_ids; gold ids from `ml/data/chunks.jsonl`). "
+          "Then run `.venv/bin/python eval_holdout.py` (from `ml/`): it scores the deployed model once, with no refitting. "
+          "Report that number as the headline and these numbers as development results.", ""]
     L += ["## Source conflicts found in the data", "",
           "1. **Poster due date.** Canvas lists *Poster Presentation* due Mon 30 Nov 2026, 23:59 HKT (`canvas_assignments.json`, 2026-11-30T15:59:59Z). "
           "The course project page says the poster link is due \"One day before your assigned Poster Presentation Session\" (Team 9 presents Nov 20). "
