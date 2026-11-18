@@ -270,16 +270,16 @@ $("f").onsubmit=e=>{e.preventDefault();ask(inp.value)};
 ["When is the proposal due?","If I get 0 on the poster, what is my project mark?","Can you write my assignment?","Is late submission allowed?","When is the poster link due?"].forEach(t=>{const b=document.createElement("button");b.type="button";b.textContent=t;b.onclick=()=>ask(t);$("hint").appendChild(b)});
 $("mdl").innerHTML='<span>router</span> '+esc(MODEL.router.analyzer)+' TF-IDF + logistic regression<br><span>retrieval</span> '+esc(MODEL.retriever.type.toUpperCase())+' over '+MODEL.chunks.length+' passages<br><span>threshold</span> '+f2(MODEL.threshold)+', set from the tune-split risk-coverage curve<br><span>runtime</span> in-browser, no server, no LLM';
 emptyTrace();renderScores();
-// ---- engine mode: any course's syllabus via ml/serve.py (fine-tuned MiniLM, no LLM) ----
-let ENG=null;const API=location.protocol.startsWith("http")?"":null;
+// ---- engine mode: any course's syllabus (fine-tuned MiniLM, no LLM) via ml/serve.py, or in the browser (engine.js) on any static server ----
+let ENG=null,LOCAL=null;const API=location.protocol.startsWith("http")?"":null;
 const courseLabel=document.querySelector(".course"),meta=document.querySelector(".top .meta");
 function setEng(on,name){ENG=on;courseLabel.textContent=on?name:"COMP1945";inp.placeholder="Ask about "+(on?name:"COMP1945");$("back").hidden=!on;$("hint").hidden=!!on;
  document.querySelector('#scores').closest(".panel").hidden=!!on;
- meta.textContent=on?"Engine mode · fine-tuned MiniLM on this machine":"Group 9 prototype · model runs in your browser";
- $("mdl").innerHTML=on?'<span>retrieval</span> MiniLM fine-tuned on public course FAQs, cosine<br><span>faq</span> common student questions matched to this syllabus<br><span>threshold</span> '+f2(ENG_T)+', set on held-out courses<br><span>runtime</span> local server, no LLM':MDL_STATIC;
+ meta.textContent=on?"Engine mode · fine-tuned MiniLM "+(LOCAL?"in your browser":"on this machine"):"Group 9 prototype · model runs in your browser";
+ $("mdl").innerHTML=on?'<span>retrieval</span> MiniLM fine-tuned on public course FAQs, cosine<br><span>faq</span> common student questions matched to this syllabus<br><span>threshold</span> '+f2(ENG_T)+', set on held-out courses<br><span>runtime</span> '+(LOCAL?'in your browser ('+LOCAL.backend.toUpperCase()+'), no server, no LLM':'local server, no LLM'):MDL_STATIC;
  if(on)$("trace").innerHTML='<h2>Decision trace</h2><p class="sub">What the engine does with your question</p><ol class="empty"><li>Embed the question with the fine-tuned MiniLM</li><li>Rank this syllabus\'s passages by cosine</li><li>Answer only if confidence clears the threshold, otherwise hand it to the TA</li></ol>';else{$("faq").innerHTML="";emptyTrace()}}
 async function engineAsk(q){add('<span>'+esc(q)+'</span>',"q");inp.value="";
- let r;try{r=await (await fetch("/api/ask",{method:"POST",body:JSON.stringify({q})})).json()}catch(e){r={stamp:"ESCALATED",answer:"Please ask the TA",reason:"engine offline",conf:0}}
+ let r;try{r=LOCAL?await LOCAL.ask(q):await (await fetch("/api/ask",{method:"POST",body:JSON.stringify({q})})).json()}catch(e){r={stamp:"ESCALATED",answer:"Please ask the TA",reason:"engine offline",conf:0}}
  const src=r.stamp==="SOURCED";
  const body=src?'<div class="rbody">'+esc(snippet(q,r.answer))+'</div><details><summary>Full source passage</summary><p>'+esc(r.answer)+'</p></details>':'<div class="rbody">Please ask the TA</div><div class="note">'+(r.reason==="engine offline"?"The engine is not running":"The model is not sure enough to answer")+'</div>';
  const foot=(src?'<span>source <b>'+esc(r.section||ENG_NAME)+'</b></span>':'<span>reason <b>'+esc(r.reason||"low confidence")+'</b></span>')+'<span>confidence <b>'+f2(r.conf)+'</b></span>';
@@ -287,14 +287,20 @@ async function engineAsk(q){add('<span>'+esc(q)+'</span>',"q");inp.value="";
  const T=ENG_T,tick='<span class="tick" style="left:'+(T*100)+'%"></span><span class="ticklab" style="left:'+(T*100)+'%">threshold '+f2(T)+'</span>';
  $("trace").innerHTML='<h2>Decision trace</h2><p class="sub">'+esc(q)+'</p><div class="step"><div class="k"><span>1 · Retrieval</span><span>fine-tuned MiniLM, cosine</span></div><div class="bars conf">'+bar("Confidence",r.conf,1,src,tick)+'</div><p class="sub" style="margin:0">Trained on '+ENG_BANK+' questions from public course FAQs</p></div>';inp.focus()}
 let ENG_T=.5,ENG_BANK=0,ENG_NAME="";const MDL_STATIC=$("mdl").innerHTML;
-if(API!==null)fetch("/api/health").then(r=>r.json()).then(h=>{ENG_T=h.threshold;ENG_BANK=h.bank}).catch(()=>{$("engsub").textContent="Start the engine with ml/serve.py to load another course";$("syl").disabled=true});
-else{$("engsub").textContent="Start the engine with ml/serve.py, then open http://127.0.0.1:8765";$("syl").disabled=true}
+const SYL_HINT="Upload a syllabus (PDF, HTML or text) to get its FAQ and ask about it";
+// no serve.py (static hosting, e.g. python3 -m http.server): load the same engine into the page
+function startLocal(){$("engsub").textContent="Loading the engine in your browser";
+ import("./engine.js").then(m=>m.createEngine(s=>$("engsub").textContent=s)).then(E=>{LOCAL=E;ENG_T=E.t;ENG_BANK=E.bank.length;document.body.dataset.engine=E.backend;document.body.dataset.engineMs=Math.round(E.loadMs);document.body.dataset.bankMs=Math.round(E.bankMs);$("syl").disabled=false;$("engsub").textContent=SYL_HINT})
+ .catch(err=>{console.error(err);$("engsub").textContent="Could not load the in-browser engine ("+err.message+"); start ml/serve.py instead"})}
+$("syl").disabled=true;
+if(API!==null)fetch("/api/health").then(r=>{if(!r.ok)throw new Error(r.status);return r.json()}).then(h=>{ENG_T=h.threshold;ENG_BANK=h.bank;$("syl").disabled=false}).catch(startLocal);
+else $("engsub").textContent="Serve this folder over http (python3 -m http.server) or start ml/serve.py to load another course";
 $("syl").onchange=async e=>{const f=e.target.files[0];if(!f)return;$("engsub").textContent="Reading "+f.name;
- try{const r=await fetch("/api/ingest",{method:"POST",headers:{"X-Filename":f.name},body:await f.arrayBuffer()});const d=await r.json();if(!r.ok)throw new Error(d.error);
+ try{let d;if(LOCAL)d=await LOCAL.ingest(f.name,new Uint8Array(await f.arrayBuffer()));else{const r=await fetch("/api/ingest",{method:"POST",headers:{"X-Filename":f.name},body:await f.arrayBuffer()});d=await r.json();if(!r.ok)throw new Error(d.error)}
   ENG_NAME=f.name.replace(/\.[^.]+$/,"");setEng(true,ENG_NAME);
   $("engsub").textContent=d.faq.length+" FAQ from "+d.chunks+" passages";
   $("faq").innerHTML=d.faq.map((x,i)=>'<details class="fq"><summary>'+esc(x.q)+'</summary><p>'+esc(x.a)+'</p><button type="button" data-i="'+i+'">Ask this</button></details>').join("")||'<p class="empty">Nothing in this syllabus matched a common question with enough confidence</p>';
   $("faq").querySelectorAll("button").forEach(b=>b.onclick=()=>ask(d.faq[+b.dataset.i].q))}
  catch(err){$("engsub").textContent="Could not read "+f.name+": "+err.message}};
-$("back").onclick=()=>{setEng(false);$("engsub").textContent="Upload a syllabus (PDF, HTML or text) to get its FAQ and ask about it";$("syl").value=""};
+$("back").onclick=()=>{setEng(false);$("engsub").textContent=SYL_HINT;$("syl").value=""};
 </script></body></html>

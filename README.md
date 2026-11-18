@@ -62,7 +62,13 @@ Upload a syllabus (PDF, HTML, Markdown or text) and the page builds that course'
 ml/.venv/bin/python ml/serve.py          # then open http://127.0.0.1:8765
 ```
 
-Opened as a file (`index.html` from disk), the page still runs the COMP1945 model in the browser and shows how to start the engine.
+Without the Python server, the same engine runs inside the page (`engine.js`): serve the folder with any static server and upload works the same way.
+
+```sh
+python3 -m http.server 8000             # then open http://127.0.0.1:8000/index.html
+```
+
+The page asks `/api/health` first; if serve.py does not answer, it loads `engine.js`, which ports `ml/engine.py` (text extraction, chunking, FAQ generation, threshold) to JavaScript and runs the fine-tuned MiniLM as ONNX (`ml/engine_model/onnx/`, 25 MB, int8 weights, built by `ml/export_onnx.py`) through transformers.js 3.8.1 (WebGPU when the browser has an adapter, otherwise WASM). transformers.js and pdf.js 5.7.284 load from jsDelivr, so the first visit needs network access. Opened as a file (`index.html` from disk), the browser blocks loading the model, so the page runs the COMP1945 model only and says how to serve it.
 
 How it was built (all from `ml/`):
 
@@ -84,5 +90,7 @@ Held-out courses (the test course's questions and answers never appear in traini
 | **MiniLM, fine-tuned on other courses' FAQs (deployed)** | **0.707** | **0.901** |
 
 Threshold 0.497: on held-out courses the engine answers 67.7% of questions, and 80.1% of those answers are the right passage; the rest go to the TA.
+
+Parity of the browser engine with the Python one: `node parity_engine.cjs` (same files and questions through `ml/engine.py` and `engine.js`; checks embedding cosine >= 0.99 per text, identical chunks, FAQ list and SOURCED/ESCALATED stamps). `STATIC=1 node e2e_engine.cjs <syllabus.html>` runs the e2e checks below against `python3 -m http.server` with no serve.py, and prints load and per-question timings.
 
 Tests: `node e2e_engine.cjs <syllabus.html>` with the server running (uploads the file as HTML and as a browser-made PDF, checks FAQ, answers, escalation, switching back to COMP1945). Playwright is not a repo dependency: install it anywhere and point `NODE_PATH` at it.
