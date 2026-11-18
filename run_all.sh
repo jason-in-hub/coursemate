@@ -6,7 +6,9 @@ cd "$(dirname "$0")/ml"
 [ -x .venv/bin/python ] || { python3 -m venv .venv && .venv/bin/pip install -q -r requirements.txt; }
 PY=.venv/bin/python
 echo "== 0. frozen data check"; shasum -a 256 -c data/FROZEN.sha256
-rm -rf ../results artifacts data/chunks.jsonl
+# keep results that run_all does not regenerate (slow external-FAQ runs and the pairwise judgement)
+mkdir -p ../results && find ../results -type f ! -name finetune_cv.json ! -name 'reranker*.json' ! -name pairwise_judge.json -delete
+rm -rf artifacts data/chunks.jsonl
 echo "== 1. build_corpus.py";   $PY build_corpus.py
 echo "== 2. eval_retrieval.py"; $PY eval_retrieval.py 2> >(grep -v -e Warning -e Loading -e redirects -e "Could not reach" >&2)
 echo "== 3. train_router.py";   $PY train_router.py
