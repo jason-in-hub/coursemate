@@ -5,25 +5,20 @@
    "right": 15,
    "wrong": 3
   },
-  "agree": {
+  "A": {
    "answered": 22,
    "right": 19,
    "wrong": 3
   },
-  "agree|mini>=0.45": {
-   "answered": 27,
-   "right": 21,
-   "wrong": 6
+  "B": {
+   "answered": 22,
+   "right": 19,
+   "wrong": 3
   },
-  "agree|mini>=0.50": {
-   "answered": 25,
-   "right": 20,
-   "wrong": 5
-  },
-  "agree|mini>=0.55": {
-   "answered": 25,
-   "right": 20,
-   "wrong": 5
+  "C": {
+   "answered": 22,
+   "right": 19,
+   "wrong": 3
   }
  },
  "test": {
@@ -32,25 +27,20 @@
    "right": 13,
    "wrong": 3
   },
-  "agree": {
+  "A": {
    "answered": 17,
    "right": 14,
    "wrong": 3
   },
-  "agree|mini>=0.45": {
-   "answered": 20,
-   "right": 15,
-   "wrong": 5
-  },
-  "agree|mini>=0.50": {
-   "answered": 19,
+  "B": {
+   "answered": 17,
    "right": 14,
-   "wrong": 5
+   "wrong": 3
   },
-  "agree|mini>=0.55": {
-   "answered": 18,
+  "C": {
+   "answered": 17,
    "right": 14,
-   "wrong": 4
+   "wrong": 3
   }
  },
  "demo": {
@@ -59,52 +49,20 @@
    "right": 8,
    "wrong": 3
   },
-  "agree": {
+  "A": {
    "answered": 17,
    "right": 14,
    "wrong": 3
   },
-  "agree|mini>=0.45": {
-   "answered": 24,
-   "right": 19,
-   "wrong": 5
+  "B": {
+   "answered": 17,
+   "right": 14,
+   "wrong": 3
   },
-  "agree|mini>=0.50": {
-   "answered": 21,
-   "right": 17,
-   "wrong": 4
-  },
-  "agree|mini>=0.55": {
+  "C": {
    "answered": 19,
    "right": 16,
    "wrong": 3
-  }
- },
- "demo-new": {
-  "current": {
-   "answered": 5,
-   "right": 4,
-   "wrong": 1
-  },
-  "agree": {
-   "answered": 9,
-   "right": 8,
-   "wrong": 1
-  },
-  "agree|mini>=0.45": {
-   "answered": 13,
-   "right": 11,
-   "wrong": 2
-  },
-  "agree|mini>=0.50": {
-   "answered": 11,
-   "right": 10,
-   "wrong": 1
-  },
-  "agree|mini>=0.55": {
-   "answered": 10,
-   "right": 9,
-   "wrong": 1
   }
  }
 }

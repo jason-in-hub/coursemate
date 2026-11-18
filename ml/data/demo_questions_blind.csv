@@ -1,0 +1,35 @@
+q,gold
+AI,ESC
+what is AI,ESC
+what is this course about,syllabus:course;syllabus:learning_outcome
+What will I learn?,syllabus:learning_outcome
+how is the course graded,syllabus:grading
+Can I use ChatGPT?,syllabus:ai_policy
+what is the project,page:project-overview:0
+group size,page:group-formation:0
+How long should the video be?,page:video-trailer:0
+Is late submission allowed?,page:submission:0
+cheat sheet allowed in exam?,syllabus:exam
+how many quizzes,ESC
+prompt injection assignment due,canvas:assignment-3-part-d-prompt-injection
+what's the weather today,ESC
+Are AI tools allowed for the project?,syllabus:ai_policy
+Do I need to say which parts were written by AI?,syllabus:ai_policy
+How many people in a group?,page:group-formation:0
+How many pages is the final report?,page:final-report:0
+What size should the poster be?,page:poster-presentation-session:1
+Where do I submit the project?,page:submission:0
+Can I email my report to the TA?,page:submission:0
+What happens if I plagiarise?,syllabus:integrity
+What does the final exam cover?,syllabus:exam
+How much is the final exam worth?,syllabus:grading
+When is assignment 1 due?,canvas:assignment-1-part-a;canvas:assignment-1-part-b
+What is the poster presentation about?,page:poster-presentation-session:0
+Which day does my team present?,page:poster-presentation-session:3
+How do I access the course website off campus?,canvas:front-page
+Where can I watch the lecture videos?,ESC
+What should the video trailer include?,page:video-trailer:0
+What file name should the final report use?,page:submission:0
+Can you do my homework for me?,ESC
+Recommend a good restaurant,ESC
+What tools can we use to build the prototype?,page:final-report:4

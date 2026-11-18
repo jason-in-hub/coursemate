@@ -109,7 +109,7 @@ tr.hit td{color:var(--text);font-weight:500}
 .up span,#back{display:inline-block;border:1px solid var(--line2);background:var(--surface);border-radius:8px;padding:6px 12px;font-size:13px;color:var(--text);cursor:pointer;transition:border-color .16s var(--ease)}
 .up:hover span,#back:hover{border-color:var(--accent)}.up input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
 .up input:disabled+span{color:var(--mute);cursor:not-allowed;border-style:dashed}
-.alts{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}.alts li{display:grid;gap:2px;padding:8px 10px;border:1px solid var(--line,#ddd);border-radius:8px;font-size:13px}.alts li b{font-weight:600;font-size:12px;color:var(--text2)}.alts-h{margin-top:10px;font-size:12px;color:var(--text2)}.sugg{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.alts{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}.alts li{display:grid;gap:2px;padding:8px 10px;border:1px solid var(--line,#ddd);border-radius:8px;font-size:13px}.alts li b{font-weight:600;font-size:12px;color:var(--text2)}.alts.best li{border-color:var(--text2);font-size:14px}.alts-h{margin-top:4px;font-size:12px;color:var(--text2)}.sugg{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 #back{margin-left:8px}[hidden]{display:none!important}
 #faq{margin-top:12px}.fq{border-top:1px solid var(--line);padding:8px 0;margin:0}.fq summary{font:13px/1.4 var(--sans);color:var(--text)}
 .fq p{font-size:12px;color:var(--text2)}.fq button{margin-top:6px;border:0;background:none;color:var(--accent-ink);font-size:12px;padding:0;cursor:pointer}
@@ -250,7 +250,10 @@ let MINI=null;
 async function miniOrder(q){if(!MINI)return null;const e=(await MINI.encode([q]))[0];const s=MINI.C.map(c=>{let z=0;for(let d=0;d<e.length;d++)z+=c[d]*e[d];return z});return{s,o:s.map((_,i)=>i).sort((a,b)=>s[b]-s[a]||a-b)}}
 async function answer2(q){const r=answer(q,SCORES),m=await miniOrder(q);
  if(m){r.miniOrder=m.o;r.miniS=m.s;r.miniTop=MODEL.chunks[m.o[0]].id;r.miniConf=m.s[m.o[0]];
-  if(r.stamp==="ESCALATED"&&r.reason==="low confidence"&&r.label==="lookup"&&r.miniTop===r.top_chunk){r.stamp="SOURCED";delete r.reason;r.agree=true}}
+  const lowLookup=r.stamp==="ESCALATED"&&r.reason==="low confidence"&&r.label==="lookup";
+  const calcNoItem=r.stamp==="ESCALATED"&&r.label==="calc"&&r.reason==="no project item named";  // router said calc but no project item: treat as a lookup
+  const softOos=r.stamp==="ESCALATED"&&r.label==="oos"&&Math.max(...r.p)<0.5;                     // router unsure it is off-topic
+  if((lowLookup||calcNoItem||softOos)&&r.miniTop===r.top_chunk){r.stamp="SOURCED";r.routed=r.label;r.label="lookup";delete r.reason;r.agree=true}}
  return r}
 function closest(q,k,skip,r){if(r&&r.miniOrder){const s=r.miniS,best=s[r.miniOrder[0]];return r.miniOrder.filter((i,n)=>n===0||s[i]>=best-0.1).map(i=>MODEL.chunks[i]).filter(c=>c.id!==skip).slice(0,k)}
  const sc=retrieveScores(q);return rankIdx(sc).filter(i=>sc[i]>0&&MODEL.chunks[i].id!==skip).slice(0,k).map(i=>MODEL.chunks[i])}
@@ -273,7 +276,8 @@ async function ask(q){q=q.trim();if(!q)return;if(ENG){engineAsk(q);return}
   foot='<span>weights <b>course project page · Important Dates</b></span><span>no model arithmetic</span>';renderScores(r.item)}
  else{const why={"out of scope":"This is outside what the course documents cover","low confidence":"The model is not sure enough to answer","weight not in table":"That item has no weight in the project table"}[r.reason]||("Cannot calculate: "+r.reason);
   const near=r.label==="oos"?[]:closest(q,3,null,r);
-   body='<div class="rbody">Please ask the TA</div><div class="note">'+esc(why)+'</div>'+(near.length?'<div class="alts-h">Best matches in the course documents (low confidence: check before relying on them)</div>'+passList(q,near):'');foot='<span>reason <b>'+esc(r.reason)+'</b></span>'+(r.label==="oos"?"":confTxt)}
+   body=near.length?'<div class="alts-h">Most likely answer (not confirmed: '+esc(why.toLowerCase())+')</div>'+passList(q,near.slice(0,1)).replace('class="alts"','class="alts best"')+(near.length>1?'<details><summary>Other matches</summary>'+passList(q,near.slice(1))+'</details>':'')+'<div class="note">Not sure? Please ask the TA</div>'
+    :'<div class="rbody">Please ask the TA</div><div class="note">'+esc(why)+'</div>';foot='<span>reason <b>'+esc(r.reason)+'</b></span>'+(r.label==="oos"?"":confTxt)}
  add('<div class="rhead"><span class="stamp st-'+r.stamp+'">'+r.stamp+'</span><span class="route">'+esc(cls)+'</span></div>'+body+'<div class="rfoot">'+foot+'</div>',"receipt");
  trace(q,r);if(r.miniTop){const mc=MODEL.chunks.find(x=>x.id===r.miniTop);$("trace").insertAdjacentHTML("beforeend",'<div class="step"><div class="k"><span>5 · Second opinion</span><span>fine-tuned MiniLM</span></div><p class="sub" style="margin:0">Top passage: <b>'+esc(mc.source)+'</b> (cosine '+f2(r.miniConf)+'). '+(r.miniTop===r.top_chunk?'Same as BM25'+(r.agree?', so the low-confidence lookup is answered':''):'Differs from BM25')+'</p></div>')}inp.focus()}
 $("f").onsubmit=e=>{e.preventDefault();ask(inp.value)};
