@@ -1,0 +1,35 @@
+q,gold,seen
+AI,syllabus:learning_outcome;syllabus:course,seen
+what is AI,syllabus:learning_outcome;syllabus:course,seen
+what is this course about,syllabus:course;syllabus:learning_outcome,seen
+What will I learn?,syllabus:learning_outcome,seen
+how is the course graded,syllabus:grading;syllabus:assessment,seen
+Can I use ChatGPT?,syllabus:ai_policy,seen
+what is the project,page:project-overview:0,seen
+group size,page:group-formation:0,seen
+How long should the video be?,page:video-trailer:0,seen
+Is late submission allowed?,page:submission:0;page:important-dates:0,seen
+cheat sheet allowed in exam?,syllabus:exam,seen
+how many quizzes,syllabus:grading;syllabus:schedule,seen
+prompt injection assignment due,canvas:assignment-3-part-d-prompt-injection,seen
+what's the weather today,ESC,new
+Are AI tools allowed for the project?,syllabus:ai_policy,new
+Do I need to say which parts were written by AI?,syllabus:ai_policy,new
+How many people in a group?,page:group-formation:0,new
+How many pages is the final report?,page:final-report:0;page:final-report:1;page:final-report:2;page:final-report:3;page:final-report:4,new
+What size should the poster be?,page:poster-presentation-session:1,new
+Where do I submit the project?,page:submission:0;canvas:front-page,new
+Can I email my report to the TA?,page:submission:0,new
+What happens if I plagiarise?,syllabus:integrity,new
+What does the final exam cover?,syllabus:exam,new
+How much is the final exam worth?,syllabus:grading,new
+When is assignment 1 due?,canvas:assignment-1-part-a;canvas:assignment-1-part-b,new
+What is the poster presentation about?,page:poster-presentation-session:0,new
+Which day does my team present?,page:poster-presentation-session:3,new
+How do I access the course website off campus?,canvas:front-page,new
+Where can I watch the lecture videos?,canvas:front-page,new
+What should the video trailer include?,page:video-trailer:0,new
+What file name should the final report use?,page:submission:0,new
+Can you do my homework for me?,ESC,new
+Recommend a good restaurant,ESC,new
+What tools can we use to build the prototype?,page:final-report:3;page:final-report:4,new
