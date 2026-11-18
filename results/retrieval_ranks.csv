@@ -113,7 +113,6 @@ q111,bm25,train,clean,page:important-dates:0,1,1
 q112,bm25,train,paraphrase,page:important-dates:0,1,1
 q113,bm25,train,clean,canvas:ai-talk-attendance,1,1
 q114,bm25,train,paraphrase,canvas:activity-participation-2,1,1
-q158,bm25,train,clean,syllabus:ai_policy,0,4
 q159,bm25,train,clean,syllabus:grading,1,1
 q160,bm25,train,paraphrase,syllabus:ai_policy,0,10
 q001,word1,train,clean,canvas:proposal-report,1,1
@@ -230,7 +229,6 @@ q111,word1,train,clean,page:important-dates:0,1,1
 q112,word1,train,paraphrase,page:important-dates:0,1,1
 q113,word1,train,clean,canvas:ai-talk-attendance,1,1
 q114,word1,train,paraphrase,canvas:activity-participation-2,1,1
-q158,word1,train,clean,syllabus:ai_policy,0,8
 q159,word1,train,clean,syllabus:grading,1,1
 q160,word1,train,paraphrase,syllabus:assessment,0,15
 q001,word12,train,clean,canvas:proposal-report,1,1
@@ -347,7 +345,6 @@ q111,word12,train,clean,page:submission:0,1,1
 q112,word12,train,paraphrase,page:important-dates:0,1,1
 q113,word12,train,clean,canvas:ai-talk-attendance,1,1
 q114,word12,train,paraphrase,canvas:activity-participation-2,1,1
-q158,word12,train,clean,syllabus:ai_policy,0,9
 q159,word12,train,clean,syllabus:grading,1,1
 q160,word12,train,paraphrase,syllabus:resource,0,12
 q001,char35,train,clean,canvas:proposal-report,1,1
@@ -464,7 +461,6 @@ q111,char35,train,clean,page:important-dates:0,1,1
 q112,char35,train,paraphrase,syllabus:resource,0,2
 q113,char35,train,clean,canvas:ai-talk-attendance,1,1
 q114,char35,train,paraphrase,canvas:activity-participation-3,0,3
-q158,char35,train,clean,syllabus:ai_policy,0,12
 q159,char35,train,clean,syllabus:grading,1,1
 q160,char35,train,paraphrase,syllabus:assessment,0,22
 q001,minilm,train,clean,page:important-dates:0,1,1
@@ -581,6 +577,5 @@ q111,minilm,train,clean,page:important-dates:0,1,1
 q112,minilm,train,paraphrase,page:important-dates:0,1,1
 q113,minilm,train,clean,canvas:ai-talk-attendance,1,1
 q114,minilm,train,paraphrase,canvas:activity-participation-3,0,4
-q158,minilm,train,clean,syllabus:exam,1,1
 q159,minilm,train,clean,syllabus:grading,1,1
 q160,minilm,train,paraphrase,syllabus:assessment,0,2

@@ -15,7 +15,7 @@ Sources (only these): the course project page (text), 22 Canvas assignment items
 
 | split | lookup | calc | oos | total |
 |---|---|---|---|---|
-| train | 70 | 16 | 14 | 100 |
+| train | 69 | 16 | 15 | 100 |
 | tune | 26 | 4 | 6 | 36 |
 | test | 21 | 5 | 5 | 31 |
 
@@ -23,10 +23,10 @@ Test has only 5 calc and 5 out-of-scope questions, so per-class numbers on test 
 
 ## 5. Methods
 
-- **Router**: TF-IDF + logistic regression (C=10, class-balanced), 3 classes lookup / calc / oos, fitted on train only. Analyzer chosen on tune macro-F1: word1 0.810, word12 0.714, char35 0.593 -> **word1** (`ml/train_router.py`).
+- **Router**: TF-IDF + logistic regression (C=10, class-balanced), 3 classes lookup / calc / oos, fitted on train only. Analyzer chosen on tune macro-F1: word1 0.810, word12 0.626, char35 0.593 -> **word1** (`ml/train_router.py`).
 - **Lookup**: BM25 vs TF-IDF (word 1-gram, word 1-2-gram, char_wb 3-5-gram) vs all-MiniLM-L6-v2 embeddings (cosine). Selection rule: max tune MRR, tie -> tune Top-3 -> order bm25,word1,word12,char35,minilm. Winner on tune: **bm25**; deployed: **bm25**. MiniLM did not win, so no transformers.js download is needed; the page stays a single static file.
 - **Calculator** (`ml/calc.py`): deterministic code over the Important Dates weights only (Registration 0, Proposal 2, Poster 10, Video 3, Final Report 7; total 22). Integer arithmetic in hundredths of a mark, so 18.7 is exact. A what-if on any item without a weight is ESCALATED with reason "weight not in table". No LLM is used anywhere.
-- **Confidence and fallback** (`ml/pipeline.py`): deployed (v2) lookup conf = router p × min(1, top1 / Σ idf(query terms)); calc conf = router max-probability; out-of-scope always escalates. Below the threshold the answer is ESCALATED: "Please ask the TA." Threshold 0.5264, chosen on tune (see 6.3 for v1 vs v2).
+- **Confidence and fallback** (`ml/pipeline.py`): deployed (v2) lookup conf = router p × min(1, top1 / Σ idf(query terms)); calc conf = router max-probability; out-of-scope always escalates. Below the threshold the answer is ESCALATED: "Please ask the TA." Threshold 0.5306, chosen on tune (see 6.3 for v1 vs v2).
 - **Browser deployment**: `ml/export_model.py` writes `model.json` (router vocabulary, idf, LR coefficients, BM25 term statistics, chunk texts, threshold, weights) and inlines it into `index.html`, so the page works from file:// and on any static host with no network calls.
 
 ## 6. Evaluation
@@ -43,15 +43,15 @@ Test split, lookup questions only (n = 21); 95% bootstrap CI (2000 resamples) in
 | char35 | sub-word chars | 0.809 | 0.429 [0.238, 0.619] | 0.952 [0.857, 1.000] | 0.333 | 0.857 | 0.905 | 0.689 |
 | minilm | WordPiece | 0.607 | 0.571 [0.333, 0.762] | 0.714 [0.524, 0.905] | 0.405 | 0.571 | 0.714 | 0.670 |
 
-Larger n: retrieval is not trained on questions, so all 117 lookup questions can also be scored (supplementary; the test split above is the primary number):
+Larger n: retrieval is not trained on questions, so all 116 lookup questions can also be scored (supplementary; the test split above is the primary number):
 
 | representation | Top-1 all | Top-3 all | Top-1 clean | Top-1 paraphrase | Top-1 typo | Top-1 code-mix |
 |---|---|---|---|---|---|---|
-| bm25 | 0.701 [0.615, 0.786] | 0.872 [0.803, 0.932] | 0.686 (n=35) | 0.683 (n=41) | 0.619 (n=21) | 0.850 (n=20) |
-| word1 | 0.684 [0.598, 0.769] | 0.872 [0.803, 0.932] | 0.657 (n=35) | 0.732 (n=41) | 0.667 (n=21) | 0.650 (n=20) |
-| word12 | 0.692 [0.607, 0.778] | 0.863 [0.795, 0.923] | 0.686 (n=35) | 0.707 (n=41) | 0.571 (n=21) | 0.800 (n=20) |
-| char35 | 0.615 [0.530, 0.701] | 0.872 [0.812, 0.923] | 0.629 (n=35) | 0.585 (n=41) | 0.667 (n=21) | 0.600 (n=20) |
-| minilm | 0.513 [0.427, 0.598] | 0.726 [0.641, 0.803] | 0.600 (n=35) | 0.537 (n=41) | 0.476 (n=21) | 0.350 (n=20) |
+| bm25 | 0.707 [0.629, 0.793] | 0.879 [0.819, 0.931] | 0.706 (n=34) | 0.683 (n=41) | 0.619 (n=21) | 0.850 (n=20) |
+| word1 | 0.690 [0.603, 0.767] | 0.879 [0.819, 0.931] | 0.676 (n=34) | 0.732 (n=41) | 0.667 (n=21) | 0.650 (n=20) |
+| word12 | 0.698 [0.612, 0.784] | 0.871 [0.810, 0.931] | 0.706 (n=34) | 0.707 (n=41) | 0.571 (n=21) | 0.800 (n=20) |
+| char35 | 0.621 [0.526, 0.707] | 0.879 [0.819, 0.940] | 0.647 (n=34) | 0.585 (n=41) | 0.667 (n=21) | 0.600 (n=20) |
+| minilm | 0.509 [0.422, 0.595] | 0.724 [0.638, 0.802] | 0.588 (n=34) | 0.537 (n=41) | 0.476 (n=21) | 0.350 (n=20) |
 
 MiniLM status: ran from the local Hugging Face cache.
 
@@ -59,12 +59,12 @@ MiniLM status: ran from the local Hugging Face cache.
 
 | metric | value | n |
 |---|---|---|
-| test macro-F1 | **0.803** | 31 |
+| test macro-F1 | **0.866** | 31 |
 | test macro-F1, majority-class baseline | 0.269 | 31 |
-| test accuracy | 0.871 | 31 |
-| test per-class F1 | lookup 0.909, calc 1.000, oos 0.500 | {'lookup': 21, 'calc': 5, 'oos': 5} |
-| 5-fold CV macro-F1, train+tune, family-grouped | 0.678 +- 0.086 (folds 0.681, 0.817, 0.676, 0.589, 0.628) | 136 |
-| 5-fold CV majority baseline | 0.276 | 136 |
+| test accuracy | 0.903 | 31 |
+| test per-class F1 | lookup 0.930, calc 1.000, oos 0.667 | {'lookup': 21, 'calc': 5, 'oos': 5} |
+| 5-fold CV macro-F1, train+tune, family-grouped | 0.688 +- 0.083 (folds 0.711, 0.817, 0.676, 0.607, 0.628) | 136 |
+| 5-fold CV majority baseline | 0.274 | 136 |
 
 Test confusion matrix (rows = true, columns = predicted):
 
@@ -72,9 +72,9 @@ Test confusion matrix (rows = true, columns = predicted):
 |---|---|---|---|
 | lookup | 20 | 0 | 1 |
 | calc | 0 | 5 | 0 |
-| oos | 3 | 0 | 2 |
+| oos | 2 | 0 | 3 |
 
-[INFERRED] The CV mean (0.678) is well below the test figure, so the test macro-F1 is probably a favourable draw of 31 questions; the plausible range is roughly the span between the two.
+[INFERRED] The CV mean (0.688) is well below the test figure, so the test macro-F1 is probably a favourable draw of 31 questions; the plausible range is roughly the span between the two.
 
 ### 6.3 Risk-coverage and threshold (`ml/train_router.py` -> `results/risk_coverage.png`)
 
@@ -82,47 +82,47 @@ Coverage = answered (SOURCED or CALCULATED) / all questions. Risk = wrong answer
 
 Two versions of the lookup confidence, both with the same threshold rule (highest tune coverage with tune risk <= 0.1; ties -> higher threshold):
 
-- **v1 (pre-registered)**: router p × s1/(s1+K), K = 5.927. Threshold 0.4450.
+- **v1 (pre-registered)**: router p × s1/(s1+K), K = 5.884. Threshold 0.4506.
 - **v2 (deployed; post-hoc: the test split had been seen once (v1) before this change)**: v1 penalised short queries, because a raw BM25 score grows with the number of query terms. Three normalised candidates were compared on TUNE only, each with its own tune-chosen threshold; the candidate with the highest tune coverage won (tie -> lower tune risk). Test was scored once, after the choice.
 
 | v2 candidate (tune only) | threshold | tune coverage | tune risk | answered |
 |---|---|---|---|---|
-| router p × top1/(top1+top2) | 0.5342 | 0.167 | 0.000 | 6 |
-| router p × min(1, top1 / Σ idf(query terms)) **(chosen)** | 0.6382 | 0.333 | 0.083 | 12 |
-| router p | 0.9485 | 0.111 | 0.000 | 4 |
+| router p × top1/(top1+top2) | 0.4875 | 0.278 | 0.100 | 10 |
+| router p × min(1, top1 / Σ idf(query terms)) **(chosen)** | 0.6076 | 0.333 | 0.083 | 12 |
+| router p | 0.9549 | 0.111 | 0.000 | 4 |
 
 ![risk-coverage](risk_coverage.png)
 
 | setting | coverage | risk | answered | wrong | n | end-to-end |
 |---|---|---|---|---|---|---|
 | tune, no threshold | 0.917 | 0.333 | 33 | 11 | 36 | - of 36 |
-| tune, v1 t=0.4450 | 0.333 | 0.083 | 12 | 1 | 36 | 18/36 |
-| tune, v2 t=0.5264 | 0.528 | 0.158 | 19 | 3 | 36 | 23/36 |
-| test, no threshold | 0.839 | 0.308 | 26 | 8 | 31 | - of 31 |
-| test, v1 t=0.4450 (seen first) | 0.355 | 0.182 | 11 | 2 | 31 | 16/31 |
-| **test, v2 t=0.5264 (post-hoc, scored once)** | 0.548 | 0.176 | 17 | 3 | 31 | 21/31 |
+| tune, v1 t=0.4506 | 0.306 | 0.091 | 11 | 1 | 36 | 17/36 |
+| tune, v2 t=0.5306 | 0.500 | 0.167 | 18 | 3 | 36 | 22/36 |
+| test, no threshold | 0.806 | 0.280 | 25 | 7 | 31 | - of 31 |
+| test, v1 t=0.4506 (seen first) | 0.355 | 0.182 | 11 | 2 | 31 | 16/31 |
+| **test, v2 t=0.5306 (post-hoc, scored once)** | 0.516 | 0.188 | 16 | 3 | 31 | 20/31 |
 
-v2 at its threshold: every test question that should escalate did (7/7); 4 test questions still escalate as low-confidence although their top chunk is correct. **Deployed threshold 0.5264 is a team override (target 0.526), set after test numbers were seen; the rule (tune risk <= 0.1) gives 0.6382.** Test risk (0.176) is above the 0.1 tune cap; the threshold comes from 36 tune questions. Because v2 was designed after v1's test numbers were seen, the v2 test row is not a clean held-out estimate: see 6.8.
+v2 at its threshold: every test question that should escalate did (7/7); 5 test questions still escalate as low-confidence although their top chunk is correct. **Deployed threshold 0.5306 is a team override (target 0.526), set after test numbers were seen; the rule (tune risk <= 0.1) gives 0.6076.** Test risk (0.188) is above the 0.1 tune cap; the threshold comes from 36 tune questions. Because v2 was designed after v1's test numbers were seen, the v2 test row is not a clean held-out estimate: see 6.8.
 
-**Sample questions, v1: 3/5 as intended.** "When is the proposal due?" -> ESCALATED (low confidence), conf 0.42, not as intended (wanted SOURCED); "If I get 0 on the poster, what is my project mark?" -> CALCULATED, conf 0.99, ok; "Can you write my assignment?" -> ESCALATED (out of scope), conf 0.58, ok; "Is late submission allowed?" -> ESCALATED (low confidence), conf 0.38, not as intended (wanted SOURCED); "When is the poster link due?" -> SOURCED, conf 0.53, ok
+**Sample questions, v1: 3/5 as intended.** "When is the proposal due?" -> ESCALATED (low confidence), conf 0.42, not as intended (wanted SOURCED); "If I get 0 on the poster, what is my project mark?" -> CALCULATED, conf 0.99, ok; "Can you write my assignment?" -> ESCALATED (out of scope), conf 0.54, ok; "Is late submission allowed?" -> ESCALATED (low confidence), conf 0.38, not as intended (wanted SOURCED); "When is the poster link due?" -> SOURCED, conf 0.53, ok
 
-**Sample questions, v2: 4/5 as intended.** "When is the proposal due?" -> SOURCED, conf 0.59, ok; "If I get 0 on the poster, what is my project mark?" -> CALCULATED, conf 0.99, ok; "Can you write my assignment?" -> ESCALATED (out of scope), conf 0.58, ok; "Is late submission allowed?" -> ESCALATED (low confidence), conf 0.45, not as intended (wanted SOURCED); "When is the poster link due?" -> SOURCED, conf 0.75, ok
+**Sample questions, v2: 4/5 as intended.** "When is the proposal due?" -> SOURCED, conf 0.59, ok; "If I get 0 on the poster, what is my project mark?" -> CALCULATED, conf 0.99, ok; "Can you write my assignment?" -> ESCALATED (out of scope), conf 0.54, ok; "Is late submission allowed?" -> ESCALATED (low confidence), conf 0.44, not as intended (wanted SOURCED); "When is the poster link due?" -> SOURCED, conf 0.74, ok
 
 v2 tune operating points (every 3rd candidate threshold; lowering the threshold trades risk for coverage, a team decision):
 
 | threshold | tune coverage | tune risk | answered |
 |---|---|---|---|
 | 0.000 | 0.917 | 0.333 | 33 |
-| 0.272 | 0.861 | 0.290 | 31 |
-| 0.395 | 0.778 | 0.250 | 28 |
-| 0.421 | 0.694 | 0.240 | 25 |
-| 0.447 | 0.611 | 0.182 | 22 |
-| 0.526 | 0.528 | 0.158 | 19 |
-| 0.546 | 0.444 | 0.188 | 16 |
-| 0.586 | 0.361 | 0.154 | 13 |
-| 0.663 | 0.278 | 0.100 | 10 |
-| 0.743 | 0.194 | 0.143 | 7 |
-| 0.901 | 0.111 | 0.250 | 4 |
+| 0.254 | 0.861 | 0.323 | 31 |
+| 0.352 | 0.778 | 0.250 | 28 |
+| 0.430 | 0.694 | 0.240 | 25 |
+| 0.480 | 0.611 | 0.136 | 22 |
+| 0.516 | 0.528 | 0.158 | 19 |
+| 0.551 | 0.444 | 0.188 | 16 |
+| 0.594 | 0.361 | 0.154 | 13 |
+| 0.650 | 0.278 | 0.000 | 10 |
+| 0.736 | 0.194 | 0.000 | 7 |
+| 0.793 | 0.111 | 0.000 | 4 |
 | 0.958 | 0.028 | 0.000 | 1 |
 
 ### 6.4 Calculator (`ml/test_calc.py`, `ml/mutate_calc.sh`)
@@ -131,19 +131,19 @@ Exact match on 15 hand-computed cases (expected values typed by hand in the test
 
 ### 6.5 Python-JS parity (`ml/parity.py`, `ml/mutate_parity.sh`)
 
-The JS embedded in `index.html` reproduces the Python pipeline on 175/175 questions (all 167 labelled + edge cases) on label, top chunk, stamp, reason and calculator output. Max probability difference 2.2e-16; smallest router top1-top2 margin 0.0174. A deliberate change to the JS confidence formula turns this red (see run log).
+The JS embedded in `index.html` reproduces the Python pipeline on 175/175 questions (all 167 labelled + edge cases) on label, top chunk, stamp, reason and calculator output. Max probability difference 2.2e-16; smallest router top1-top2 margin 0.0057. A deliberate change to the JS confidence formula turns this red (see run log).
 
 ### 6.6 Against the proposal targets
 
 | target | result | met? | source |
 |---|---|---|---|
-| router macro-F1 >= 0.85 | test 0.803 (n=31); CV 0.678 | no | train_router.py |
+| router macro-F1 >= 0.85 | test 0.866 (n=31); CV 0.688 | yes | train_router.py |
 | lookup Top-3 >= 80% (bm25) | test 85.7% [CI 71.4%-100.0%], n=21 | yes (point estimate); CI lower bound below 80% | eval_retrieval.py |
 | calculator exact match >= 95% | 15/15 | yes | test_calc.py |
 
 ### 6.7 Error analysis: 5 real test failures, deployed v2 (`results/predictions.csv`)
 
-10 of 31 test questions were not handled correctly end-to-end. Five, chosen to cover different failure types:
+11 of 31 test questions were not handled correctly end-to-end. Five, chosen to cover different failure types:
 
 | id | question | true | router | stamp | top chunk | why |
 |---|---|---|---|---|---|---|

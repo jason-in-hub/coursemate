@@ -1,168 +1,168 @@
 id,split,q,label,pred,conf,stamp,reason,top_chunk,gold,correct
-q001,train,When is the proposal due?,lookup,lookup,0.4237,ESCALATED,low confidence,canvas:proposal-report,page:important-dates:0;page:submission:0;canvas:proposal-report,0
-q002,train,proposal deadline?,lookup,lookup,0.3473,ESCALATED,low confidence,canvas:proposal-report,page:important-dates:0;page:submission:0;canvas:proposal-report,0
-q003,train,wen is the propsal due,lookup,lookup,0.1767,ESCALATED,low confidence,canvas:activity-participation-1,page:important-dates:0;page:submission:0;canvas:proposal-report,0
-q004,train,proposal幾時due?,lookup,lookup,0.4216,ESCALATED,low confidence,canvas:proposal-report,page:important-dates:0;page:submission:0;canvas:proposal-report,0
-q005,train,What date do we have to hand in the project proposal?,lookup,lookup,0.5378,SOURCED,,syllabus:grading,page:important-dates:0;page:submission:0;canvas:proposal-report,0
-q025,train,Is late submission allowed?,lookup,lookup,0.3832,ESCALATED,low confidence,syllabus:ai_policy,page:submission:0,0
-q026,train,Can I get an extension if I submit late?,lookup,lookup,0.3055,ESCALATED,low confidence,canvas:front-page,page:submission:0,0
-q027,train,late submision accepted?,lookup,lookup,0.4266,ESCALATED,low confidence,page:submission:0,page:submission:0,0
-q028,train,遲交late submission得唔得?,lookup,lookup,0.2282,ESCALATED,low confidence,page:submission:0,page:submission:0,0
-q029,train,What happens if we hand in the report late?,lookup,lookup,0.4623,SOURCED,,syllabus:grading,page:submission:0,0
-q043,train,What is the page limit for the report?,lookup,lookup,0.4974,SOURCED,,page:final-report:0,page:final-report:0,1
-q044,train,How many pages can the final report be?,lookup,lookup,0.4779,SOURCED,,page:submission:0,page:final-report:0,0
-q045,train,Does the 8-page limit include the references and appendix?,lookup,lookup,0.6910,SOURCED,,page:final-report:0,page:final-report:0,1
-q046,train,final report可以寫幾多pages?,lookup,lookup,0.3666,ESCALATED,low confidence,page:final-report:0,page:final-report:0,0
-q047,train,page limt for final report,lookup,lookup,0.4066,ESCALATED,low confidence,page:final-report:0,page:final-report:0,0
-q048,train,Is there a template for the final report?,lookup,lookup,0.4505,SOURCED,,page:final-report:0,page:final-report:0,1
-q049,train,report templete docx?,lookup,lookup,0.3298,ESCALATED,low confidence,page:final-report:0,page:final-report:0,0
-q050,train,What should the data collection and preprocessing section include?,lookup,lookup,0.5649,SOURCED,,page:final-report:1,page:final-report:1,1
-q051,train,How long should the data and preprocessing section be?,lookup,lookup,0.5184,SOURCED,,page:final-report:1,page:final-report:1,1
-q052,train,data preprocesing section requirements,lookup,lookup,0.2929,ESCALATED,low confidence,page:final-report:3,page:final-report:1,0
-q059,train,What size is the poster?,lookup,lookup,0.4405,ESCALATED,low confidence,page:poster-presentation-session:0,page:poster-presentation-session:0;page:poster-presentation-session:1,0
-q060,train,How many poster panels do we need?,lookup,lookup,0.4989,SOURCED,,page:poster-presentation-session:1,page:poster-presentation-session:0;page:poster-presentation-session:1,1
+q001,train,When is the proposal due?,lookup,lookup,0.4233,ESCALATED,low confidence,canvas:proposal-report,page:important-dates:0;page:submission:0;canvas:proposal-report,0
+q002,train,proposal deadline?,lookup,lookup,0.3511,ESCALATED,low confidence,canvas:proposal-report,page:important-dates:0;page:submission:0;canvas:proposal-report,0
+q003,train,wen is the propsal due,lookup,lookup,0.1760,ESCALATED,low confidence,canvas:activity-participation-1,page:important-dates:0;page:submission:0;canvas:proposal-report,0
+q004,train,proposal幾時due?,lookup,lookup,0.4250,ESCALATED,low confidence,canvas:proposal-report,page:important-dates:0;page:submission:0;canvas:proposal-report,0
+q005,train,What date do we have to hand in the project proposal?,lookup,lookup,0.5010,SOURCED,,syllabus:grading,page:important-dates:0;page:submission:0;canvas:proposal-report,0
+q025,train,Is late submission allowed?,lookup,lookup,0.3822,ESCALATED,low confidence,syllabus:ai_policy,page:submission:0,0
+q026,train,Can I get an extension if I submit late?,lookup,lookup,0.3104,ESCALATED,low confidence,canvas:front-page,page:submission:0,0
+q027,train,late submision accepted?,lookup,lookup,0.4275,ESCALATED,low confidence,page:submission:0,page:submission:0,0
+q028,train,遲交late submission得唔得?,lookup,lookup,0.2290,ESCALATED,low confidence,page:submission:0,page:submission:0,0
+q029,train,What happens if we hand in the report late?,lookup,lookup,0.4697,SOURCED,,syllabus:grading,page:submission:0,0
+q043,train,What is the page limit for the report?,lookup,lookup,0.4938,SOURCED,,page:final-report:0,page:final-report:0,1
+q044,train,How many pages can the final report be?,lookup,lookup,0.4711,SOURCED,,page:submission:0,page:final-report:0,0
+q045,train,Does the 8-page limit include the references and appendix?,lookup,lookup,0.6937,SOURCED,,page:final-report:0,page:final-report:0,1
+q046,train,final report可以寫幾多pages?,lookup,lookup,0.3607,ESCALATED,low confidence,page:final-report:0,page:final-report:0,0
+q047,train,page limt for final report,lookup,lookup,0.4008,ESCALATED,low confidence,page:final-report:0,page:final-report:0,0
+q048,train,Is there a template for the final report?,lookup,lookup,0.4361,ESCALATED,low confidence,page:final-report:0,page:final-report:0,0
+q049,train,report templete docx?,lookup,lookup,0.3356,ESCALATED,low confidence,page:final-report:0,page:final-report:0,0
+q050,train,What should the data collection and preprocessing section include?,lookup,lookup,0.5588,SOURCED,,page:final-report:1,page:final-report:1,1
+q051,train,How long should the data and preprocessing section be?,lookup,lookup,0.5220,SOURCED,,page:final-report:1,page:final-report:1,1
+q052,train,data preprocesing section requirements,lookup,lookup,0.2946,ESCALATED,low confidence,page:final-report:3,page:final-report:1,0
+q059,train,What size is the poster?,lookup,lookup,0.4251,ESCALATED,low confidence,page:poster-presentation-session:0,page:poster-presentation-session:0;page:poster-presentation-session:1,0
+q060,train,How many poster panels do we need?,lookup,lookup,0.5042,SOURCED,,page:poster-presentation-session:1,page:poster-presentation-session:0;page:poster-presentation-session:1,1
 q061,train,Can the posters be landscape orientation?,lookup,lookup,0.5434,SOURCED,,page:poster-presentation-session:1,page:poster-presentation-session:1,1
-q062,train,poster要幾大size?,lookup,lookup,0.4373,ESCALATED,low confidence,page:poster-presentation-session:0,page:poster-presentation-session:0;page:poster-presentation-session:1,0
-q063,train,How long is the opening pitch?,lookup,lookup,0.5132,SOURCED,,page:poster-presentation-session:1,page:poster-presentation-session:1,1
-q064,train,How long should the demonstration be at the poster session?,lookup,lookup,0.6137,SOURCED,,page:poster-presentation-session:0,page:poster-presentation-session:1,0
-q065,train,how long is the poster walkthru,lookup,lookup,0.3753,ESCALATED,low confidence,syllabus:learning_outcome,page:poster-presentation-session:1,0
-q066,train,demonstration要幾耐minutes?,lookup,lookup,0.3365,ESCALATED,low confidence,page:video-trailer:0,page:poster-presentation-session:1,0
-q067,train,Do all group members need to be present at the poster session?,lookup,lookup,0.5689,SOURCED,,page:group-formation:0,page:poster-presentation-session:2,0
-q068,train,Can we use a QR code or a short video for the demo?,lookup,lookup,0.5600,SOURCED,,page:poster-presentation-session:2,page:poster-presentation-session:2,1
-q069,train,全組members都要出席poster session?,lookup,lookup,0.4322,ESCALATED,low confidence,page:group-formation:0,page:poster-presentation-session:2,0
-q072,train,How long should the video trailer be?,lookup,lookup,0.6097,SOURCED,,page:video-trailer:0,page:video-trailer:0,1
-q073,train,What is the recommended length of the video?,lookup,lookup,0.4673,SOURCED,,page:video-trailer:0,page:video-trailer:0,1
-q074,train,vid trailer how many minutes,lookup,lookup,0.4531,SOURCED,,page:video-trailer:0,page:video-trailer:0,1
-q075,train,段video要幾長?,lookup,lookup,0.3145,ESCALATED,low confidence,page:video-trailer:0,page:video-trailer:0,0
-q079,train,How many members per group?,lookup,lookup,0.4438,ESCALATED,low confidence,page:group-formation:0,page:group-formation:0,0
-q080,train,Can a group have only 3 people?,lookup,lookup,0.3833,ESCALATED,low confidence,canvas:front-page,page:group-formation:0,0
-q081,train,grp size for project,lookup,lookup,0.3148,ESCALATED,low confidence,page:final-report:3,page:group-formation:0,0
-q082,train,一組project group幾多人?,lookup,lookup,0.2606,ESCALATED,low confidence,page:poster-presentation-session:0,page:group-formation:0,0
-q085,train,What topics are allowed for the project?,lookup,lookup,0.5165,SOURCED,,syllabus:ai_policy,page:project-overview:0,0
-q086,train,Does the project topic need to relate to HKUST?,lookup,lookup,0.4440,ESCALATED,low confidence,page:project-overview:0,page:project-overview:0,0
-q087,train,project topic requirment,lookup,lookup,0.3405,ESCALATED,low confidence,page:project-overview:0,page:project-overview:0,0
-q088,train,個project topic有咩要求?,lookup,lookup,0.3411,ESCALATED,low confidence,page:project-overview:0,page:project-overview:0,0
-q089,train,When is Quiz 2 due?,lookup,lookup,0.4452,SOURCED,,canvas:quiz-2-l1,canvas:quiz-2-l1,1
-q090,train,quiz 3 deadline,lookup,lookup,0.3468,ESCALATED,low confidence,canvas:quiz-3-l1,canvas:quiz-3-l1,0
-q091,train,When was Quiz 1 due?,lookup,lookup,0.3470,ESCALATED,low confidence,canvas:quiz-1-l1,canvas:quiz-1-l1,0
-q092,train,qiuz 5 due time?,lookup,lookup,0.3482,ESCALATED,low confidence,page:important-dates:0,canvas:quiz-5-l1,0
-q093,train,quiz 4幾點due?,lookup,lookup,0.4309,ESCALATED,low confidence,canvas:quiz-4-l1,canvas:quiz-4-l1,0
-q094,train,When is Assignment 1 Part A due?,lookup,lookup,0.4042,ESCALATED,low confidence,canvas:assignment-1-part-a,canvas:assignment-1-part-a,0
-q095,train,Assignment 3 Part C deadline,lookup,lookup,0.5438,SOURCED,,canvas:assignment-3-part-c-system-prompt,canvas:assignment-3-part-c-system-prompt,1
-q096,train,assignmnt 2 part b due?,lookup,lookup,0.5339,SOURCED,,canvas:assignment-2-part-b,canvas:assignment-2-part-b,1
-q097,train,assignment 3 part D幾時due?,lookup,lookup,0.5953,SOURCED,,canvas:assignment-3-part-d-prompt-injection,canvas:assignment-3-part-d-prompt-injection,1
-q098,train,When is the Assignment 3 comic submission due?,lookup,lookup,0.5919,SOURCED,,canvas:assignment-3-part-a1-comic-submission,canvas:assignment-3-part-a1-comic-submission,1
-q099,train,When is Assignment 3 Part B image evaluation due?,lookup,lookup,0.6905,SOURCED,,canvas:assignment-3-part-b-image-evaluation,canvas:assignment-3-part-b-image-evaluation,1
-q100,train,Where is the main course website?,lookup,lookup,0.5198,SOURCED,,canvas:front-page,canvas:front-page,1
-q101,train,Where can I find the lecture videos?,lookup,lookup,0.4578,SOURCED,,page:group-formation:0,canvas:front-page,0
-q102,train,How do I activate my CSD account for off-campus access?,lookup,lookup,0.5507,SOURCED,,canvas:front-page,canvas:front-page,1
-q103,train,lecture有冇videos睇?,lookup,lookup,0.2986,ESCALATED,low confidence,canvas:front-page,canvas:front-page,0
-q104,train,What prototyping tools are suggested?,lookup,lookup,0.4500,SOURCED,,syllabus:ai_policy,page:final-report:4,0
-q105,train,Can we use Dify to build a chatbot prototype?,lookup,lookup,0.5479,SOURCED,,page:final-report:4,page:final-report:4,1
-q106,train,sugested tools for prototype,lookup,lookup,0.3894,ESCALATED,low confidence,page:final-report:4,page:final-report:4,0
-q107,train,How is the final report graded?,lookup,lookup,0.4022,ESCALATED,low confidence,page:final-report:0,page:final-report:4,0
-q108,train,What are the grading criteria for the report?,lookup,lookup,0.4278,ESCALATED,low confidence,syllabus:ai_policy,page:final-report:4,0
-q111,train,What time of day are the deliverables due?,lookup,lookup,0.5278,SOURCED,,page:important-dates:0,page:important-dates:0;page:submission:0,1
-q112,train,Is the deadline 23:59 Hong Kong time?,lookup,lookup,0.5681,SOURCED,,page:important-dates:0,page:important-dates:0;page:submission:0,1
-q113,train,Does AI Talk Attendance have a due date?,lookup,lookup,0.6204,SOURCED,,canvas:ai-talk-attendance,canvas:ai-talk-attendance,1
-q114,train,When is Activity Participation (2) due?,lookup,lookup,0.5483,SOURCED,,canvas:activity-participation-2,canvas:activity-participation-2,1
-q115,train,"If I get 0 on the poster, what is my project mark?",calc,calc,0.9933,CALCULATED,,page:important-dates:0,,1
-q116,train,poster拎0分project mark會點?,calc,calc,0.9544,CALCULATED,,page:important-dates:0,,1
-q117,train,what if I score 50 on the poster,calc,calc,0.9592,CALCULATED,,syllabus:grading,,1
-q118,train,if i get 70 for the postr what is my mark,calc,calc,0.9298,ESCALATED,no project item named,canvas:front-page,,0
-q119,train,"Suppose our poster presentation gets 60, what is my project total?",calc,calc,0.9006,CALCULATED,,page:important-dates:0,,1
-q125,train,"If the proposal got 90, what's my project mark?",calc,calc,0.9593,CALCULATED,,page:final-report:3,,1
-q126,train,what if i got 90 on the propasal,calc,calc,0.9305,ESCALATED,no project item named,syllabus:assessment,,0
-q127,train,proposal攞到100分project total幾多?,calc,calc,0.8968,CALCULATED,,syllabus:grading,,1
-q128,train,If the final report gets 55 what is my project score?,calc,calc,0.9605,CALCULATED,,syllabus:grading,,1
-q129,train,how much do I lose if the final report scores 55,calc,calc,0.8722,CALCULATED,,page:poster-presentation-session:2,,1
+q062,train,poster要幾大size?,lookup,lookup,0.4411,ESCALATED,low confidence,page:poster-presentation-session:0,page:poster-presentation-session:0;page:poster-presentation-session:1,0
+q063,train,How long is the opening pitch?,lookup,lookup,0.5104,SOURCED,,page:poster-presentation-session:1,page:poster-presentation-session:1,1
+q064,train,How long should the demonstration be at the poster session?,lookup,lookup,0.6161,SOURCED,,page:poster-presentation-session:0,page:poster-presentation-session:1,0
+q065,train,how long is the poster walkthru,lookup,lookup,0.3751,ESCALATED,low confidence,syllabus:learning_outcome,page:poster-presentation-session:1,0
+q066,train,demonstration要幾耐minutes?,lookup,lookup,0.3376,ESCALATED,low confidence,page:video-trailer:0,page:poster-presentation-session:1,0
+q067,train,Do all group members need to be present at the poster session?,lookup,lookup,0.5742,SOURCED,,page:group-formation:0,page:poster-presentation-session:2,0
+q068,train,Can we use a QR code or a short video for the demo?,lookup,lookup,0.5689,SOURCED,,page:poster-presentation-session:2,page:poster-presentation-session:2,1
+q069,train,全組members都要出席poster session?,lookup,lookup,0.4339,ESCALATED,low confidence,page:group-formation:0,page:poster-presentation-session:2,0
+q072,train,How long should the video trailer be?,lookup,lookup,0.6125,SOURCED,,page:video-trailer:0,page:video-trailer:0,1
+q073,train,What is the recommended length of the video?,lookup,lookup,0.4562,SOURCED,,page:video-trailer:0,page:video-trailer:0,1
+q074,train,vid trailer how many minutes,lookup,lookup,0.4559,SOURCED,,page:video-trailer:0,page:video-trailer:0,1
+q075,train,段video要幾長?,lookup,lookup,0.3159,ESCALATED,low confidence,page:video-trailer:0,page:video-trailer:0,0
+q079,train,How many members per group?,lookup,lookup,0.4479,ESCALATED,low confidence,page:group-formation:0,page:group-formation:0,0
+q080,train,Can a group have only 3 people?,lookup,lookup,0.3917,ESCALATED,low confidence,canvas:front-page,page:group-formation:0,0
+q081,train,grp size for project,lookup,lookup,0.3206,ESCALATED,low confidence,page:final-report:3,page:group-formation:0,0
+q082,train,一組project group幾多人?,lookup,lookup,0.2632,ESCALATED,low confidence,page:poster-presentation-session:0,page:group-formation:0,0
+q085,train,What topics are allowed for the project?,lookup,lookup,0.5160,SOURCED,,syllabus:ai_policy,page:project-overview:0,0
+q086,train,Does the project topic need to relate to HKUST?,lookup,lookup,0.4500,ESCALATED,low confidence,page:project-overview:0,page:project-overview:0,0
+q087,train,project topic requirment,lookup,lookup,0.3427,ESCALATED,low confidence,page:project-overview:0,page:project-overview:0,0
+q088,train,個project topic有咩要求?,lookup,lookup,0.3432,ESCALATED,low confidence,page:project-overview:0,page:project-overview:0,0
+q089,train,When is Quiz 2 due?,lookup,lookup,0.4455,ESCALATED,low confidence,canvas:quiz-2-l1,canvas:quiz-2-l1,0
+q090,train,quiz 3 deadline,lookup,lookup,0.3491,ESCALATED,low confidence,canvas:quiz-3-l1,canvas:quiz-3-l1,0
+q091,train,When was Quiz 1 due?,lookup,lookup,0.3512,ESCALATED,low confidence,canvas:quiz-1-l1,canvas:quiz-1-l1,0
+q092,train,qiuz 5 due time?,lookup,lookup,0.3507,ESCALATED,low confidence,page:important-dates:0,canvas:quiz-5-l1,0
+q093,train,quiz 4幾點due?,lookup,lookup,0.4348,ESCALATED,low confidence,canvas:quiz-4-l1,canvas:quiz-4-l1,0
+q094,train,When is Assignment 1 Part A due?,lookup,lookup,0.4052,ESCALATED,low confidence,canvas:assignment-1-part-a,canvas:assignment-1-part-a,0
+q095,train,Assignment 3 Part C deadline,lookup,lookup,0.5454,SOURCED,,canvas:assignment-3-part-c-system-prompt,canvas:assignment-3-part-c-system-prompt,1
+q096,train,assignmnt 2 part b due?,lookup,lookup,0.5375,SOURCED,,canvas:assignment-2-part-b,canvas:assignment-2-part-b,1
+q097,train,assignment 3 part D幾時due?,lookup,lookup,0.5974,SOURCED,,canvas:assignment-3-part-d-prompt-injection,canvas:assignment-3-part-d-prompt-injection,1
+q098,train,When is the Assignment 3 comic submission due?,lookup,lookup,0.5913,SOURCED,,canvas:assignment-3-part-a1-comic-submission,canvas:assignment-3-part-a1-comic-submission,1
+q099,train,When is Assignment 3 Part B image evaluation due?,lookup,lookup,0.6896,SOURCED,,canvas:assignment-3-part-b-image-evaluation,canvas:assignment-3-part-b-image-evaluation,1
+q100,train,Where is the main course website?,lookup,lookup,0.5152,SOURCED,,canvas:front-page,canvas:front-page,1
+q101,train,Where can I find the lecture videos?,lookup,lookup,0.4595,SOURCED,,page:group-formation:0,canvas:front-page,0
+q102,train,How do I activate my CSD account for off-campus access?,lookup,lookup,0.5619,SOURCED,,canvas:front-page,canvas:front-page,1
+q103,train,lecture有冇videos睇?,lookup,lookup,0.2996,ESCALATED,low confidence,canvas:front-page,canvas:front-page,0
+q104,train,What prototyping tools are suggested?,lookup,lookup,0.4453,ESCALATED,low confidence,syllabus:ai_policy,page:final-report:4,0
+q105,train,Can we use Dify to build a chatbot prototype?,lookup,lookup,0.5532,SOURCED,,page:final-report:4,page:final-report:4,1
+q106,train,sugested tools for prototype,lookup,lookup,0.3931,ESCALATED,low confidence,page:final-report:4,page:final-report:4,0
+q107,train,How is the final report graded?,lookup,lookup,0.3821,ESCALATED,low confidence,page:final-report:0,page:final-report:4,0
+q108,train,What are the grading criteria for the report?,lookup,lookup,0.4310,ESCALATED,low confidence,syllabus:ai_policy,page:final-report:4,0
+q111,train,What time of day are the deliverables due?,lookup,lookup,0.5279,SOURCED,,page:important-dates:0,page:important-dates:0;page:submission:0,1
+q112,train,Is the deadline 23:59 Hong Kong time?,lookup,lookup,0.5643,SOURCED,,page:important-dates:0,page:important-dates:0;page:submission:0,1
+q113,train,Does AI Talk Attendance have a due date?,lookup,lookup,0.5954,SOURCED,,canvas:ai-talk-attendance,canvas:ai-talk-attendance,1
+q114,train,When is Activity Participation (2) due?,lookup,lookup,0.5480,SOURCED,,canvas:activity-participation-2,canvas:activity-participation-2,1
+q115,train,"If I get 0 on the poster, what is my project mark?",calc,calc,0.9931,CALCULATED,,page:important-dates:0,,1
+q116,train,poster拎0分project mark會點?,calc,calc,0.9536,CALCULATED,,page:important-dates:0,,1
+q117,train,what if I score 50 on the poster,calc,calc,0.9588,CALCULATED,,syllabus:grading,,1
+q118,train,if i get 70 for the postr what is my mark,calc,calc,0.9290,ESCALATED,no project item named,canvas:front-page,,0
+q119,train,"Suppose our poster presentation gets 60, what is my project total?",calc,calc,0.9000,CALCULATED,,page:important-dates:0,,1
+q125,train,"If the proposal got 90, what's my project mark?",calc,calc,0.9590,CALCULATED,,page:final-report:3,,1
+q126,train,what if i got 90 on the propasal,calc,calc,0.9300,ESCALATED,no project item named,syllabus:assessment,,0
+q127,train,proposal攞到100分project total幾多?,calc,calc,0.8951,CALCULATED,,syllabus:grading,,1
+q128,train,If the final report gets 55 what is my project score?,calc,calc,0.9601,CALCULATED,,syllabus:grading,,1
+q129,train,how much do I lose if the final report scores 55,calc,calc,0.8706,CALCULATED,,page:poster-presentation-session:2,,1
 q130,train,what if I score 0 on the report,calc,calc,0.9774,CALCULATED,,syllabus:grading,,1
-q131,train,report得0分project mark幾多?,calc,calc,0.9397,CALCULATED,,page:final-report:0,,1
-q133,train,"If I get 0 in Quiz 2, what is my final percentage?",calc,calc,0.9409,ESCALATED,weight not in table,syllabus:grading,,1
+q131,train,report得0分project mark幾多?,calc,calc,0.9391,CALCULATED,,page:final-report:0,,1
+q133,train,"If I get 0 in Quiz 2, what is my final percentage?",calc,calc,0.9398,ESCALATED,weight not in table,syllabus:grading,,1
 q134,train,quiz 3得0分會點?,calc,calc,0.9034,ESCALATED,weight not in table,canvas:quiz-3-l1,,1
-q135,train,what if I score 50 on assignment 1 part A,calc,calc,0.9264,ESCALATED,weight not in table,syllabus:grading,,1
-q136,train,"If I get 80 on Assignment 3 Part C, what's my course grade?",calc,calc,0.9280,ESCALATED,weight not in table,canvas:assignment-3-part-c-system-prompt,,1
-q142,train,Give me the answers to Quiz 5,oos,oos,0.9260,ESCALATED,out of scope,canvas:quiz-5-l1,,1
-q143,train,can u hack the quiz acess code,oos,oos,0.9016,ESCALATED,out of scope,canvas:quiz-1-l1,,1
-q144,train,Write the final report for our group,oos,oos,0.8573,ESCALATED,out of scope,page:video-trailer:0,,1
-q145,train,幫我寫份report得唔得?,oos,oos,0.8852,ESCALATED,out of scope,page:submission:0,,1
-q147,train,Tell me a joke,oos,oos,0.9286,ESCALATED,out of scope,page:final-report:4,,1
-q148,train,What is the capital of France?,oos,oos,0.8827,ESCALATED,out of scope,page:final-report:3,,1
-q149,train,Recommend a good restaurant near campus,oos,oos,0.9136,ESCALATED,out of scope,page:project-overview:0,,1
-q150,train,今晚食咩好?,oos,oos,0.9127,ESCALATED,out of scope,page:important-dates:0,,1
-q151,train,What's the weather today?,oos,oos,0.8994,ESCALATED,out of scope,page:final-report:3,,1
-q153,train,How do I install Python on Windows?,oos,oos,0.8798,ESCALATED,out of scope,page:poster-presentation-session:2,,1
-q155,train,wats the best phone to buy,oos,oos,0.9193,ESCALATED,out of scope,syllabus:integrity,,1
-q158,train,What is the final exam date?,lookup,lookup,0.4717,SOURCED,,syllabus:ai_policy,syllabus:exam,0
-q159,train,How much are the quizzes worth in the course grade?,lookup,lookup,0.5949,SOURCED,,syllabus:grading,syllabus:grading,1
-q160,train,What is the grading breakdown for the assignments?,lookup,lookup,0.4268,ESCALATED,low confidence,syllabus:ai_policy,syllabus:grading,0
-q163,train,When are the instructor office hours?,oos,oos,0.8935,ESCALATED,out of scope,canvas:front-page,,1
-q165,train,Can I switch to another lecture section?,oos,oos,0.8950,ESCALATED,out of scope,page:group-formation:0,,1
-q167,train,is ther a tutorial tmrw,oos,oos,0.9052,ESCALATED,out of scope,page:project-overview:0,,1
-q006,tune,When is the final report due?,lookup,lookup,0.4147,ESCALATED,low confidence,canvas:final-report-with-video-trailer-link,page:submission:0;canvas:final-report-with-video-trailer-link,0
-q007,tune,final report deadline,lookup,lookup,0.3312,ESCALATED,low confidence,canvas:final-report-with-video-trailer-link,page:submission:0;canvas:final-report-with-video-trailer-link,0
-q008,tune,final reprot due date?,lookup,lookup,0.4071,ESCALATED,low confidence,page:important-dates:0,page:submission:0;canvas:final-report-with-video-trailer-link,0
-q009,tune,final report幾時交?,lookup,lookup,0.3317,ESCALATED,low confidence,canvas:final-report-with-video-trailer-link,page:submission:0;canvas:final-report-with-video-trailer-link,0
-q010,tune,What's the last day to submit the report?,lookup,lookup,0.2222,ESCALATED,low confidence,page:important-dates:0,page:submission:0;canvas:final-report-with-video-trailer-link,0
+q135,train,what if I score 50 on assignment 1 part A,calc,calc,0.9270,ESCALATED,weight not in table,syllabus:grading,,1
+q136,train,"If I get 80 on Assignment 3 Part C, what's my course grade?",calc,calc,0.9283,ESCALATED,weight not in table,canvas:assignment-3-part-c-system-prompt,,1
+q142,train,Give me the answers to Quiz 5,oos,oos,0.9222,ESCALATED,out of scope,canvas:quiz-5-l1,,1
+q143,train,can u hack the quiz acess code,oos,oos,0.8979,ESCALATED,out of scope,canvas:quiz-1-l1,,1
+q144,train,Write the final report for our group,oos,oos,0.8586,ESCALATED,out of scope,page:video-trailer:0,,1
+q145,train,幫我寫份report得唔得?,oos,oos,0.8766,ESCALATED,out of scope,page:submission:0,,1
+q147,train,Tell me a joke,oos,oos,0.9238,ESCALATED,out of scope,page:final-report:4,,1
+q148,train,What is the capital of France?,oos,oos,0.8866,ESCALATED,out of scope,page:final-report:3,,1
+q149,train,Recommend a good restaurant near campus,oos,oos,0.9088,ESCALATED,out of scope,page:project-overview:0,,1
+q150,train,今晚食咩好?,oos,oos,0.9088,ESCALATED,out of scope,page:important-dates:0,,1
+q151,train,What's the weather today?,oos,oos,0.9002,ESCALATED,out of scope,page:final-report:3,,1
+q153,train,How do I install Python on Windows?,oos,oos,0.8713,ESCALATED,out of scope,page:poster-presentation-session:2,,1
+q155,train,wats the best phone to buy,oos,oos,0.9156,ESCALATED,out of scope,syllabus:integrity,,1
+q158,train,What is the final exam date?,oos,oos,0.8779,ESCALATED,out of scope,syllabus:ai_policy,,1
+q159,train,How much are the quizzes worth in the course grade?,lookup,lookup,0.6011,SOURCED,,syllabus:grading,syllabus:grading,1
+q160,train,What is the grading breakdown for the assignments?,lookup,lookup,0.4193,ESCALATED,low confidence,syllabus:ai_policy,syllabus:grading,0
+q163,train,When are the instructor office hours?,oos,oos,0.8886,ESCALATED,out of scope,canvas:front-page,,1
+q165,train,Can I switch to another lecture section?,oos,oos,0.8882,ESCALATED,out of scope,page:group-formation:0,,1
+q167,train,is ther a tutorial tmrw,oos,oos,0.9039,ESCALATED,out of scope,page:project-overview:0,,1
+q006,tune,When is the final report due?,lookup,lookup,0.3898,ESCALATED,low confidence,canvas:final-report-with-video-trailer-link,page:submission:0;canvas:final-report-with-video-trailer-link,0
+q007,tune,final report deadline,lookup,lookup,0.3032,ESCALATED,low confidence,canvas:final-report-with-video-trailer-link,page:submission:0;canvas:final-report-with-video-trailer-link,0
+q008,tune,final reprot due date?,lookup,lookup,0.2646,ESCALATED,low confidence,page:important-dates:0,page:submission:0;canvas:final-report-with-video-trailer-link,0
+q009,tune,final report幾時交?,lookup,lookup,0.3149,ESCALATED,low confidence,canvas:final-report-with-video-trailer-link,page:submission:0;canvas:final-report-with-video-trailer-link,0
+q010,tune,What's the last day to submit the report?,lookup,lookup,0.2208,ESCALATED,low confidence,page:important-dates:0,page:submission:0;canvas:final-report-with-video-trailer-link,0
 q015,tune,When is the poster due?,lookup,lookup,0.3923,ESCALATED,low confidence,page:important-dates:0,page:important-dates:0;canvas:poster-presentation,0
-q016,tune,Deadline for the poster link?,lookup,lookup,0.5181,SOURCED,,page:important-dates:0,page:important-dates:0;canvas:poster-presentation,1
-q017,tune,postr link due date,lookup,lookup,0.4606,SOURCED,,page:important-dates:0,page:important-dates:0;canvas:poster-presentation,1
-q018,tune,poster幾時due?,lookup,lookup,0.3829,ESCALATED,low confidence,page:important-dates:0,page:important-dates:0;canvas:poster-presentation,0
-q019,tune,By when must we submit the poster?,lookup,lookup,0.4466,SOURCED,,page:submission:0,page:important-dates:0;canvas:poster-presentation,0
-q020,tune,When does Team 9 present?,lookup,lookup,0.4880,SOURCED,,page:poster-presentation-session:3,page:poster-presentation-session:3,1
-q021,tune,Which presentation session is Team 9 presenting in?,lookup,lookup,0.5579,SOURCED,,page:poster-presentation-session:3,page:poster-presentation-session:3,1
-q022,tune,wat day is team 9 poster presentaion,lookup,lookup,0.5065,SOURCED,,page:poster-presentation-session:3,page:poster-presentation-session:3,1
-q023,tune,team 9幾時present?,lookup,lookup,0.4548,SOURCED,,page:poster-presentation-session:3,page:poster-presentation-session:3,1
-q024,tune,"Our group is team 9, which date do we present the poster?",lookup,lookup,0.4450,SOURCED,,page:poster-presentation-session:3,page:poster-presentation-session:3,1
-q039,tune,What should the file name be?,lookup,lookup,0.4078,ESCALATED,low confidence,page:submission:0,page:submission:0,0
-q040,tune,How do I name the proposal PDF file?,lookup,lookup,0.3886,ESCALATED,low confidence,page:submission:0,page:submission:0,0
-q041,tune,report file nmae format,lookup,lookup,0.2752,ESCALATED,low confidence,page:submission:0,page:submission:0,0
-q042,tune,份report個file name點改?,lookup,lookup,0.2205,ESCALATED,low confidence,page:submission:0,page:submission:0,0
-q053,tune,What goes in the evaluation and results section?,lookup,lookup,0.3679,ESCALATED,low confidence,page:final-report:3,page:final-report:2,0
-q054,tune,How many pages for the evaluation and results section?,lookup,lookup,0.5990,SOURCED,,page:final-report:2,page:final-report:2,1
-q055,tune,evaluation and results section點寫?,lookup,lookup,0.2974,ESCALATED,low confidence,page:final-report:2,page:final-report:2,0
-q070,tune,How is the poster presentation graded?,lookup,lookup,0.4433,ESCALATED,low confidence,page:important-dates:0,page:poster-presentation-session:3,0
-q071,tune,poster grading critera,lookup,lookup,0.2867,ESCALATED,low confidence,page:important-dates:0,page:poster-presentation-session:3,0
-q109,tune,What links must the final report include?,lookup,lookup,0.3740,ESCALATED,low confidence,syllabus:ai_policy,page:submission:0;page:video-trailer:0,0
-q110,tune,Does the report need a link to the poster?,lookup,lookup,0.4305,ESCALATED,low confidence,page:submission:0,page:submission:0,0
-q120,tune,what if I fail the video,calc,calc,0.7432,CALCULATED,,page:poster-presentation-session:2,,1
-q121,tune,"If the video trailer gets zero, how much do I lose?",calc,calc,0.6382,CALCULATED,,canvas:final-report-with-video-trailer-link,,1
-q132,tune,"If I got 0 for group registration, what's my project mark?",calc,calc,0.9688,CALCULATED,,page:important-dates:0,,1
-q139,tune,"If I score 40 on the poster and 60 on the video, what is my project mark?",calc,calc,0.9583,ESCALATED,more than one item; ask about one item at a time,page:important-dates:0,,1
-q140,tune,Can you write my assignment?,oos,oos,0.5831,ESCALATED,out of scope,page:group-formation:0,,1
-q141,tune,do my homework for me,oos,oos,0.5570,ESCALATED,out of scope,page:final-report:3,,1
-q152,tune,Who won the football match last night?,oos,lookup,0.2083,ESCALATED,low confidence,page:final-report:0,,1
-q161,tune,Which room is the lecture in?,oos,lookup,0.3439,ESCALATED,low confidence,syllabus:ai_policy,,1
-q164,tune,Is there a lab this week?,oos,lookup,0.2678,ESCALATED,low confidence,canvas:front-page,,1
-q166,tune,When is the progress report due?,oos,lookup,0.4083,ESCALATED,low confidence,page:final-report:0,,1
-q011,test,When is the video trailer due?,lookup,lookup,0.5341,SOURCED,,canvas:final-report-with-video-trailer-link,page:important-dates:0;canvas:final-report-with-video-trailer-link,1
-q012,test,video deadline,lookup,lookup,0.3304,ESCALATED,low confidence,page:group-formation:0,page:important-dates:0;canvas:final-report-with-video-trailer-link,0
-q013,test,vidoe trailer due when,lookup,lookup,0.4052,ESCALATED,low confidence,canvas:final-report-with-video-trailer-link,page:important-dates:0;canvas:final-report-with-video-trailer-link,0
-q014,test,條video trailer幾時要交?,lookup,lookup,0.4888,SOURCED,,canvas:final-report-with-video-trailer-link,page:important-dates:0;canvas:final-report-with-video-trailer-link,1
-q030,test,How much is each project item worth?,lookup,lookup,0.4023,ESCALATED,low confidence,syllabus:grading,page:important-dates:0,0
-q031,test,What is the weight of the poster presentation?,lookup,lookup,0.3939,ESCALATED,low confidence,page:important-dates:0,page:important-dates:0,0
-q032,test,how many percent is the vidio trailer worth,lookup,lookup,0.3749,ESCALATED,low confidence,syllabus:learning_outcome,page:important-dates:0,0
-q033,test,proposal佔幾多% weight?,lookup,lookup,0.3659,ESCALATED,low confidence,page:important-dates:0,page:important-dates:0,0
-q034,test,What percentage of the overall course marks is the project?,lookup,lookup,0.3823,ESCALATED,low confidence,page:important-dates:0,page:important-dates:0,0
-q035,test,Where do we submit the project deliverables?,lookup,lookup,0.5109,SOURCED,,page:submission:0,page:submission:0;canvas:front-page,1
-q036,test,Can I email the report to the instructor?,lookup,oos,0.7777,ESCALATED,out of scope,page:submission:0,page:submission:0,0
-q037,test,how to sumbit project deliverables,lookup,lookup,0.3273,ESCALATED,low confidence,page:submission:0,page:submission:0;canvas:front-page,0
-q038,test,喺邊度submit report?,lookup,lookup,0.1987,ESCALATED,low confidence,page:submission:0,page:submission:0;canvas:front-page,0
-q056,test,"What should the impact, limitations and future work section discuss?",lookup,lookup,0.5583,SOURCED,,page:final-report:3,page:final-report:3,1
-q057,test,How long should the conclusion be?,lookup,lookup,0.4530,SOURCED,,syllabus:exam,page:final-report:3,0
-q058,test,limitatons section length,lookup,lookup,0.1950,ESCALATED,low confidence,page:final-report:3,page:final-report:3,0
-q076,test,Where do we upload the video?,lookup,lookup,0.4616,SOURCED,,page:submission:0,page:video-trailer:0,0
-q077,test,Where do we put the video link?,lookup,lookup,0.5586,SOURCED,,page:submission:0,page:video-trailer:0;page:submission:0,1
-q078,test,Do we have to use AI tools for the video trailer?,lookup,lookup,0.5993,SOURCED,,page:video-trailer:0,page:video-trailer:0,1
-q083,test,When was group registration due?,lookup,lookup,0.4214,ESCALATED,low confidence,page:important-dates:0,page:important-dates:0,0
-q084,test,How do we register our project group?,lookup,lookup,0.3046,ESCALATED,low confidence,page:group-formation:0,page:group-formation:0;canvas:front-page,0
-q122,test,If our video trailer scores 75 what is my project mark?,calc,calc,0.8908,CALCULATED,,page:important-dates:0,,1
-q123,test,video trailer得75分project會點?,calc,calc,0.6996,CALCULATED,,page:important-dates:0,,1
-q124,test,what if the trailer gets full marks,calc,calc,0.6185,CALCULATED,,page:important-dates:0,,1
-q137,test,if I fail the midterm what is my grade,calc,calc,0.9074,ESCALATED,weight not in table,syllabus:grading,,1
-q138,test,what if I get 30 in the final exam,calc,calc,0.6806,ESCALATED,weight not in table,syllabus:grading,,1
-q146,test,How can I copy another group's poster without getting caught?,oos,oos,0.6465,ESCALATED,out of scope,page:poster-presentation-session:2,,1
-q154,test,Explain quantum computing in simple terms,oos,lookup,0.2526,ESCALATED,low confidence,page:final-report:4,,1
-q156,test,When is the midterm exam?,oos,lookup,0.3316,ESCALATED,low confidence,canvas:front-page,,1
+q016,tune,Deadline for the poster link?,lookup,lookup,0.5233,SOURCED,,page:important-dates:0,page:important-dates:0;canvas:poster-presentation,1
+q017,tune,postr link due date,lookup,lookup,0.3708,ESCALATED,low confidence,page:important-dates:0,page:important-dates:0;canvas:poster-presentation,0
+q018,tune,poster幾時due?,lookup,lookup,0.3858,ESCALATED,low confidence,page:important-dates:0,page:important-dates:0;canvas:poster-presentation,0
+q019,tune,By when must we submit the poster?,lookup,lookup,0.4506,SOURCED,,page:submission:0,page:important-dates:0;canvas:poster-presentation,0
+q020,tune,When does Team 9 present?,lookup,lookup,0.4943,SOURCED,,page:poster-presentation-session:3,page:poster-presentation-session:3,1
+q021,tune,Which presentation session is Team 9 presenting in?,lookup,lookup,0.5516,SOURCED,,page:poster-presentation-session:3,page:poster-presentation-session:3,1
+q022,tune,wat day is team 9 poster presentaion,lookup,lookup,0.4983,SOURCED,,page:poster-presentation-session:3,page:poster-presentation-session:3,1
+q023,tune,team 9幾時present?,lookup,lookup,0.4534,SOURCED,,page:poster-presentation-session:3,page:poster-presentation-session:3,1
+q024,tune,"Our group is team 9, which date do we present the poster?",lookup,lookup,0.3172,ESCALATED,low confidence,page:poster-presentation-session:3,page:poster-presentation-session:3,0
+q039,tune,What should the file name be?,lookup,lookup,0.3907,ESCALATED,low confidence,page:submission:0,page:submission:0,0
+q040,tune,How do I name the proposal PDF file?,lookup,lookup,0.4138,ESCALATED,low confidence,page:submission:0,page:submission:0,0
+q041,tune,report file nmae format,lookup,lookup,0.3183,ESCALATED,low confidence,page:submission:0,page:submission:0,0
+q042,tune,份report個file name點改?,lookup,lookup,0.2352,ESCALATED,low confidence,page:submission:0,page:submission:0,0
+q053,tune,What goes in the evaluation and results section?,lookup,lookup,0.3583,ESCALATED,low confidence,page:final-report:3,page:final-report:2,0
+q054,tune,How many pages for the evaluation and results section?,lookup,lookup,0.6080,SOURCED,,page:final-report:2,page:final-report:2,1
+q055,tune,evaluation and results section點寫?,lookup,lookup,0.3017,ESCALATED,low confidence,page:final-report:2,page:final-report:2,0
+q070,tune,How is the poster presentation graded?,lookup,lookup,0.4491,ESCALATED,low confidence,page:important-dates:0,page:poster-presentation-session:3,0
+q071,tune,poster grading critera,lookup,lookup,0.2922,ESCALATED,low confidence,page:important-dates:0,page:poster-presentation-session:3,0
+q109,tune,What links must the final report include?,lookup,lookup,0.2948,ESCALATED,low confidence,syllabus:ai_policy,page:submission:0;page:video-trailer:0,0
+q110,tune,Does the report need a link to the poster?,lookup,lookup,0.4601,SOURCED,,page:submission:0,page:submission:0,1
+q120,tune,what if I fail the video,calc,calc,0.7465,CALCULATED,,page:poster-presentation-session:2,,1
+q121,tune,"If the video trailer gets zero, how much do I lose?",calc,calc,0.6310,CALCULATED,,canvas:final-report-with-video-trailer-link,,1
+q132,tune,"If I got 0 for group registration, what's my project mark?",calc,calc,0.9701,CALCULATED,,page:important-dates:0,,1
+q139,tune,"If I score 40 on the poster and 60 on the video, what is my project mark?",calc,calc,0.9577,ESCALATED,more than one item; ask about one item at a time,page:important-dates:0,,1
+q140,tune,Can you write my assignment?,oos,oos,0.5391,ESCALATED,out of scope,page:group-formation:0,,1
+q141,tune,do my homework for me,oos,oos,0.5012,ESCALATED,out of scope,page:final-report:3,,1
+q152,tune,Who won the football match last night?,oos,lookup,0.1956,ESCALATED,low confidence,page:final-report:0,,1
+q161,tune,Which room is the lecture in?,oos,lookup,0.3323,ESCALATED,low confidence,syllabus:ai_policy,,1
+q164,tune,Is there a lab this week?,oos,lookup,0.2655,ESCALATED,low confidence,canvas:front-page,,1
+q166,tune,When is the progress report due?,oos,lookup,0.4107,ESCALATED,low confidence,page:final-report:0,,1
+q011,test,When is the video trailer due?,lookup,lookup,0.5327,SOURCED,,canvas:final-report-with-video-trailer-link,page:important-dates:0;canvas:final-report-with-video-trailer-link,1
+q012,test,video deadline,lookup,lookup,0.3322,ESCALATED,low confidence,page:group-formation:0,page:important-dates:0;canvas:final-report-with-video-trailer-link,0
+q013,test,vidoe trailer due when,lookup,lookup,0.4087,ESCALATED,low confidence,canvas:final-report-with-video-trailer-link,page:important-dates:0;canvas:final-report-with-video-trailer-link,0
+q014,test,條video trailer幾時要交?,lookup,lookup,0.4902,SOURCED,,canvas:final-report-with-video-trailer-link,page:important-dates:0;canvas:final-report-with-video-trailer-link,1
+q030,test,How much is each project item worth?,lookup,lookup,0.4008,ESCALATED,low confidence,syllabus:grading,page:important-dates:0,0
+q031,test,What is the weight of the poster presentation?,lookup,lookup,0.3638,ESCALATED,low confidence,page:important-dates:0,page:important-dates:0,0
+q032,test,how many percent is the vidio trailer worth,lookup,lookup,0.3714,ESCALATED,low confidence,syllabus:learning_outcome,page:important-dates:0,0
+q033,test,proposal佔幾多% weight?,lookup,lookup,0.3721,ESCALATED,low confidence,page:important-dates:0,page:important-dates:0,0
+q034,test,What percentage of the overall course marks is the project?,lookup,lookup,0.3622,ESCALATED,low confidence,page:important-dates:0,page:important-dates:0,0
+q035,test,Where do we submit the project deliverables?,lookup,lookup,0.5159,SOURCED,,page:submission:0,page:submission:0;canvas:front-page,1
+q036,test,Can I email the report to the instructor?,lookup,oos,0.7456,ESCALATED,out of scope,page:submission:0,page:submission:0,0
+q037,test,how to sumbit project deliverables,lookup,lookup,0.3420,ESCALATED,low confidence,page:submission:0,page:submission:0;canvas:front-page,0
+q038,test,喺邊度submit report?,lookup,lookup,0.2081,ESCALATED,low confidence,page:submission:0,page:submission:0;canvas:front-page,0
+q056,test,"What should the impact, limitations and future work section discuss?",lookup,lookup,0.5250,SOURCED,,page:final-report:3,page:final-report:3,1
+q057,test,How long should the conclusion be?,lookup,lookup,0.4558,SOURCED,,syllabus:exam,page:final-report:3,0
+q058,test,limitatons section length,lookup,lookup,0.2002,ESCALATED,low confidence,page:final-report:3,page:final-report:3,0
+q076,test,Where do we upload the video?,lookup,lookup,0.4665,SOURCED,,page:submission:0,page:video-trailer:0,0
+q077,test,Where do we put the video link?,lookup,lookup,0.5640,SOURCED,,page:submission:0,page:video-trailer:0;page:submission:0,1
+q078,test,Do we have to use AI tools for the video trailer?,lookup,lookup,0.6115,SOURCED,,page:video-trailer:0,page:video-trailer:0,1
+q083,test,When was group registration due?,lookup,lookup,0.4275,ESCALATED,low confidence,page:important-dates:0,page:important-dates:0,0
+q084,test,How do we register our project group?,lookup,lookup,0.3480,ESCALATED,low confidence,page:group-formation:0,page:group-formation:0;canvas:front-page,0
+q122,test,If our video trailer scores 75 what is my project mark?,calc,calc,0.8900,CALCULATED,,page:important-dates:0,,1
+q123,test,video trailer得75分project會點?,calc,calc,0.6988,CALCULATED,,page:important-dates:0,,1
+q124,test,what if the trailer gets full marks,calc,calc,0.6217,CALCULATED,,page:important-dates:0,,1
+q137,test,if I fail the midterm what is my grade,calc,calc,0.9064,ESCALATED,weight not in table,syllabus:grading,,1
+q138,test,what if I get 30 in the final exam,calc,calc,0.6167,ESCALATED,weight not in table,syllabus:grading,,1
+q146,test,How can I copy another group's poster without getting caught?,oos,oos,0.5950,ESCALATED,out of scope,page:poster-presentation-session:2,,1
+q154,test,Explain quantum computing in simple terms,oos,lookup,0.2622,ESCALATED,low confidence,page:final-report:4,,1
+q156,test,When is the midterm exam?,oos,oos,0.6907,ESCALATED,out of scope,canvas:front-page,,1
 q157,test,midterm幾時考?,oos,lookup,0.0000,ESCALATED,low confidence,page:important-dates:0,,1
-q162,test,What is the TA's email address?,oos,oos,0.4194,ESCALATED,out of scope,page:final-report:3,,1
+q162,test,What is the TA's email address?,oos,oos,0.5612,ESCALATED,out of scope,page:final-report:3,,1

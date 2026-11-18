@@ -6,7 +6,7 @@
    "intended": false,
    "stamp": "ESCALATED",
    "reason": "low confidence",
-   "conf": 0.42372017934566775,
+   "conf": 0.42333007544172624,
    "top_chunk": "canvas:proposal-report"
   },
   {
@@ -15,7 +15,7 @@
    "intended": true,
    "stamp": "CALCULATED",
    "reason": null,
-   "conf": 0.993290465571196,
+   "conf": 0.9930914960955183,
    "top_chunk": "page:important-dates:0"
   },
   {
@@ -24,7 +24,7 @@
    "intended": true,
    "stamp": "ESCALATED",
    "reason": "out of scope",
-   "conf": 0.5830902986717215,
+   "conf": 0.5390953643443622,
    "top_chunk": "page:group-formation:0"
   },
   {
@@ -33,7 +33,7 @@
    "intended": false,
    "stamp": "ESCALATED",
    "reason": "low confidence",
-   "conf": 0.38321820434294385,
+   "conf": 0.38217740146034274,
    "top_chunk": "syllabus:ai_policy"
   },
   {
@@ -42,7 +42,7 @@
    "intended": true,
    "stamp": "SOURCED",
    "reason": null,
-   "conf": 0.5258523466262508,
+   "conf": 0.5252830500846767,
    "top_chunk": "page:important-dates:0"
   }
  ],
@@ -53,7 +53,7 @@
    "intended": true,
    "stamp": "SOURCED",
    "reason": null,
-   "conf": 0.5915060549865785,
+   "conf": 0.5885751796785094,
    "top_chunk": "canvas:proposal-report"
   },
   {
@@ -62,7 +62,7 @@
    "intended": true,
    "stamp": "CALCULATED",
    "reason": null,
-   "conf": 0.993290465571196,
+   "conf": 0.9930914960955183,
    "top_chunk": "page:important-dates:0"
   },
   {
@@ -71,7 +71,7 @@
    "intended": true,
    "stamp": "ESCALATED",
    "reason": "out of scope",
-   "conf": 0.5830902986717215,
+   "conf": 0.5390953643443622,
    "top_chunk": "page:group-formation:0"
   },
   {
@@ -80,7 +80,7 @@
    "intended": false,
    "stamp": "ESCALATED",
    "reason": "low confidence",
-   "conf": 0.4473712687136145,
+   "conf": 0.4442070236505283,
    "top_chunk": "syllabus:ai_policy"
   },
   {
@@ -89,7 +89,7 @@
    "intended": true,
    "stamp": "SOURCED",
    "reason": null,
-   "conf": 0.7479114808694528,
+   "conf": 0.7446398880192138,
    "top_chunk": "page:important-dates:0"
   }
  ]

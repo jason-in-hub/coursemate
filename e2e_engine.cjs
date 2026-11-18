@@ -10,7 +10,7 @@ async function ask(p, q) { const n = await p.locator('.receipt').count(); await 
   const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1440, height: 900 } }); const errs = [];
   p.on('pageerror', e => errs.push(e.message));
   // make a PDF of the same syllabus with the browser itself
-  const pdfPath = path.join(path.dirname(SYL), 'cs50_syllabus.pdf');
+  const pdfPath = path.join(process.env.SHOTS || require('os').tmpdir(), 'cs50_syllabus.pdf'); // not the tracked copy: p.pdf() bytes differ per run
   await p.goto('file://' + path.resolve(SYL)); await p.pdf({ path: pdfPath });
   for (const file of [SYL, pdfPath]) {
     await p.goto(BASE); await p.waitForFunction(() => !document.getElementById('syl').disabled);
