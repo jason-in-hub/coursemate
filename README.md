@@ -10,6 +10,17 @@ Results, with every number tied to the script that produced it: [results/RESULTS
 
 On 34 natural demo questions (`ml/data/demo_questions.csv`, 21 not seen during development; labels checked against a blind relabelling in `ml/data/demo_questions_blind.csv`, 33/34 agree): right answers 11 -> 19 with wrong answers unchanged at 3; the first passage shown is right for 28/34; the right passage is on screen for 32/34. Gate: `MIN_RIGHT=19 MAX_WRONG=3 node demo_eval.cjs ml/data/demo_questions.csv <url> mini`. On the labelled tune and test splits the rule adds right answers (15 -> 19, 13 -> 14) with the same 3 wrong answers each (`ml/eval_agree.py` -> `results/agree.json`). Opened from disk (file://), the page runs BM25 only.
 
+Against standard FAQ-bot baselines (`ml/eval_baselines.py` -> `results/baselines.json`; each baseline's threshold chosen on tune by the same criterion, right + correct escalations - wrong), right/wrong answers:
+
+| system | test (31) | demo (34) | demo, independent full-text relabel (34) |
+|---|---|---|---|
+| TF-IDF cosine | 6 / 1 | 8 / 3 | 7 / 4 |
+| off-the-shelf all-MiniLM-L6-v2 | 1 / 1 | 7 / 1 | 6 / 2 |
+| BM25 pipeline only (v2) | 13 / 3 | 8 / 3 | 6 / 5 |
+| **CourseMate** | **14 / 3** | **16 / 3** | **13 / 6** |
+
+Caveats: with a threshold picked on the demo set itself (peeking), off-the-shelf MiniLM reaches 22 / 4 on demo but 2 / 1 on test. The relabel is stricter (it marks "what is AI" and "how many quizzes" as not answerable), which is why wrong answers rise there.
+
 ## Open locally
 
 Double-click `index.html`, or `open index.html` (macOS).
