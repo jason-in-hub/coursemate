@@ -21,6 +21,8 @@ Against standard FAQ-bot baselines (`ml/eval_baselines.py` -> `results/baselines
 
 Caveats: with a threshold picked on the demo set itself (peeking), off-the-shelf MiniLM reaches 22 / 4 on demo but 2 / 1 on test. The relabel is stricter (it marks "what is AI" and "how many quizzes" as not answerable), which is why wrong answers rise there.
 
+Blind pairwise judgement by an independent model (`results/pairwise_judge.json`): for each demo question it saw CourseMate's reply and a baseline's reply in random A/B order and picked the more helpful, non-misleading one. CourseMate vs TF-IDF bot: 20 wins, 5 losses, 9 ties. CourseMate vs BM25-only v2: 19 wins, 2 losses, 13 ties. Position check: A chosen 20 times, B 26. Losses: "what is AI", "group size", "When is assignment 1 due?", "What does the final exam cover?", "Where can I watch the lecture videos?".
+
 ## Open locally
 
 Double-click `index.html`, or `open index.html` (macOS).

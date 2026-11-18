@@ -1,0 +1,640 @@
+{
+ "judge": "independent model, blind A/B (order randomised, seed 1945), 34 demo questions x 2 opponents",
+ "tally": {
+  "tfidf": {
+   "win": 20,
+   "loss": 5,
+   "tie": 9
+  },
+  "bm25v2": {
+   "win": 19,
+   "loss": 2,
+   "tie": 13
+  }
+ },
+ "losses": [
+  "tfidf | what is AI",
+  "tfidf | group size",
+  "tfidf | What does the final exam cover?",
+  "bm25v2 | What does the final exam cover?",
+  "tfidf | When is assignment 1 due?",
+  "tfidf | Where can I watch the lecture videos?",
+  "bm25v2 | Where can I watch the lecture videos?"
+ ],
+ "A": 20,
+ "B": 26,
+ "pairs": [
+  {
+   "id": 1,
+   "q": "AI",
+   "other": "tfidf",
+   "ours_is": "B",
+   "A": "ANSWER (from course documents) -> Syllabus (coursework page) · learning_outcome: Describe basic AI concepts and explain how AI systems utilize data. Identify current AI trends and analyze how AI is transforming various industries. Use AI as a collaborative tool to enhance creativity and problem-solving skills, while developing adaptability in AI-driven environments. Recognize ethical risks and potential concerns associated with AI systems, along with the fundamental principles of responsible AI. Identify potential AI-related problems and propose preliminary AI solutions.",
+   "B": "ANSWER (from course documents) -> Syllabus (coursework page) · learning_outcome: Describe basic AI concepts and explain how AI systems utilize data. Identify current AI trends and analyze how AI is transforming various industries. Use AI as a collaborative tool to enhance creativity and problem-solving skills, while developing adaptability in AI-driven environments. Recognize ethical risks and potential concerns associated with AI systems, along with the fundamental principles of responsible AI. Identify potential AI-related problems and propose preliminary AI solutions.",
+   "verdict": "T"
+  },
+  {
+   "id": 2,
+   "q": "AI",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "ANSWER (from course documents) -> Syllabus (coursework page) · learning_outcome: Describe basic AI concepts and explain how AI systems utilize data. Identify current AI trends and analyze how AI is transforming various industries. Use AI as a collaborative tool to enhance creativity and problem-solving skills, while developing adaptability in AI-driven environments. Recognize ethical risks and potential concerns associated with AI systems, along with the fundamental principles of responsible AI. Identify potential AI-related problems and propose preliminary AI solutions.",
+   "B": "ANSWER (from course documents) -> Syllabus (coursework page) · learning_outcome: Describe basic AI concepts and explain how AI systems utilize data. Identify current AI trends and analyze how AI is transforming various industries. Use AI as a collaborative tool to enhance creativity and problem-solving skills, while developing adaptability in AI-driven environments. Recognize ethical risks and potential concerns associated with AI systems, along with the fundamental principles of responsible AI. Identify potential AI-related problems and propose preliminary AI solutions.",
+   "verdict": "T"
+  },
+  {
+   "id": 3,
+   "q": "what is AI",
+   "other": "tfidf",
+   "ours_is": "A",
+   "A": "ANSWER (from course documents) -> Syllabus (coursework page) · ai_policy: All generative AI tools (ChatGPT, Claude, Copilot, Gemini, etc.) are allowed and encouraged for assignments and projects (but obviously not for the final exam), subject to the following requirements: (but obviously not for the final exam) You must clearly indicate which parts of your submission were generated or assisted by AI. Include a separate \"AI Usage Statement\" with each submission detailing: Which AI tools were used Specific prompts used to generate content What portions of the work are AI-generated versus your original contributions",
+   "B": "ANSWER (from course documents) -> Syllabus (coursework page) · learning_outcome: Describe basic AI concepts and explain how AI systems utilize data. Identify current AI trends and analyze how AI is transforming various industries. Use AI as a collaborative tool to enhance creativity and problem-solving skills, while developing adaptability in AI-driven environments. Recognize ethical risks and potential concerns associated with AI systems, along with the fundamental principles of responsible AI. Identify potential AI-related problems and propose preliminary AI solutions.",
+   "verdict": "B"
+  },
+  {
+   "id": 4,
+   "q": "what is AI",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "ANSWER (from course documents) -> Syllabus (coursework page) · ai_policy: All generative AI tools (ChatGPT, Claude, Copilot, Gemini, etc.) are allowed and encouraged for assignments and projects (but obviously not for the final exam), subject to the following requirements: (but obviously not for the final exam) You must clearly indicate which parts of your submission were generated or assisted by AI. Include a separate \"AI Usage Statement\" with each submission detailing: Which AI tools were used Specific prompts used to generate content What portions of the work are AI-generated versus your original contributions",
+   "B": "ANSWER (from course documents) -> Syllabus (coursework page) · ai_policy: All generative AI tools (ChatGPT, Claude, Copilot, Gemini, etc.) are allowed and encouraged for assignments and projects (but obviously not for the final exam), subject to the following requirements: (but obviously not for the final exam) You must clearly indicate which parts of your submission were generated or assisted by AI. Include a separate \"AI Usage Statement\" with each submission detailing: Which AI tools were used Specific prompts used to generate content What portions of the work are AI-generated versus your original contributions",
+   "verdict": "T"
+  },
+  {
+   "id": 5,
+   "q": "what is this course about",
+   "other": "tfidf",
+   "ours_is": "A",
+   "A": "NOT CONFIRMED - most likely relevant passage -> Course project page · Project Overview: The Course Project is a group-based assignment that gives you and your teammates an opportunity to apply the knowledge and skills developed in this course to a meaningful real-world problem of your interest. Your project topic should be relevant to at least one of the following: HKUST: for example, improving campus life, learning experiences, sustainability, accessibility, student well-being, administrative processes, or university-community engagement. Your major or discipline: for example, addressing a practical challenge, investigating an emerging issue, developing a prototype, or applying course concepts in a professional or industry context. A Sample Project demo based on the idea from   || Not sure? Please ask the TA.",
+   "B": "Please ask the TA.",
+   "verdict": "T"
+  },
+  {
+   "id": 6,
+   "q": "what is this course about",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "NOT CONFIRMED - most likely relevant passage -> Course project page · Project Overview: The Course Project is a group-based assignment that gives you and your teammates an opportunity to apply the knowledge and skills developed in this course to a meaningful real-world problem of your interest. Your project topic should be relevant to at least one of the following: HKUST: for example, improving campus life, learning experiences, sustainability, accessibility, student well-being, administrative processes, or university-community engagement. Your major or discipline: for example, addressing a practical challenge, investigating an emerging issue, developing a prototype, or applying course concepts in a professional or industry context. A Sample Project demo based on the idea from   || Not sure? Please ask the TA.",
+   "verdict": "T"
+  },
+  {
+   "id": 7,
+   "q": "What will I learn?",
+   "other": "tfidf",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "NOT CONFIRMED - most likely relevant passage -> Syllabus (coursework page) · learning_outcome: Describe basic AI concepts and explain how AI systems utilize data. Identify current AI trends and analyze how AI is transforming various industries. Use AI as a collaborative tool to enhance creativity and problem-solving skills, while developing adaptability in AI-driven environments. Recognize ethical risks and potential concerns associated with AI systems, along with the fundamental principles of responsible AI. Identify potential AI-related problems and propose preliminary AI solutions.  || Not sure? Please ask the TA.",
+   "verdict": "B"
+  },
+  {
+   "id": 8,
+   "q": "What will I learn?",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "NOT CONFIRMED - most likely relevant passage -> Syllabus (coursework page) · learning_outcome: Describe basic AI concepts and explain how AI systems utilize data. Identify current AI trends and analyze how AI is transforming various industries. Use AI as a collaborative tool to enhance creativity and problem-solving skills, while developing adaptability in AI-driven environments. Recognize ethical risks and potential concerns associated with AI systems, along with the fundamental principles of responsible AI. Identify potential AI-related problems and propose preliminary AI solutions.  || Not sure? Please ask the TA.",
+   "verdict": "B"
+  },
+  {
+   "id": 9,
+   "q": "how is the course graded",
+   "other": "tfidf",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "ANSWER (from course documents) -> Syllabus (coursework page) · assessment: your project group will participate in four graded in-class activities, each worth 1% of your total grade. Details about the talk will be shared later. If no AI talk is arranged, alternative arrangements will be communicated. There are three regular assignments, including hands-on tasks that apply course concepts. For these parts, marks are primarily determined by whether the AI system you configure produces correct results for hidden test cases, given the instructions and prompts you design. Your grade on these assignments may depend on the behavior of your submitted AI system (e.g., prompts, model configuration), not on manual partial credit for every intermediate step. The instructor may ",
+   "verdict": "B"
+  },
+  {
+   "id": 10,
+   "q": "how is the course graded",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "ANSWER (from course documents) -> Syllabus (coursework page) · assessment: your project group will participate in four graded in-class activities, each worth 1% of your total grade. Details about the talk will be shared later. If no AI talk is arranged, alternative arrangements will be communicated. There are three regular assignments, including hands-on tasks that apply course concepts. For these parts, marks are primarily determined by whether the AI system you configure produces correct results for hidden test cases, given the instructions and prompts you design. Your grade on these assignments may depend on the behavior of your submitted AI system (e.g., prompts, model configuration), not on manual partial credit for every intermediate step. The instructor may ",
+   "verdict": "B"
+  },
+  {
+   "id": 11,
+   "q": "Can I use ChatGPT?",
+   "other": "tfidf",
+   "ours_is": "A",
+   "A": "NOT CONFIRMED - most likely relevant passage -> Syllabus (coursework page) · ai_policy: All generative AI tools (ChatGPT, Claude, Copilot, Gemini, etc.) are allowed and encouraged for assignments and projects (but obviously not for the final exam), subject to the following requirements: (but obviously not for the final exam) You must clearly indicate which parts of your submission were generated or assisted by AI. Include a separate \"AI Usage Statement\" with each submission detailing: Which AI tools were used Specific prompts used to generate content What portions of the work are AI-generated versus your original contributions  || Not sure? Please ask the TA.",
+   "B": "Please ask the TA.",
+   "verdict": "A"
+  },
+  {
+   "id": 12,
+   "q": "Can I use ChatGPT?",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "NOT CONFIRMED - most likely relevant passage -> Syllabus (coursework page) · ai_policy: All generative AI tools (ChatGPT, Claude, Copilot, Gemini, etc.) are allowed and encouraged for assignments and projects (but obviously not for the final exam), subject to the following requirements: (but obviously not for the final exam) You must clearly indicate which parts of your submission were generated or assisted by AI. Include a separate \"AI Usage Statement\" with each submission detailing: Which AI tools were used Specific prompts used to generate content What portions of the work are AI-generated versus your original contributions  || Not sure? Please ask the TA.",
+   "verdict": "B"
+  },
+  {
+   "id": 13,
+   "q": "what is the project",
+   "other": "tfidf",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "NOT CONFIRMED - most likely relevant passage -> Course project page · Project Overview: The Course Project is a group-based assignment that gives you and your teammates an opportunity to apply the knowledge and skills developed in this course to a meaningful real-world problem of your interest. Your project topic should be relevant to at least one of the following: HKUST: for example, improving campus life, learning experiences, sustainability, accessibility, student well-being, administrative processes, or university-community engagement. Your major or discipline: for example, addressing a practical challenge, investigating an emerging issue, developing a prototype, or applying course concepts in a professional or industry context. A Sample Project demo based on the idea from   || Not sure? Please ask the TA.",
+   "verdict": "B"
+  },
+  {
+   "id": 14,
+   "q": "what is the project",
+   "other": "bm25v2",
+   "ours_is": "A",
+   "A": "NOT CONFIRMED - most likely relevant passage -> Course project page · Project Overview: The Course Project is a group-based assignment that gives you and your teammates an opportunity to apply the knowledge and skills developed in this course to a meaningful real-world problem of your interest. Your project topic should be relevant to at least one of the following: HKUST: for example, improving campus life, learning experiences, sustainability, accessibility, student well-being, administrative processes, or university-community engagement. Your major or discipline: for example, addressing a practical challenge, investigating an emerging issue, developing a prototype, or applying course concepts in a professional or industry context. A Sample Project demo based on the idea from   || Not sure? Please ask the TA.",
+   "B": "Please ask the TA.",
+   "verdict": "A"
+  },
+  {
+   "id": 15,
+   "q": "group size",
+   "other": "tfidf",
+   "ours_is": "A",
+   "A": "ANSWER (from course documents) -> Course project page · Poster Presentation Session: Each group will participate in a Poster Presentation Session (around Week 12-13) to communicate its AI project to the teaching team and fellow students. The session is designed as an interactive showcase: other classmates will approach your group, ask questions, and may request a demonstration of your prototype or proposed solution. Your group should be prepared to explain the project clearly to both technical and non-technical audiences, demonstrate the prototype where applicable, and answer questions about the problem, AI solution, data, methods, evaluation, limitations, and potential impact. Effective poster presentations use a logical visual flow, concise text, legible design, and intera",
+   "B": "Please ask the TA.",
+   "verdict": "B"
+  },
+  {
+   "id": 16,
+   "q": "group size",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "ANSWER (from course documents) -> Course project page · Poster Presentation Session: Each group will participate in a Poster Presentation Session (around Week 12-13) to communicate its AI project to the teaching team and fellow students. The session is designed as an interactive showcase: other classmates will approach your group, ask questions, and may request a demonstration of your prototype or proposed solution. Your group should be prepared to explain the project clearly to both technical and non-technical audiences, demonstrate the prototype where applicable, and answer questions about the problem, AI solution, data, methods, evaluation, limitations, and potential impact. Effective poster presentations use a logical visual flow, concise text, legible design, and intera",
+   "B": "ANSWER (from course documents) -> Course project page · Poster Presentation Session: Each group will participate in a Poster Presentation Session (around Week 12-13) to communicate its AI project to the teaching team and fellow students. The session is designed as an interactive showcase: other classmates will approach your group, ask questions, and may request a demonstration of your prototype or proposed solution. Your group should be prepared to explain the project clearly to both technical and non-technical audiences, demonstrate the prototype where applicable, and answer questions about the problem, AI solution, data, methods, evaluation, limitations, and potential impact. Effective poster presentations use a logical visual flow, concise text, legible design, and intera",
+   "verdict": "T"
+  },
+  {
+   "id": 17,
+   "q": "How long should the video be?",
+   "other": "tfidf",
+   "ours_is": "A",
+   "A": "ANSWER (from course documents) -> Course project page · Video Trailer: Each group must create a short AI-generated or AI-assisted video trailer to introduce and promote its Course Project. The trailer should be engaging, accessible to a general audience, and designed to communicate the project's central idea, not to reproduce the full Final Report. The video should be approximately 1-2 minutes long. It should use AI tools for ideation, scriptwriting, narration, visuals, animation, music, video generation, editing, or subtitles. However, your group remains responsible for the accuracy, appropriateness, copyright compliance, and ethical use of all material included in the video. Submission Requirements Length: Approximately 2 minutes; recommended range: 1.5-2.5 m",
+   "B": "ANSWER (from course documents) -> Course project page · Video Trailer: Each group must create a short AI-generated or AI-assisted video trailer to introduce and promote its Course Project. The trailer should be engaging, accessible to a general audience, and designed to communicate the project's central idea, not to reproduce the full Final Report. The video should be approximately 1-2 minutes long. It should use AI tools for ideation, scriptwriting, narration, visuals, animation, music, video generation, editing, or subtitles. However, your group remains responsible for the accuracy, appropriateness, copyright compliance, and ethical use of all material included in the video. Submission Requirements Length: Approximately 2 minutes; recommended range: 1.5-2.5 m",
+   "verdict": "T"
+  },
+  {
+   "id": 18,
+   "q": "How long should the video be?",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "ANSWER (from course documents) -> Course project page · Video Trailer: Each group must create a short AI-generated or AI-assisted video trailer to introduce and promote its Course Project. The trailer should be engaging, accessible to a general audience, and designed to communicate the project's central idea, not to reproduce the full Final Report. The video should be approximately 1-2 minutes long. It should use AI tools for ideation, scriptwriting, narration, visuals, animation, music, video generation, editing, or subtitles. However, your group remains responsible for the accuracy, appropriateness, copyright compliance, and ethical use of all material included in the video. Submission Requirements Length: Approximately 2 minutes; recommended range: 1.5-2.5 m",
+   "B": "ANSWER (from course documents) -> Course project page · Video Trailer: Each group must create a short AI-generated or AI-assisted video trailer to introduce and promote its Course Project. The trailer should be engaging, accessible to a general audience, and designed to communicate the project's central idea, not to reproduce the full Final Report. The video should be approximately 1-2 minutes long. It should use AI tools for ideation, scriptwriting, narration, visuals, animation, music, video generation, editing, or subtitles. However, your group remains responsible for the accuracy, appropriateness, copyright compliance, and ethical use of all material included in the video. Submission Requirements Length: Approximately 2 minutes; recommended range: 1.5-2.5 m",
+   "verdict": "T"
+  },
+  {
+   "id": 19,
+   "q": "Is late submission allowed?",
+   "other": "tfidf",
+   "ours_is": "A",
+   "A": "NOT CONFIRMED - most likely relevant passage -> Course project page · Submission: Project deliverables should be submitted through Canvas. Do not email them to us. All the deliverables are due at 23:59 Hong Kong Time on the specified date. Late submissions will not be accepted! File Structure 1. Proposal Report (Due October 24): teamX_proposal.pdf 2. Final Report (Due November 30): teamX_report.pdf Replace X with your actual team number The teamX_report.pdf must include a link to your poster and a link to your video. Make sure the shared drive link has view access enabled so we can access your poster and video Academic Integrity and AI Policy Please refer to the Coursework page.  || Not sure? Please ask the TA.",
+   "B": "Please ask the TA.",
+   "verdict": "A"
+  },
+  {
+   "id": 20,
+   "q": "Is late submission allowed?",
+   "other": "bm25v2",
+   "ours_is": "A",
+   "A": "NOT CONFIRMED - most likely relevant passage -> Course project page · Submission: Project deliverables should be submitted through Canvas. Do not email them to us. All the deliverables are due at 23:59 Hong Kong Time on the specified date. Late submissions will not be accepted! File Structure 1. Proposal Report (Due October 24): teamX_proposal.pdf 2. Final Report (Due November 30): teamX_report.pdf Replace X with your actual team number The teamX_report.pdf must include a link to your poster and a link to your video. Make sure the shared drive link has view access enabled so we can access your poster and video Academic Integrity and AI Policy Please refer to the Coursework page.  || Not sure? Please ask the TA.",
+   "B": "Please ask the TA.",
+   "verdict": "A"
+  },
+  {
+   "id": 21,
+   "q": "cheat sheet allowed in exam?",
+   "other": "tfidf",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "ANSWER (from course documents) -> Syllabus (coursework page) · exam: The exam will be a written test (Multiple Choice + Short/Long Questions) covering all course material. covering all course material. Each student may bring one double-sided A4 cheat sheet. Further details will be provided later in the semester.",
+   "verdict": "B"
+  },
+  {
+   "id": 22,
+   "q": "cheat sheet allowed in exam?",
+   "other": "bm25v2",
+   "ours_is": "A",
+   "A": "ANSWER (from course documents) -> Syllabus (coursework page) · exam: The exam will be a written test (Multiple Choice + Short/Long Questions) covering all course material. covering all course material. Each student may bring one double-sided A4 cheat sheet. Further details will be provided later in the semester.",
+   "B": "Please ask the TA.",
+   "verdict": "A"
+  },
+  {
+   "id": 23,
+   "q": "how many quizzes",
+   "other": "tfidf",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "ANSWER (from course documents) -> Syllabus (coursework page) · grading: In-class Participation (10%) Assignments (18%) Final Project (22%) Final Exam (50%) In-class Canvas Quizzes (5%): Your final quiz score is the average of all quizzes, scaled to 5% of your total grade. In-class Activity Participation (4%): each worth 1% of your total grade. If we have less than 4 activities, we will scale the marks accordingly. [TBC] AI Talk Attendance (1%):",
+   "verdict": "B"
+  },
+  {
+   "id": 24,
+   "q": "how many quizzes",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "ANSWER (from course documents) -> Syllabus (coursework page) · grading: In-class Participation (10%) Assignments (18%) Final Project (22%) Final Exam (50%) In-class Canvas Quizzes (5%): Your final quiz score is the average of all quizzes, scaled to 5% of your total grade. In-class Activity Participation (4%): each worth 1% of your total grade. If we have less than 4 activities, we will scale the marks accordingly. [TBC] AI Talk Attendance (1%):",
+   "B": "ANSWER (from course documents) -> Syllabus (coursework page) · grading: In-class Participation (10%) Assignments (18%) Final Project (22%) Final Exam (50%) In-class Canvas Quizzes (5%): Your final quiz score is the average of all quizzes, scaled to 5% of your total grade. In-class Activity Participation (4%): each worth 1% of your total grade. If we have less than 4 activities, we will scale the marks accordingly. [TBC] AI Talk Attendance (1%):",
+   "verdict": "T"
+  },
+  {
+   "id": 25,
+   "q": "prompt injection assignment due",
+   "other": "tfidf",
+   "ours_is": "B",
+   "A": "ANSWER (from course documents) -> Canvas Assignments · Assignment 3 (Part D - Prompt Injection): Canvas assignment: Assignment 3 (Part D - Prompt Injection). Due: Sat 21 Nov 2026, 23:59 HKT. Canvas points: 40. Submission type: online upload.",
+   "B": "ANSWER (from course documents) -> Canvas Assignments · Assignment 3 (Part D - Prompt Injection): Canvas assignment: Assignment 3 (Part D - Prompt Injection). Due: Sat 21 Nov 2026, 23:59 HKT. Canvas points: 40. Submission type: online upload.",
+   "verdict": "T"
+  },
+  {
+   "id": 26,
+   "q": "prompt injection assignment due",
+   "other": "bm25v2",
+   "ours_is": "A",
+   "A": "ANSWER (from course documents) -> Canvas Assignments · Assignment 3 (Part D - Prompt Injection): Canvas assignment: Assignment 3 (Part D - Prompt Injection). Due: Sat 21 Nov 2026, 23:59 HKT. Canvas points: 40. Submission type: online upload.",
+   "B": "ANSWER (from course documents) -> Canvas Assignments · Assignment 3 (Part D - Prompt Injection): Canvas assignment: Assignment 3 (Part D - Prompt Injection). Due: Sat 21 Nov 2026, 23:59 HKT. Canvas points: 40. Submission type: online upload.",
+   "verdict": "T"
+  },
+  {
+   "id": 27,
+   "q": "what's the weather today",
+   "other": "tfidf",
+   "ours_is": "A",
+   "A": "Please ask the TA. (This is outside what the course documents cover.)",
+   "B": "Please ask the TA.",
+   "verdict": "A"
+  },
+  {
+   "id": 28,
+   "q": "what's the weather today",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "Please ask the TA. (This is outside what the course documents cover.)",
+   "verdict": "B"
+  },
+  {
+   "id": 29,
+   "q": "Are AI tools allowed for the project?",
+   "other": "tfidf",
+   "ours_is": "A",
+   "A": "ANSWER (from course documents) -> Syllabus (coursework page) · ai_policy: All generative AI tools (ChatGPT, Claude, Copilot, Gemini, etc.) are allowed and encouraged for assignments and projects (but obviously not for the final exam), subject to the following requirements: (but obviously not for the final exam) You must clearly indicate which parts of your submission were generated or assisted by AI. Include a separate \"AI Usage Statement\" with each submission detailing: Which AI tools were used Specific prompts used to generate content What portions of the work are AI-generated versus your original contributions",
+   "B": "ANSWER (from course documents) -> Syllabus (coursework page) · ai_policy: All generative AI tools (ChatGPT, Claude, Copilot, Gemini, etc.) are allowed and encouraged for assignments and projects (but obviously not for the final exam), subject to the following requirements: (but obviously not for the final exam) You must clearly indicate which parts of your submission were generated or assisted by AI. Include a separate \"AI Usage Statement\" with each submission detailing: Which AI tools were used Specific prompts used to generate content What portions of the work are AI-generated versus your original contributions",
+   "verdict": "T"
+  },
+  {
+   "id": 30,
+   "q": "Are AI tools allowed for the project?",
+   "other": "bm25v2",
+   "ours_is": "A",
+   "A": "ANSWER (from course documents) -> Syllabus (coursework page) · ai_policy: All generative AI tools (ChatGPT, Claude, Copilot, Gemini, etc.) are allowed and encouraged for assignments and projects (but obviously not for the final exam), subject to the following requirements: (but obviously not for the final exam) You must clearly indicate which parts of your submission were generated or assisted by AI. Include a separate \"AI Usage Statement\" with each submission detailing: Which AI tools were used Specific prompts used to generate content What portions of the work are AI-generated versus your original contributions",
+   "B": "ANSWER (from course documents) -> Syllabus (coursework page) · ai_policy: All generative AI tools (ChatGPT, Claude, Copilot, Gemini, etc.) are allowed and encouraged for assignments and projects (but obviously not for the final exam), subject to the following requirements: (but obviously not for the final exam) You must clearly indicate which parts of your submission were generated or assisted by AI. Include a separate \"AI Usage Statement\" with each submission detailing: Which AI tools were used Specific prompts used to generate content What portions of the work are AI-generated versus your original contributions",
+   "verdict": "T"
+  },
+  {
+   "id": 31,
+   "q": "Do I need to say which parts were written by AI?",
+   "other": "tfidf",
+   "ours_is": "A",
+   "A": "ANSWER (from course documents) -> Syllabus (coursework page) · ai_policy: All generative AI tools (ChatGPT, Claude, Copilot, Gemini, etc.) are allowed and encouraged for assignments and projects (but obviously not for the final exam), subject to the following requirements: (but obviously not for the final exam) You must clearly indicate which parts of your submission were generated or assisted by AI. Include a separate \"AI Usage Statement\" with each submission detailing: Which AI tools were used Specific prompts used to generate content What portions of the work are AI-generated versus your original contributions",
+   "B": "ANSWER (from course documents) -> Syllabus (coursework page) · ai_policy: All generative AI tools (ChatGPT, Claude, Copilot, Gemini, etc.) are allowed and encouraged for assignments and projects (but obviously not for the final exam), subject to the following requirements: (but obviously not for the final exam) You must clearly indicate which parts of your submission were generated or assisted by AI. Include a separate \"AI Usage Statement\" with each submission detailing: Which AI tools were used Specific prompts used to generate content What portions of the work are AI-generated versus your original contributions",
+   "verdict": "T"
+  },
+  {
+   "id": 32,
+   "q": "Do I need to say which parts were written by AI?",
+   "other": "bm25v2",
+   "ours_is": "A",
+   "A": "ANSWER (from course documents) -> Syllabus (coursework page) · ai_policy: All generative AI tools (ChatGPT, Claude, Copilot, Gemini, etc.) are allowed and encouraged for assignments and projects (but obviously not for the final exam), subject to the following requirements: (but obviously not for the final exam) You must clearly indicate which parts of your submission were generated or assisted by AI. Include a separate \"AI Usage Statement\" with each submission detailing: Which AI tools were used Specific prompts used to generate content What portions of the work are AI-generated versus your original contributions",
+   "B": "Please ask the TA.",
+   "verdict": "A"
+  },
+  {
+   "id": 33,
+   "q": "How many people in a group?",
+   "other": "tfidf",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "NOT CONFIRMED - most likely relevant passage -> Course project page · Group Formation: You should form a group of 4-5 members from the same lecture session. You can use the following links to find classmates. L1 helper sheet here. After forming your group, You need to register your group in Canvas Group by the deadline (see Important Dates). If you cannot form a group or your group has fewer than 4 members after this date, we will randomly assign you or your team to other students.  || Not sure? Please ask the TA.",
+   "verdict": "B"
+  },
+  {
+   "id": 34,
+   "q": "How many people in a group?",
+   "other": "bm25v2",
+   "ours_is": "A",
+   "A": "NOT CONFIRMED - most likely relevant passage -> Course project page · Group Formation: You should form a group of 4-5 members from the same lecture session. You can use the following links to find classmates. L1 helper sheet here. After forming your group, You need to register your group in Canvas Group by the deadline (see Important Dates). If you cannot form a group or your group has fewer than 4 members after this date, we will randomly assign you or your team to other students.  || Not sure? Please ask the TA.",
+   "B": "Please ask the TA.",
+   "verdict": "A"
+  },
+  {
+   "id": 35,
+   "q": "How many pages is the final report?",
+   "other": "tfidf",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "ANSWER (from course documents) -> Course project page · Final Report: Extend the Progress Report to a final report summarizing your project. Format Template: template.docx Length: within 8 pages Title, References and Appendix: The 8-page limit does not include the title page, reference list and the appendix. You may include additional materials in the appendix after the references, but your work will be graded primarily on the first seven to eight pages. Suggested Report Structure 1. Title and group information (Title page): Project title; names, student IDs, and contribution table. 2. Problem and motivation (0.75 - 1 page): Define the problem clearly. Explain who is affected, why it matters, and its relevance to HKUST, the group members' major(s), or another ",
+   "verdict": "B"
+  },
+  {
+   "id": 36,
+   "q": "How many pages is the final report?",
+   "other": "bm25v2",
+   "ours_is": "A",
+   "A": "ANSWER (from course documents) -> Course project page · Final Report: Extend the Progress Report to a final report summarizing your project. Format Template: template.docx Length: within 8 pages Title, References and Appendix: The 8-page limit does not include the title page, reference list and the appendix. You may include additional materials in the appendix after the references, but your work will be graded primarily on the first seven to eight pages. Suggested Report Structure 1. Title and group information (Title page): Project title; names, student IDs, and contribution table. 2. Problem and motivation (0.75 - 1 page): Define the problem clearly. Explain who is affected, why it matters, and its relevance to HKUST, the group members' major(s), or another ",
+   "B": "ANSWER (from course documents) -> Course project page · Final Report: Extend the Progress Report to a final report summarizing your project. Format Template: template.docx Length: within 8 pages Title, References and Appendix: The 8-page limit does not include the title page, reference list and the appendix. You may include additional materials in the appendix after the references, but your work will be graded primarily on the first seven to eight pages. Suggested Report Structure 1. Title and group information (Title page): Project title; names, student IDs, and contribution table. 2. Problem and motivation (0.75 - 1 page): Define the problem clearly. Explain who is affected, why it matters, and its relevance to HKUST, the group members' major(s), or another ",
+   "verdict": "T"
+  },
+  {
+   "id": 37,
+   "q": "What size should the poster be?",
+   "other": "tfidf",
+   "ours_is": "A",
+   "A": "ANSWER (from course documents) -> Course project page · Poster Presentation Session: Requirements Each group must prepare three A3-size poster panels. The three posters should work together as one coherent visual story. Poster size: A3 per panel. Number of panels: Three posters per group. Orientation: Portrait or landscape is permitted, but all three panels should use a consistent orientation and visual style where possible. Suggested Format: Print-ready PDF files may be required before the session; further submission arrangements will be announced separately. Opening pitch: A 30-second opening pitch that attracts attention and states the problem, AI solution, and expected benefit. Poster walkthrough: A 2-minute poster walkthrough covering the main visual story across the th",
+   "B": "ANSWER (from course documents) -> Course project page · Poster Presentation Session: Each group will participate in a Poster Presentation Session (around Week 12-13) to communicate its AI project to the teaching team and fellow students. The session is designed as an interactive showcase: other classmates will approach your group, ask questions, and may request a demonstration of your prototype or proposed solution. Your group should be prepared to explain the project clearly to both technical and non-technical audiences, demonstrate the prototype where applicable, and answer questions about the problem, AI solution, data, methods, evaluation, limitations, and potential impact. Effective poster presentations use a logical visual flow, concise text, legible design, and intera",
+   "verdict": "A"
+  },
+  {
+   "id": 38,
+   "q": "What size should the poster be?",
+   "other": "bm25v2",
+   "ours_is": "A",
+   "A": "ANSWER (from course documents) -> Course project page · Poster Presentation Session: Requirements Each group must prepare three A3-size poster panels. The three posters should work together as one coherent visual story. Poster size: A3 per panel. Number of panels: Three posters per group. Orientation: Portrait or landscape is permitted, but all three panels should use a consistent orientation and visual style where possible. Suggested Format: Print-ready PDF files may be required before the session; further submission arrangements will be announced separately. Opening pitch: A 30-second opening pitch that attracts attention and states the problem, AI solution, and expected benefit. Poster walkthrough: A 2-minute poster walkthrough covering the main visual story across the th",
+   "B": "ANSWER (from course documents) -> Course project page · Poster Presentation Session: Requirements Each group must prepare three A3-size poster panels. The three posters should work together as one coherent visual story. Poster size: A3 per panel. Number of panels: Three posters per group. Orientation: Portrait or landscape is permitted, but all three panels should use a consistent orientation and visual style where possible. Suggested Format: Print-ready PDF files may be required before the session; further submission arrangements will be announced separately. Opening pitch: A 30-second opening pitch that attracts attention and states the problem, AI solution, and expected benefit. Poster walkthrough: A 2-minute poster walkthrough covering the main visual story across the th",
+   "verdict": "T"
+  },
+  {
+   "id": 39,
+   "q": "Where do I submit the project?",
+   "other": "tfidf",
+   "ours_is": "A",
+   "A": "NOT CONFIRMED - most likely relevant passage -> Course project page · Submission: Project deliverables should be submitted through Canvas. Do not email them to us. All the deliverables are due at 23:59 Hong Kong Time on the specified date. Late submissions will not be accepted! File Structure 1. Proposal Report (Due October 24): teamX_proposal.pdf 2. Final Report (Due November 30): teamX_report.pdf Replace X with your actual team number The teamX_report.pdf must include a link to your poster and a link to your video. Make sure the shared drive link has view access enabled so we can access your poster and video Academic Integrity and AI Policy Please refer to the Coursework page.  || Not sure? Please ask the TA.",
+   "B": "Please ask the TA.",
+   "verdict": "A"
+  },
+  {
+   "id": 40,
+   "q": "Where do I submit the project?",
+   "other": "bm25v2",
+   "ours_is": "A",
+   "A": "NOT CONFIRMED - most likely relevant passage -> Course project page · Submission: Project deliverables should be submitted through Canvas. Do not email them to us. All the deliverables are due at 23:59 Hong Kong Time on the specified date. Late submissions will not be accepted! File Structure 1. Proposal Report (Due October 24): teamX_proposal.pdf 2. Final Report (Due November 30): teamX_report.pdf Replace X with your actual team number The teamX_report.pdf must include a link to your poster and a link to your video. Make sure the shared drive link has view access enabled so we can access your poster and video Academic Integrity and AI Policy Please refer to the Coursework page.  || Not sure? Please ask the TA.",
+   "B": "Please ask the TA.",
+   "verdict": "A"
+  },
+  {
+   "id": 41,
+   "q": "Can I email my report to the TA?",
+   "other": "tfidf",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "ANSWER (from course documents) -> Course project page · Submission: Project deliverables should be submitted through Canvas. Do not email them to us. All the deliverables are due at 23:59 Hong Kong Time on the specified date. Late submissions will not be accepted! File Structure 1. Proposal Report (Due October 24): teamX_proposal.pdf 2. Final Report (Due November 30): teamX_report.pdf Replace X with your actual team number The teamX_report.pdf must include a link to your poster and a link to your video. Make sure the shared drive link has view access enabled so we can access your poster and video Academic Integrity and AI Policy Please refer to the Coursework page.",
+   "verdict": "B"
+  },
+  {
+   "id": 42,
+   "q": "Can I email my report to the TA?",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "ANSWER (from course documents) -> Course project page · Submission: Project deliverables should be submitted through Canvas. Do not email them to us. All the deliverables are due at 23:59 Hong Kong Time on the specified date. Late submissions will not be accepted! File Structure 1. Proposal Report (Due October 24): teamX_proposal.pdf 2. Final Report (Due November 30): teamX_report.pdf Replace X with your actual team number The teamX_report.pdf must include a link to your poster and a link to your video. Make sure the shared drive link has view access enabled so we can access your poster and video Academic Integrity and AI Policy Please refer to the Coursework page.",
+   "verdict": "B"
+  },
+  {
+   "id": 43,
+   "q": "What happens if I plagiarise?",
+   "other": "tfidf",
+   "ours_is": "A",
+   "A": "NOT CONFIRMED - most likely relevant passage -> Syllabus (coursework page) · integrity: Violations include but are not limited to: plagiarism, unauthorized collaboration, fabrication of data, and any form of cheating on assignments, projects or examinations. Suspected violations are subject to reporting to the CSE Department and the University for investigation and may result in severe penalties, including failure of the assignment or course, suspension, or expulsion.  || Not sure? Please ask the TA.",
+   "B": "Please ask the TA.",
+   "verdict": "A"
+  },
+  {
+   "id": 44,
+   "q": "What happens if I plagiarise?",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "NOT CONFIRMED - most likely relevant passage -> Syllabus (coursework page) · integrity: Violations include but are not limited to: plagiarism, unauthorized collaboration, fabrication of data, and any form of cheating on assignments, projects or examinations. Suspected violations are subject to reporting to the CSE Department and the University for investigation and may result in severe penalties, including failure of the assignment or course, suspension, or expulsion.  || Not sure? Please ask the TA.",
+   "verdict": "B"
+  },
+  {
+   "id": 45,
+   "q": "What does the final exam cover?",
+   "other": "tfidf",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "Please ask the TA. (This is outside what the course documents cover.)",
+   "verdict": "A"
+  },
+  {
+   "id": 46,
+   "q": "What does the final exam cover?",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "Please ask the TA. (This is outside what the course documents cover.)",
+   "verdict": "A"
+  },
+  {
+   "id": 47,
+   "q": "How much is the final exam worth?",
+   "other": "tfidf",
+   "ours_is": "B",
+   "A": "ANSWER (from course documents) -> Syllabus (coursework page) · grading: In-class Participation (10%) Assignments (18%) Final Project (22%) Final Exam (50%) In-class Canvas Quizzes (5%): Your final quiz score is the average of all quizzes, scaled to 5% of your total grade. In-class Activity Participation (4%): each worth 1% of your total grade. If we have less than 4 activities, we will scale the marks accordingly. [TBC] AI Talk Attendance (1%):",
+   "B": "ANSWER (from course documents) -> Syllabus (coursework page) · grading: In-class Participation (10%) Assignments (18%) Final Project (22%) Final Exam (50%) In-class Canvas Quizzes (5%): Your final quiz score is the average of all quizzes, scaled to 5% of your total grade. In-class Activity Participation (4%): each worth 1% of your total grade. If we have less than 4 activities, we will scale the marks accordingly. [TBC] AI Talk Attendance (1%):",
+   "verdict": "T"
+  },
+  {
+   "id": 48,
+   "q": "How much is the final exam worth?",
+   "other": "bm25v2",
+   "ours_is": "A",
+   "A": "ANSWER (from course documents) -> Syllabus (coursework page) · grading: In-class Participation (10%) Assignments (18%) Final Project (22%) Final Exam (50%) In-class Canvas Quizzes (5%): Your final quiz score is the average of all quizzes, scaled to 5% of your total grade. In-class Activity Participation (4%): each worth 1% of your total grade. If we have less than 4 activities, we will scale the marks accordingly. [TBC] AI Talk Attendance (1%):",
+   "B": "Please ask the TA.",
+   "verdict": "A"
+  },
+  {
+   "id": 49,
+   "q": "When is assignment 1 due?",
+   "other": "tfidf",
+   "ours_is": "A",
+   "A": "ANSWER (from course documents) -> Canvas front page: Welcome to COMP1945! This Canvas site is not the main COMP1945 website. The main website is here: https://course.cse.ust.hk/comp1945 [https://course.cse.ust.hk/comp1945] Please go there to get all the latest course information. You need to 'turn on' your Computer Science Department (CSD) account before you can get into the website when you are off-campus. Please follow the steps below: - Visit: https://password.cse.ust.hk:8443/pass.html [https://password.cse.ust.hk:8443/pass.html] - When you reach the \"CSD Password Setting Service\" page, type a new password and confirm it by typing it again. Please record/remember your password for accessing the course web off-campus in the future. - Check t",
+   "B": "Please ask the TA.",
+   "verdict": "B"
+  },
+  {
+   "id": 50,
+   "q": "When is assignment 1 due?",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "ANSWER (from course documents) -> Canvas front page: Welcome to COMP1945! This Canvas site is not the main COMP1945 website. The main website is here: https://course.cse.ust.hk/comp1945 [https://course.cse.ust.hk/comp1945] Please go there to get all the latest course information. You need to 'turn on' your Computer Science Department (CSD) account before you can get into the website when you are off-campus. Please follow the steps below: - Visit: https://password.cse.ust.hk:8443/pass.html [https://password.cse.ust.hk:8443/pass.html] - When you reach the \"CSD Password Setting Service\" page, type a new password and confirm it by typing it again. Please record/remember your password for accessing the course web off-campus in the future. - Check t",
+   "B": "ANSWER (from course documents) -> Canvas front page: Welcome to COMP1945! This Canvas site is not the main COMP1945 website. The main website is here: https://course.cse.ust.hk/comp1945 [https://course.cse.ust.hk/comp1945] Please go there to get all the latest course information. You need to 'turn on' your Computer Science Department (CSD) account before you can get into the website when you are off-campus. Please follow the steps below: - Visit: https://password.cse.ust.hk:8443/pass.html [https://password.cse.ust.hk:8443/pass.html] - When you reach the \"CSD Password Setting Service\" page, type a new password and confirm it by typing it again. Please record/remember your password for accessing the course web off-campus in the future. - Check t",
+   "verdict": "T"
+  },
+  {
+   "id": 51,
+   "q": "What is the poster presentation about?",
+   "other": "tfidf",
+   "ours_is": "B",
+   "A": "ANSWER (from course documents) -> Course project page · Important Dates: Deliverable | Weight (22% of overall course marks) | Due Date Group Registration on Canvas | 0 | September 19 1. Project Proposal (PDF) | 2 | October 24 2. Poster Presentation (LINK to Poster) | 10 | One day before your assigned Poster Presentation Session 3. Video Trailer (LINK to Video) | 3 | November 30 4. Final Report (PDF) | 7 | Except for the project presentation, all project delieverables are due by 23:59 Hong Kong Time on the specified date.",
+   "B": "NOT CONFIRMED - most likely relevant passage -> Course project page · Poster Presentation Session: Each group will participate in a Poster Presentation Session (around Week 12-13) to communicate its AI project to the teaching team and fellow students. The session is designed as an interactive showcase: other classmates will approach your group, ask questions, and may request a demonstration of your prototype or proposed solution. Your group should be prepared to explain the project clearly to both technical and non-technical audiences, demonstrate the prototype where applicable, and answer questions about the problem, AI solution, data, methods, evaluation, limitations, and potential impact. Effective poster presentations use a logical visual flow, concise text, legible design, and intera  || Not sure? Please ask the TA.",
+   "verdict": "B"
+  },
+  {
+   "id": 52,
+   "q": "What is the poster presentation about?",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "NOT CONFIRMED - most likely relevant passage -> Course project page · Poster Presentation Session: Each group will participate in a Poster Presentation Session (around Week 12-13) to communicate its AI project to the teaching team and fellow students. The session is designed as an interactive showcase: other classmates will approach your group, ask questions, and may request a demonstration of your prototype or proposed solution. Your group should be prepared to explain the project clearly to both technical and non-technical audiences, demonstrate the prototype where applicable, and answer questions about the problem, AI solution, data, methods, evaluation, limitations, and potential impact. Effective poster presentations use a logical visual flow, concise text, legible design, and intera  || Not sure? Please ask the TA.",
+   "verdict": "B"
+  },
+  {
+   "id": 53,
+   "q": "Which day does my team present?",
+   "other": "tfidf",
+   "ours_is": "A",
+   "A": "NOT CONFIRMED - most likely relevant passage -> Course project page · Poster Presentation Session: Nov 18: Presenting Team 1, 11, 17, 19, 20, 23, 24. Attending Team 4, 6, 7, 9, 12, 15, 27. Project Presentation II Nov 20: Presenting Team 4, 6, 7, 9, 12, 15, 27. Attending Team 2, 8, 14, 16, 18, 22, 29. Project Presentation III Nov 25: Presenting Team 2, 8, 14, 16, 18, 22, 29. Attending Team 3, 5, 10, 13, 25, 26, 28, 30. Project Presentation IV Nov 27: Presenting Team 3, 5, 10, 13, 25, 26, 28, 30. Attending Team 1, 11, 17, 19, 20, 23, 24. Grading Novelty: Is the problem or approach original? Understanding: Do you show a solid grasp of the problem and the AI techniques you apply? Poster: Quality of design, layout, and content. Demo: Does your solution actually work? Clarity: Can the audience   || Not sure? Please ask the TA.",
+   "B": "Please ask the TA.",
+   "verdict": "A"
+  },
+  {
+   "id": 54,
+   "q": "Which day does my team present?",
+   "other": "bm25v2",
+   "ours_is": "A",
+   "A": "NOT CONFIRMED - most likely relevant passage -> Course project page · Poster Presentation Session: Nov 18: Presenting Team 1, 11, 17, 19, 20, 23, 24. Attending Team 4, 6, 7, 9, 12, 15, 27. Project Presentation II Nov 20: Presenting Team 4, 6, 7, 9, 12, 15, 27. Attending Team 2, 8, 14, 16, 18, 22, 29. Project Presentation III Nov 25: Presenting Team 2, 8, 14, 16, 18, 22, 29. Attending Team 3, 5, 10, 13, 25, 26, 28, 30. Project Presentation IV Nov 27: Presenting Team 3, 5, 10, 13, 25, 26, 28, 30. Attending Team 1, 11, 17, 19, 20, 23, 24. Grading Novelty: Is the problem or approach original? Understanding: Do you show a solid grasp of the problem and the AI techniques you apply? Poster: Quality of design, layout, and content. Demo: Does your solution actually work? Clarity: Can the audience   || Not sure? Please ask the TA.",
+   "B": "Please ask the TA.",
+   "verdict": "A"
+  },
+  {
+   "id": 55,
+   "q": "How do I access the course website off campus?",
+   "other": "tfidf",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "ANSWER (from course documents) -> Canvas front page: Welcome to COMP1945! This Canvas site is not the main COMP1945 website. The main website is here: https://course.cse.ust.hk/comp1945 [https://course.cse.ust.hk/comp1945] Please go there to get all the latest course information. You need to 'turn on' your Computer Science Department (CSD) account before you can get into the website when you are off-campus. Please follow the steps below: - Visit: https://password.cse.ust.hk:8443/pass.html [https://password.cse.ust.hk:8443/pass.html] - When you reach the \"CSD Password Setting Service\" page, type a new password and confirm it by typing it again. Please record/remember your password for accessing the course web off-campus in the future. - Check t",
+   "verdict": "B"
+  },
+  {
+   "id": 56,
+   "q": "How do I access the course website off campus?",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "ANSWER (from course documents) -> Canvas front page: Welcome to COMP1945! This Canvas site is not the main COMP1945 website. The main website is here: https://course.cse.ust.hk/comp1945 [https://course.cse.ust.hk/comp1945] Please go there to get all the latest course information. You need to 'turn on' your Computer Science Department (CSD) account before you can get into the website when you are off-campus. Please follow the steps below: - Visit: https://password.cse.ust.hk:8443/pass.html [https://password.cse.ust.hk:8443/pass.html] - When you reach the \"CSD Password Setting Service\" page, type a new password and confirm it by typing it again. Please record/remember your password for accessing the course web off-campus in the future. - Check t",
+   "verdict": "B"
+  },
+  {
+   "id": 57,
+   "q": "Where can I watch the lecture videos?",
+   "other": "tfidf",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "ANSWER (from course documents) -> Canvas front page: Welcome to COMP1945! This Canvas site is not the main COMP1945 website. The main website is here: https://course.cse.ust.hk/comp1945 [https://course.cse.ust.hk/comp1945] Please go there to get all the latest course information. You need to 'turn on' your Computer Science Department (CSD) account before you can get into the website when you are off-campus. Please follow the steps below: - Visit: https://password.cse.ust.hk:8443/pass.html [https://password.cse.ust.hk:8443/pass.html] - When you reach the \"CSD Password Setting Service\" page, type a new password and confirm it by typing it again. Please record/remember your password for accessing the course web off-campus in the future. - Check t",
+   "verdict": "A"
+  },
+  {
+   "id": 58,
+   "q": "Where can I watch the lecture videos?",
+   "other": "bm25v2",
+   "ours_is": "A",
+   "A": "ANSWER (from course documents) -> Canvas front page: Welcome to COMP1945! This Canvas site is not the main COMP1945 website. The main website is here: https://course.cse.ust.hk/comp1945 [https://course.cse.ust.hk/comp1945] Please go there to get all the latest course information. You need to 'turn on' your Computer Science Department (CSD) account before you can get into the website when you are off-campus. Please follow the steps below: - Visit: https://password.cse.ust.hk:8443/pass.html [https://password.cse.ust.hk:8443/pass.html] - When you reach the \"CSD Password Setting Service\" page, type a new password and confirm it by typing it again. Please record/remember your password for accessing the course web off-campus in the future. - Check t",
+   "B": "Please ask the TA.",
+   "verdict": "B"
+  },
+  {
+   "id": 59,
+   "q": "What should the video trailer include?",
+   "other": "tfidf",
+   "ours_is": "B",
+   "A": "ANSWER (from course documents) -> Course project page · Video Trailer: Each group must create a short AI-generated or AI-assisted video trailer to introduce and promote its Course Project. The trailer should be engaging, accessible to a general audience, and designed to communicate the project's central idea, not to reproduce the full Final Report. The video should be approximately 1-2 minutes long. It should use AI tools for ideation, scriptwriting, narration, visuals, animation, music, video generation, editing, or subtitles. However, your group remains responsible for the accuracy, appropriateness, copyright compliance, and ethical use of all material included in the video. Submission Requirements Length: Approximately 2 minutes; recommended range: 1.5-2.5 m",
+   "B": "ANSWER (from course documents) -> Course project page · Video Trailer: Each group must create a short AI-generated or AI-assisted video trailer to introduce and promote its Course Project. The trailer should be engaging, accessible to a general audience, and designed to communicate the project's central idea, not to reproduce the full Final Report. The video should be approximately 1-2 minutes long. It should use AI tools for ideation, scriptwriting, narration, visuals, animation, music, video generation, editing, or subtitles. However, your group remains responsible for the accuracy, appropriateness, copyright compliance, and ethical use of all material included in the video. Submission Requirements Length: Approximately 2 minutes; recommended range: 1.5-2.5 m",
+   "verdict": "T"
+  },
+  {
+   "id": 60,
+   "q": "What should the video trailer include?",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "ANSWER (from course documents) -> Course project page · Video Trailer: Each group must create a short AI-generated or AI-assisted video trailer to introduce and promote its Course Project. The trailer should be engaging, accessible to a general audience, and designed to communicate the project's central idea, not to reproduce the full Final Report. The video should be approximately 1-2 minutes long. It should use AI tools for ideation, scriptwriting, narration, visuals, animation, music, video generation, editing, or subtitles. However, your group remains responsible for the accuracy, appropriateness, copyright compliance, and ethical use of all material included in the video. Submission Requirements Length: Approximately 2 minutes; recommended range: 1.5-2.5 m",
+   "B": "ANSWER (from course documents) -> Course project page · Video Trailer: Each group must create a short AI-generated or AI-assisted video trailer to introduce and promote its Course Project. The trailer should be engaging, accessible to a general audience, and designed to communicate the project's central idea, not to reproduce the full Final Report. The video should be approximately 1-2 minutes long. It should use AI tools for ideation, scriptwriting, narration, visuals, animation, music, video generation, editing, or subtitles. However, your group remains responsible for the accuracy, appropriateness, copyright compliance, and ethical use of all material included in the video. Submission Requirements Length: Approximately 2 minutes; recommended range: 1.5-2.5 m",
+   "verdict": "T"
+  },
+  {
+   "id": 61,
+   "q": "What file name should the final report use?",
+   "other": "tfidf",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "NOT CONFIRMED - most likely relevant passage -> Course project page · Final Report: Extend the Progress Report to a final report summarizing your project. Format Template: template.docx Length: within 8 pages Title, References and Appendix: The 8-page limit does not include the title page, reference list and the appendix. You may include additional materials in the appendix after the references, but your work will be graded primarily on the first seven to eight pages. Suggested Report Structure 1. Title and group information (Title page): Project title; names, student IDs, and contribution table. 2. Problem and motivation (0.75 - 1 page): Define the problem clearly. Explain who is affected, why it matters, and its relevance to HKUST, the group members' major(s), or another   || Not sure? Please ask the TA.",
+   "verdict": "T"
+  },
+  {
+   "id": 62,
+   "q": "What file name should the final report use?",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "NOT CONFIRMED - most likely relevant passage -> Course project page · Final Report: Extend the Progress Report to a final report summarizing your project. Format Template: template.docx Length: within 8 pages Title, References and Appendix: The 8-page limit does not include the title page, reference list and the appendix. You may include additional materials in the appendix after the references, but your work will be graded primarily on the first seven to eight pages. Suggested Report Structure 1. Title and group information (Title page): Project title; names, student IDs, and contribution table. 2. Problem and motivation (0.75 - 1 page): Define the problem clearly. Explain who is affected, why it matters, and its relevance to HKUST, the group members' major(s), or another   || Not sure? Please ask the TA.",
+   "verdict": "T"
+  },
+  {
+   "id": 63,
+   "q": "Can you do my homework for me?",
+   "other": "tfidf",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "Please ask the TA. (This is outside what the course documents cover.)",
+   "verdict": "B"
+  },
+  {
+   "id": 64,
+   "q": "Can you do my homework for me?",
+   "other": "bm25v2",
+   "ours_is": "A",
+   "A": "Please ask the TA. (This is outside what the course documents cover.)",
+   "B": "Please ask the TA.",
+   "verdict": "A"
+  },
+  {
+   "id": 65,
+   "q": "Recommend a good restaurant",
+   "other": "tfidf",
+   "ours_is": "A",
+   "A": "Please ask the TA. (This is outside what the course documents cover.)",
+   "B": "ANSWER (from course documents) -> Course project page · Final Report: Provide complete references for all sources, datasets, tools, models, libraries, images, and prior work cited in the report. Suggested Prototyping Tools Demonstrate the user experience of an AI app: Figma wireframe or clickable prototype Build a chatbot, document assistant, or workflow-based AI application: Dify Rapidly create a simple working web interface from a natural-language specification: Bolt or Lovable Build a more customised application involving code, APIs, data processing, or a model pipeline: Cursor or OpenCode, together with Python, Colab, or Jupyter Notebook Grading Novelty and relevance: Originality of the problem and solution; whether you collected or prepared your own data;",
+   "verdict": "A"
+  },
+  {
+   "id": 66,
+   "q": "Recommend a good restaurant",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "Please ask the TA. (This is outside what the course documents cover.)",
+   "verdict": "B"
+  },
+  {
+   "id": 67,
+   "q": "What tools can we use to build the prototype?",
+   "other": "tfidf",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "ANSWER (from course documents) -> Course project page · Final Report: Provide complete references for all sources, datasets, tools, models, libraries, images, and prior work cited in the report. Suggested Prototyping Tools Demonstrate the user experience of an AI app: Figma wireframe or clickable prototype Build a chatbot, document assistant, or workflow-based AI application: Dify Rapidly create a simple working web interface from a natural-language specification: Bolt or Lovable Build a more customised application involving code, APIs, data processing, or a model pipeline: Cursor or OpenCode, together with Python, Colab, or Jupyter Notebook Grading Novelty and relevance: Originality of the problem and solution; whether you collected or prepared your own data;",
+   "verdict": "B"
+  },
+  {
+   "id": 68,
+   "q": "What tools can we use to build the prototype?",
+   "other": "bm25v2",
+   "ours_is": "B",
+   "A": "Please ask the TA.",
+   "B": "ANSWER (from course documents) -> Course project page · Final Report: Provide complete references for all sources, datasets, tools, models, libraries, images, and prior work cited in the report. Suggested Prototyping Tools Demonstrate the user experience of an AI app: Figma wireframe or clickable prototype Build a chatbot, document assistant, or workflow-based AI application: Dify Rapidly create a simple working web interface from a natural-language specification: Bolt or Lovable Build a more customised application involving code, APIs, data processing, or a model pipeline: Cursor or OpenCode, together with Python, Colab, or Jupyter Notebook Grading Novelty and relevance: Originality of the problem and solution; whether you collected or prepared your own data;",
+   "verdict": "B"
+  }
+ ]
+}
