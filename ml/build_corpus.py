@@ -7,6 +7,7 @@ Each chunk: id, text, source (human-readable label), section, n_words.
   A section of <= 200 words stays one chunk, so short sections (e.g. Important Dates) are below 100 words.
 - Canvas assignments: one chunk per item; due_at converted from UTC to HKT (UTC+8).
 - Canvas front page: one chunk.
+- Syllabus (coursework page, from COMP1945_Course_Data.csv): one chunk per category.
 """
 import json
 import math
@@ -78,6 +79,11 @@ def main():
     front = (RAW / "canvas_front_page.txt").read_text(encoding="utf-8").split()
     chunks.append({"id": "canvas:front-page", "text": " ".join(front), "source": "Canvas front page",
                    "section": "Canvas front page", "n_words": len(front)})
+    for sec in json.loads((RAW / "syllabus_coursework.json").read_text(encoding="utf-8")):
+        text = " ".join(sec["lines"])
+        chunks.append({"id": f"syllabus:{sec['category']}", "text": text,
+                       "source": f"Syllabus (coursework page) · {sec['category']}", "section": "Syllabus",
+                       "n_words": len(text.split())})
     ids = [c["id"] for c in chunks]
     assert len(ids) == len(set(ids)), "duplicate chunk ids"
     with OUT.open("w", encoding="utf-8") as f:

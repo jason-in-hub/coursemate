@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>
+ CS 15-122: Principles of Imperative Computation (Fall 2024)
+</title>
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+<script type="text/javascript" src="inc/lib/jquery.min.js"></script>
+<script type="text/javascript" src="inc/lib/tipsy/js/jquery.tipsy.js"></script>
+<link rel="stylesheet" type="text/css" href="inc/lib/tipsy/css/tipsy.css" />
+<script type="text/javascript" src="inc/lib/jQuery.bubbletip-1.0.6.js"></script>
+<link type="text/css" href="inc/lib/bubbletip/bubbletip.css" rel="stylesheet" />
+
+<!-- Course -->
+<script type="text/javascript" src="inc/scripts/toggler.js"></script>
+<link rel="stylesheet" type="text/css" href="inc/css/course.css" />
+
+<!-- Email -->
+<script type="text/javascript" src="inc/scripts/email.js"></script>
+
+<!-- Calendar -->
+<script type="text/javascript" src="inc/scripts/dateutil.js"></script>
+<link rel="stylesheet" type="text/css" href="inc/css/calendar.css" />
+<script type="text/javascript" src="inc/scripts/calendar.js"></script>
+<script type="text/javascript" src="inc/scripts/staff.js"></script>
+<link rel="stylesheet" type="text/css" href="inc/css/staff.css" />
+<script type="text/javascript">
+  // Default subject of all emails
+  setEmailSubject("15-122");
+  var autolab    = "https://autolab.andrew.cmu.edu/courses/15122-f24";
+  var qatoolname = "Ed";
+  var qatool     = "https://edstem.org/us/courses/61754/discussion/";
+  //  var qatoolname = "Piazza";
+  //  var qatool     = "https://piazza.com/cmu/spring2022/15122";
+  //  var qatoolname = "Diderot";
+  //  var qatool     = "https://www.diderot.one/courses/157";
+  var gradescope = "https://www.gradescope.com/courses/778982";
+  var logistics  = "https://enr-apps.as.cmu.edu/open/SOC/SOCServlet/courseDetails?COURSE=15122&SEMESTER=F24";
+  var grades     = "https://pic.cs.cmu.edu/f24/grades/login/index.php";
+// TODO
+  var checkinURL = "https://NOT_YET_AVAILABLE/index.php?checkmein=true";
+  var queueURL = "https://q.15122.tk/";
+
+  var C = new Course(2024, 08,26,12,06); // Begin-end of teaching semester
+
+  // values in {weekend, noclass, lecture, lab, recitation, precept}
+  C.setWeek(weekend, weekend, noclass, lecture, noclass, lecture, precept);
+  C.setFinals(2024, 12,09,12,16);   // setFinals(y, bm,bd, em,ed)
+  C.setBreak(2024, 10,14, 10,18);   // setBreak(y, bm,bd, em,ed)
+  C.addHoliday(2024,09,02);         // Labor Day/Martin Luther King Day
+//C.addHoliday(2024,10,28);         // Mid semester
+  C.addHoliday(2024,11,27);         // Thanksgiving/Carnival
+  C.addHoliday(2024,11,28);         // Thanksgiving/Carnival
+  C.addHoliday(2024,11,29);         // Thanksgiving/Carnival
+
+// addExam(type, year,month,day, percent,learning,corrected)
+//addExam(mt, 2024,02,22, '10%', '1-8', +4);
+//addExam(mt, 2024,04,02, '15%', '1-8', +4);
+
+  C.newExam('CH', 'Check-Ins', 'proctored-activity', 'varies', 1);
+
+  // addExam(type, year,month,day, percent,learning,corrected,focus)
+  C.addExam('CH', 2024,09,03, '3%', '1-3',        +2, 'Lec.0-1');   // 1
+  C.addExam('CH', 2024,09,10, '3%', '1,2,4,12',   +2, 'Lec.1-2');   // 2
+  C.addExam('CH', 2024,09,17, '3%', '1-4,21,27',  +2, 'Lec.3-4');   // 3
+  C.addExam('CH', 2024,09,24, '3%', '6-10,15-17', +2, 'Lec.5-6');   // 4
+  C.addExam('CH', 2024,10,01, '3%', '6-8,12,17',  +2, 'Lec.7-8');   // 5
+  C.addExam('CH', 2024,10,08, '3%', '9,17,24,27', +2, 'Lec.9-10');  // 6
+  C.addExam('CH', 2024,10,22, '3%', '12,24,27',   +2, 'Lec.11-12'); // 7
+  C.addExam('CH', 2024,10,29, '3%', '9,10,25-27', +2, 'Lec.13-14'); // 8
+  C.addExam('CH', 2024,11,05, '3%', '2,13,25,27', +2, 'Lec.15-16'); // 9
+  C.addExam('CH', 2024,11,12, '3%', '18-20',      +2, 'Lec.17-18'); // 10
+  C.addExam('CH', 2024,11,19, '3%', '19,20',      +2, 'Lec.19-20'); // 11
+  C.addExam('CH', 2024,11,26, '3%', '5,20,27',    +6, 'Lec.21-22'); // 12
+  C.addExam('CH', 2024,12,03, '--', '5,20,27',    +2, 'Lec.0-24');  // 13
+
+  C.setFinal(2024,12,09,              // setFinal(year,month,day,
+             '1-4pm', null,           //          time,room,
+             '25%', '1-27', +7);      //          percent,learning,corrected)
+
+
+  // Obsolete
+  // setFinal(year,month,day, time,room, percent,learning,corrected)
+  //setFinal(2024,12,31, 'TBA', null, '25%', '1-27', +7);
+
+  var upl = gradescope;
+  C.newHw('PP', 'Practice Problems', 'practice-problem',
+          '6pm', '<a href="'+gradescope+'">Gradescope</a>', 0);
+  C.addHw('PP', 2024,08,29, '0%',   '1-3,11',     -7,+1, upl, 'Lec.0');    // 0
+  C.addHw('PP', 2024,09,05, '0.5%', '1-3',        -7,+1, upl, 'Lec.1-2');  // 1
+  C.addHw('PP', 2024,09,12, '0.5%', '1,2,4,12',   -7,+1, upl, 'Lec.3-4');  // 2
+  C.addHw('PP', 2024,09,19, '0.5%', '1-4,21,27',  -7,+1, upl, 'Lec.5-6');  // 3
+  C.addHw('PP', 2024,09,26, '0.5%', '6-10,15-17', -7,+1, upl, 'Lec.7-8');  // 4
+  C.addHw('PP', 2024,10,03, '0.5%', '6-8,12,17',  -7,+1, upl, 'Lec.9-10'); // 5
+  C.addHw('PP', 2024,10,10, '0.5%', '9,17,24,27', -7,+1, upl, 'Lec.11-12');// 6
+  C.addHw('PP', 2024,10,24, '0.5%', '12,24,27',  -14,+1, upl, 'Lec.13-14');// 7
+  C.addHw('PP', 2024,10,31, '0.5%', '9,10,25-27', -7,+1, upl, 'Lec.15-16');// 8
+  C.addHw('PP', 2024,11,07, '0.5%', '2,13,25,27', -7,+1, upl, 'Lec.17-18');// 9
+  C.addHw('PP', 2024,11,14, '0.5%', '18-20',      -7,+1, upl, 'Lec.19-20');// 10
+  C.addHw('PP', 2024,11,21, '0.5%', '19,20',      -7,+1, upl, 'Lec.21-22');// 11
+  C.addHw('PP', 2024,12,02, '0.5%', '5,20,27',   -11,+1, upl, 'Lec.23-24');// 12
+
+  var upl = autolab;
+  C.newHw('PG', 'Programming Homework', 'prog',
+          '9pm', '<a href="'+autolab+'">Autolab</a>', 1);
+  C.addHw('PG', 2024,09,08, '2.5%', '1,12',     -7,+2, upl, 'C0');      // 1
+  C.addHw('PG', 2024,09,15, '2.5%', '12,15,16', -7,+2, upl, 'ints');    // 2
+  C.addHw('PG', 2024,09,22, '2.5%', '1,12-16',  -7,+2, upl, 'arrays');  // 3
+  C.addHw('PG', 2024,09,29, '2.5%', '1,18,17',  -7,+2, upl, 'sorting'); // 4
+  C.addHw('PG', 2024,10,06, '2.5%', '5,12,27',  -7,+2, upl, 'stacks');  // 5
+  C.addHw('PG', 2024,10,20, '1.6%', '10',      -14,+2, upl, 'lists');   // 6
+//C.addHw('PG', 2024,03,14, '2.5%', '10',      -14,+2, upl, 'lists');   // 6
+  C.addHw('PG', 2024,10,27, '3.4%', '1,12-18', -21,+2, upl, 'lists');   // 7
+//C.addHw('PG', 2024,11,01, '2.5%', '1,12-18',  -7,+2, upl, 'hashing'); // 7
+  C.addHw('PG', 2024,11,03, '2.5%', '8,10-18',  -7,+2, upl, 'trees');   // 8
+  C.addHw('PG', 2024,11,10, '2.5%', '9,12-18',  -7,+5, upl, 'C');       // 9
+  C.addHw('PG', 2024,11,17, '2.5%', '10,15-20', -7,+2, upl, 'C');       // 10
+  C.addHw('PG', 2024,11,24, '2.5%', '5,15-20',  -7,+2, upl, 'c0vm');    // 11
+  C.addHw('PG', 2024,12,05, '2.5%', '5,15-20', -18,+2, upl, 'c0vm');    // 12
+
+  addInstructor("Iliano Cervesato", MEA("iliano", "cmu", "edu"),
+                "iliano.png", "https://cs.cmu.edu/~iliano",
+                [officeHours("T", "13:30", 60, "GHC 6007", null),
+                 officeHours("R", "13:30", 60, "GHC 6007", null),
+                 /*
+                 specialOfficeHours("RT 12:10-12:40 (GHC 6 commons)<br>"+
+                                    "<span class='ohcomment'>Lunch OH</span>"),
+                 */
+                 specialOfficeHours("By appointment at other times")]);
+
+  addInstructor("Anne Kohlbrenner", MEA("akohlbre", "andrew", "cmu", "edu"),
+                "akohlbre.png", "https://cs.cmu.edu/~akohlbre/",
+                [officeHours("M", "13:30", 60, "GHC 4111", null),
+                 officeHours("F", "12:30", 60, "GHC 4111", null),
+                 specialOfficeHours("By appointment at other times")]);
+
+  addOHonly([/*officeHours("M", "12:00", 30, "GHC 6 commons", "Lunch OH"),*/
+             officeHours("T", "12:00", 30, "GHC 6 commons", "Lunch OH"),
+             /*officeHours("W", "12:00", 30, "GHC 6 commons", "Lunch OH"),*/
+             officeHours("R", "12:00", 30, "GHC 6 commons", "Lunch OH") /*,
+             officeHours("F", "12:00", 30, "GHC 6 commons", "Lunch OH") */]);
+  addOHonly([officeHours("T", "6:00pm", 60, "GHC 4211", null),
+             officeHours("T", "7:00pm", 60, "GHC 4211", null)]);
+/*
+  addInstructor("Dilsun Kaynar", MEA("dilsun", "cs", "cmu", "edu"),
+                "dilsun.jpg", "https://cs.cmu.edu/~dilsun",
+                [officeHours("M", "13:00", 90, "GHC 6009", null),
+                 officeHours("T", "13:00", 90, "GHC 6009", null),
+                 specialOfficeHours("By appointment at other times")]);
+*/
+
+  addStaff('mascot', "Honk ! ", "honk@andrew.cmu.edu",
+           ['honk/bfly.jpg',  'honk/love.jpg',    'honk/irish.jpg',
+            'honk/berry.jpg', 'honk/pumpkin.jpg', 'honk/pilgrim.jpg',
+            'honk/shore.jpg', 'honk/piada.jpg',   'honk/thanksgiving.jpg',
+            'honk/clown.jpg', 'honk/umpire.jpg',  'honk/frankenstein.jpg',
+            'honk/drink.jpg', 'honk/inclass.jpg', 'honk/karaoke.jpg',
+            'honk/diva.jpg',  'honk/takeoff.jpg', 'honk/fence.jpg',
+                                                  'honk/valentine.png',
+                                                  'honk/rockstar.jpg'
+           ],
+           "https://www.instagram.com/honk15122/",
+           null, []);
+
+  addStaff('mascotbuddy', "Chonk", null,
+           "chonk.png",
+           "https://www.instagram.com/chonk122/",
+           null, []);
+
+  addAA("Oliver Moss", MEA("omoss", "andrew", "cmu", "edu"),
+        "omoss.png", null, "GHC 6006");
+
+  function aMEA(id) { return MEA(id, "andrew", "cmu", "edu"); }
+/*addTA("Example TA", MEA("ta", "cs", "cmu", "edu"),
+                "ta.png", "https://www.cs.cmu.edu/~15122ta/",
+                [officeHours("F", "7:00pm", 60, "GHC 4307", null),
+                 officeHours("S", "1:30pm", 60, "GHC ta5", "Conceptual OH"),
+                 specialOfficeHours("TBA")]);
+*/
+
+addTA("Atto Allas",         aMEA("aallas"),   "aallas.jpg",    null, []);
+addTA("Arin Bhandari",      aMEA("arinb"),    "arinb.png",     null, []);
+addTA("Samriddhi Bhardwaj", aMEA("samriddb"), "samriddb.png",  null, []);
+addTA("Krish Suraparaju",   aMEA("csurapar"), "csurapar.png", "https://csuraparaju.github.io/", []);
+addTA("Elyssa Chandler",    aMEA("elyssac"),  "elyssac.png",  null,  []);
+addTA("Rohaib Cheema",      aMEA("rcheema"),  "rcheema.png",  null,  []);
+addTA("Alex Cheng",         aMEA("abcheng"),  "abcheng.png",  null, []);
+addTA("Liz Chu",            aMEA("echu2"),    "echu2.png",    null, []);
+addTA("Diya Dinesh",        aMEA("ddinesh"),  "ddinesh.png",  null, []);
+addTA("Sophia Fang",        aMEA("spfang"),   "spfang.png",   null, []);
+addTA("David Freifeld",     aMEA("dfreifel"), "dfreifel.png", "http://quantumi.sh",  []);
+addTA("Mehul Goel",         aMEA("mehulg"),   "mehulg.png",   "mehulgoel.com", []);
+addTA("Ethan Gu",           aMEA("ethang"),   "ethang.png",   null, []);
+addTA("Arth Gupta",         aMEA("arthg"),    "arthg.png",    null, []);
+addTA("Diane He",           aMEA("xieh"),     "xieh.png",     "https://www.linkedin.com/in/diane-xiehe-34313a250/",  []);
+addTA("Ashley Hu",          aMEA("ahu3"),     "ahu3.png",     null, []);
+addTA("Vincent Huai",       aMEA("vhuai"),    "vhuai.png",    null, []);
+addTA("Mihir Khare",        aMEA("mihirk"),   "mihirk.jpg",   null, []);
+addTA("Preeya Kirani",      aMEA("pkirani"),  "pkirani.png",  null,  []);
+addTA("Aadi Kuchlous",      aMEA("akuchlou"), "akuchlou.png", null,  []);
+addTA("Owen Lalis",         aMEA("olalis"),   "olalis.png",   "https://github.com/ow3nl",  []);
+addTA("Rachel Lewis",       aMEA("rlewis2"),  "rlewis2.png",  null,  []);
+addTA("Amanda Li",          aMEA("xal"),      "xal.jpg",      null, []);
+addTA("Jessica Li",         aMEA("jgli"),     "jgli.png",     "https://jessica.li", []);
+addTA("Audi Lin",           aMEA("audil"),    "audil.png",    null,  []);
+addTA("Derek Lu",           aMEA("dereklu"),  "dereklu.png",  null, []);
+addTA("Josef Macera",       aMEA("jmacera"),  "jmacera.png",  "https://soggypancakes.tech",  []);
+addTA("Daniel Mai",         aMEA("dmai"),     "dmai.png",     null,  []);
+addTA("Muskan Mankikar",    aMEA("muskanm"),  "muskanm.png",  null,  []);
+addTA("Robbie Mones",       aMEA("rmones"),   "rmones.jpg",   null, []);
+addTA("Josh Nichols",       aMEA("joshuani"), "joshuani.png", null,  []);
+addTA("Hyojae Park",        aMEA("hyojaep"),  "hyojaep.png",  null, []);
+addTA("Andrew Peng",        aMEA("apeng2"),   "apeng2.png",   null, []);
+addTA("Kavya Ramesh",       aMEA("kramesh"),  "kramesh.png",  null, []);
+addTA("Jackson Romero",     aMEA("jtromero"), "jtromero.jpg", null,  []);
+addTA("Sheng Shu",          aMEA("shengshu"), "shengshu.png", null, []);
+addTA("Samanvita Singhania",aMEA("samanvis"), "samanvis.png", null,  []);
+/*addTA("Shreya Sreekantham", aMEA("ssreekan"), "ssreekan.png", null,  []);*/
+addTA("Panpan Tochirakul",  aMEA("itochira"), "itochira.png", null, []);
+addTA("Jessica Wang",       aMEA("jessica8"), "jessica8.png", null, []);
+addTA("Kevin Wang",         aMEA("kjw2"),     "kjw2.png",     null, []);
+addTA("Samantha Wong",      aMEA("swong3"),   "swong3.png",   null,  []);
+addTA("Karen Wu",           aMEA("karenw2"),  "karenw2.png",  null, []);
+addTA("Oliver Yun",         aMEA("oyun"),     "oyun.png",     null,  []);
+addTA("Alyssa Zhu",         aMEA("alyssaz"),  "alyssaz.png",  null,  []);
+
+  go(C);                          // runs initialization scripts
+
+  var author = staff[0].email;
+
+  $(document).ready(function () {
+     $("[rel='tipsy']").tipsy({gravity:'n', delayIn: 350, delayOut: 100, fade: true});
+     $('a.qatoolname').text(qatoolname);
+     $('a.qatool').attr("href", qatool);
+     $('a.gradescope').text("Gradescope");
+     $('a.gradescope').attr("href", gradescope);
+     $('a.autolab').text("Autolab");
+     $('a.autolab').attr("href", autolab);
+     $('a.grades').attr("href", grades);
+     $('a.logistics').attr("href", logistics);
+     $('#authorEmail').html(eMail(author));
+     $('.contactInstr').html(function (idx, oldtxt) {
+                               return hMail(oldtxt, emailByRole ("instructor"));
+                            });
+     $('#email_addr').attr("value", mAddrs(emailByRole("instructor")));
+     $('#classCalendar').html(buildCalendar(C));
+     $('#courseworkCalendar').html(buildWorkCalendarByKind(C.hws['PP'])
+                                 + buildWorkCalendarByKind(C.hws['PG'])
+                                 + buildWorkCalendarByKind(C.exams['CH'])
+                                 + C.final.display());
+
+     peopleFaces();
+  });
+</script>
+</head>
+
+
+<body>
+<div class="top">
+
+<table class="title">
+<tr>
+ <td class="logo">
+   <a href="https://www.cmu.edu">
+    <img class="logo" style="height:51px; padding-right: 0; border: 2px solid white;" src="inc/img/cmu-logo.png">
+   </a>
+ </td>
+ <td class="courseName">
+   CS 15-122: Principles of Imperative Computation
+  <br>(Fall 2024)
+ </td>
+ <td class="logo">
+   <a href="https://www.cs.cmu.edu">
+    <img class="logo" src="inc/img/scs-logo.gif">
+   </a>
+ </td>
+</tr>
+</table>
+
+<ul class="menu">
+<li class="menu"><a class="menu" href="home.shtml">Home</a></li>
+<li class="menu"><a class="menu" href="about.shtml"
+    rel="tipsy" title="Objectives, resources and policies">About</a></li>
+<li class="menu"><a class="menu" href="staff.shtml"
+    rel="tipsy" title="Instructors and TAs">Staff</a></li>
+<li class="menu"><a class="menu" href="schedule.shtml"
+    rel="tipsy" title="Lectures and precepts">Schedule</a></li>
+<li class="menu"><a class="menu" href="handouts.shtml"
+    rel="tipsy" title="This contains course material and assignments">Handouts</a></li>
+
+<li class="menu"><a class="menu qatool qatoolname" target="_blank" href=""
+    rel="tipsy" title="This is our discussion board"></a></li>
+<li class="menu"><a class="menu gradescope" target="_blank" href=""
+    rel="tipsy" title="This is where you submit your written assignments"></a></li>
+<li class="menu"><a class="menu autolab" target="_blank" href=""
+    rel="tipsy" title="This is where you submit your programming assignments"></a></li>
+<!--li class="menu"><a class="menu" href="quiz.shtml"
+    rel="tipsy" title="Today's quiz (if any)">Quiz</a></li-->
+<li class="menu"><a class="menu" target="_blank" href="activities.shtml"
+    rel="tipsy" title="Today's in-class activity">Activities</a></li>
+<li class="menu"><a class="menu grades" target="_blank" href=""
+    rel="tipsy" title="This where you can see your grades (and more)">Grades</a></li>
+</ul>
+</div>
+<br>
+
+<h1>About this course
+<span class="shortcut">
+&nbsp;[&nbsp; <a href="#DESCRIPTION">Description</a>
+&nbsp;|&nbsp; <a href="#FEEDBACK">How to Do Well</a>
+&nbsp;|&nbsp; <a href="#RESOURCES">Resources</a>
+&nbsp;|&nbsp; <a href="#GRADING">Grading</a>
+&nbsp;|&nbsp; <a href="#AIP">Academic Integrity</a>
+&nbsp;|&nbsp; <a href="#POLICIES">Policies</a>
+&nbsp;|&nbsp; <a href="#HELP">Help</a>
+&nbsp;|&nbsp; <a href="#LO">Learning Objectives</a>
+&nbsp;]
+</span></h1>
+
+
+<div class="toggler-on">
+<h2 id="DESCRIPTION" class="toggle-base"><span class="toggle-label">Description</span></h2>
+
+<div class="toggle-me">
+This course teaches imperative programming in a C-like language and
+methods for ensuring the correctness of imperative programs. It is
+intended for students who are familiar with elementary programming
+concepts such as variables, expressions, loops, arrays, and
+functions. Given these building blocks, students will learn the
+process and techniques needed to go from high-level descriptions of
+algorithms to correct imperative implementations, with specific
+applications to basic data structures and algorithms. Much of the
+course will be conducted in a subset of C amenable to verification,
+with a transition to full C near the end.
+
+This will be accomplished along three dimensions:
+<ul>
+<li>
+  The main skill you will get out of this course is the ability to
+  write code that is correct by design and accounts for the needs of
+  its application context.  You will learn about deliberate
+  programming as a way to write high quality code, about assessing the
+  performance of a program, and about comparing solutions to satisfy
+  deployment constraints.
+</li>
+<li>
+  As you do so, you will gain exposure to fundamental concepts in
+  Computer Science &mdash; as opposed to programming &mdash; such as
+  abstraction, correctness, complexity, and modularity.  This will
+  also give you a vocabulary to communicate effectively and precisely
+  with other computer scientists.
+</li>
+<li>
+  Our vehicle for achieving these objectives will initially be C0, a
+  safe variant of C, and later C itself.  Using them, you will gain
+  exposure to a number of data structures and algorithms that are used
+  pervasively in computer science.  C is the language of choice for
+  system-level applications, and both are representative of the popular
+  imperative programming paradigm.
+</li>
+</ul>
+After completing 15-122, you will be able to
+take <a href="https://www.cs.cmu.edu/~213/">15-213</a>
+(<em>Introduction to Computer
+  Systems</em>), <a href="http://www.cs.cmu.edu/~15210/">15-210</a>
+(<em>Parallel and Sequential Data Structures and Algorithms</em>)
+and <a href="http://www.cs.cmu.edu/~charlie/courses/15-214/2016-spring/">15-214</a>
+(<em>Principles of Software System Construction</em>).  Other
+prerequisites or restrictions may apply.
+
+
+<h3>Prerequisites</h3>
+
+You must have gotten a 5 on
+the <a href="https://apstudent.collegeboard.org/apcourse/ap-computer-science-a">AP
+  Computer Science A exam</a> or
+passed <a href="http://www.cs.cmu.edu/~112/">15-112</a>
+(<em>Fundamentals of Programming</em>) or equivalent.  You may also
+get permission from an advisor if you performed very high on the CS
+Assessment on Canvas.
+<!--In rare cases, you may receive special permission by the instructors.-->
+
+<br style="margin-bottom:0.5ex">
+It is <b>strongly</b> advised that you either have taken or take at
+the same time
+either <a href="https://www.andrew.cmu.edu/course/21-127/">21-127</a>
+(<em>Concepts of Mathematics</em>)
+or <a href="http://www.contrib.andrew.cmu.edu/~akwon/teaching/15-151-f16.html">15-151</a>
+(<em>Mathematical Foundations of Computer Science</em>): historically,
+students who did not do so ended up learning less, spending
+considerably more time on the course and earning one letter grade
+lower than their peers who did, on average.
+
+
+<h3>Past Offerings</h3>
+
+<table class="offerings" style="margin: auto; " border="1">
+  <tr><th style="background-color: initial;"></th>
+    <!--th>2024</th-->
+    <th>2024</th>
+    <th>'23</th>
+    <th>'22</th>
+    <th>'21</th>
+    <th>'20</th>
+    <th>'19</th>
+    <th>'18</th>
+    <th>'17</th>
+    <th>'16</th>
+    <th>'15</th>
+    <th>'14</th>
+    <th>'13</th>
+    <th>'12</th>
+    <th>'11</th>
+    <th>'10</th>
+  </tr>
+  <tr><th style="text-align:right">Fall</th>
+    <!--td style="background-color: initial;"></td-->
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/f24/">F24</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/f23/">F23</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/f22/">F22</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/f21/">F21</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/f20/">F20</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/f19/">F19</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/f18/">F18</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/f17/">F17</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/f16/">F16</a></td>
+    <td><a href="http://www.cs.cmu.edu/~fp/courses/15122-f15/">F15</a></td>
+    <td><a href="http://www.cs.cmu.edu/~rjsimmon/15122-f14">F14</a></td>
+    <td>F13</td>
+    <td><a href="http://www.cs.cmu.edu/~fp/courses/15122-f12/">F12</a></td>
+    <td>F11</td>
+    <td><a href="http://www.cs.cmu.edu/~fp/courses/15122-f10/">F10</a></td>
+  </tr>
+  <tr><th style="text-align:right">Summer</th>
+    <!--td style="background-color: initial;"></td-->
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/n24/">N24</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/n23/">N23</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/m22/">M22</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/n21/">N21</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/n20/">N20</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/n19/">N19</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/n18/">N18</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/n17/">N17</a></td>
+    <td><a href="http://www.cs.cmu.edu/afs/cs/academic/class/15122-n16/www/">N16</a></td>
+    <td><a href="http://www.cs.cmu.edu/~rjsimmon/15122-m15">M15</a></td>
+    <td><a href="http://www.cs.cmu.edu/~rjsimmon/15122-m14">M14</a></td>
+    <td>M13</td>
+    <td><a href="http://www.cs.cmu.edu/~jamiemmt/teaching/su-122/">M12</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/s11/">S11</a></td>
+    <td style="background-color: initial;"></td>
+  </tr>
+  <tr><th style="text-align:right">Spring</th>
+    <!--td style="background-color: initial;"></td-->
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/s24/">S24</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/s23/">S23</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/s22/">S22</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/s21/">S21</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/s20/">S20</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/s19/">S19</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/s18/">S18</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/s17/">S17</a></td>
+    <td><a href="http://www.cs.cmu.edu/~rjsimmon/15122-s16">S16</a></td>
+    <td><a href="http://www.cs.cmu.edu/~rjsimmon/15122-s15">S15</a></td>
+    <td><a href="http://symbolaris.com/course/pic14.html">S14</a></td>
+    <td><a href="http://symbolaris.com/course/pic13.html">S13</a></td>
+    <td><a href="http://www.andrew.cmu.edu/course/15-122/">S12</a></td>
+    <td><a href="http://www.cs.cmu.edu/~15122-archive/s11/">S11</a></td>
+    <td style="background-color: initial;"></td>
+  </tr>
+</table>
+
+</div>
+
+
+<h2 id="FEEDBACK" class="toggle-base"><span class="toggle-label">How to do Well in this Course</span></h2>
+
+<div class="toggle-me">
+Our goals are for you to succeed in this course and to teach you
+skills and concepts that will contribute to your success in life.  To
+this end, we are providing you with lots of resources and the
+knowledge that comes from years of experience.  Talking to some of the
+thousands of students who took this course before you, here's some
+advice that they found particularly useful:
+<ul>
+<li>
+  <em>Do not stress over grades</em>: your goal is to learn new and
+  exciting things.  Good grades follow naturally from deep learning
+  (but not necessarily vice versa).  ...and employers care about what
+  you know not what grade you got.
+</li>
+<li>
+  <em>Participate</em>: you will get a lot more from this class if you
+  ask questions and engage with the course staff than if you are a fly
+  on the wall &mdash; and it will be more fun.
+</li>
+<li>
+  <em>Manage your time wisely</em>: allocate sufficient time for
+  homework and learning.  Little adjustments can save you a whole lot
+  of time later and have a huge impact on your performance.  In
+  particular, use class time to learn, review the material presented
+  in lecture the same day, and schedule time for homework
+  proactively.
+</li>
+<li>
+  <em>Start homework early</em>: racing against a deadline is so
+  stressful!  Starting early will remove that stress, lead to deeper
+  learning and give you time to improve your solution if you feel like
+  it.
+</li>
+<li>
+  <em>Get all the help you need</em>: we provide plenty of resources
+  to help you succeed in this course
+  &mdash; <a href="home.shtml#OH">office hours every
+  day</a>, <a class="qatool" href="">online help</a> 24-7,
+  and <a href="staff.shtml">friendly staff</a> when you need them.
+  Take advantage of them: they are there for you!  The only thing we
+  ask is that you plan a bit ahead: helping students takes time and
+  there are not enough of us if everybody waits up to the deadline.
+</li>
+<li>
+  <em>Make time for fun</em>: take a break from studying at least once
+  a day &mdash; meet with friends, go for a walk, play sports,
+  whatever gets you to reset your mind.
+</li>
+</ul>
+
+
+<h3>Feedback</h3>
+
+It is our goal to make this course successful, stimulating and
+enjoyable.  If at any time you feel that the course is not meeting
+your expectations or you want to provide feedback on how the course is
+progressing for you, please <span class="contactInstr">contact
+  us</span>.  If we are not aware about a problem, we won't know to
+fix it.  If you would like to provide anonymous comments, please
+use <a href="home.shtml">the feedback form on the course home page</a>
+or slide a note under our doors.
+</div>
+
+
+<h2 id="RESOURCES" class="toggle-base"><span class="toggle-label">Resources</span></h2>
+
+<div class="toggle-me">
+<h3>Course Material</h3>
+
+There is no textbook for this course.  Lecture notes and other
+resources are provided through
+the <a href="schedule.shtml">Schedule</a> tab of this page and
+on <a class="qatool qatoolname" href=""></a>.  We do not require
+students to read lecture notes before lecture, but those who are
+interested in reading ahead can certainly do so.
+
+<h3>The C0 Language</h3>
+
+In the first nine weeks, the course
+uses <a href="https://bitbucket.org/c0-lang/docs/wiki/">C0</a>, a safe subset of C
+augmented with contracts.  This language has been specifically
+designed to support the <a href="#LO">learning objectives in this
+course</a>.  It provides garbage collection (freeing students from
+dealing with low-level details of explicit memory management), fixed
+range modular integer arithmetic (avoiding the complexities of floating
+point arithmetic and multiple data sizes), an unambiguous language
+definition (guarding against undefined behavior), and contracts
+(making code expectations explicit and localizing reasoning).
+
+<table style="width: 100%;">
+<tr style="vertical-align: top;"><td style="width: 30%;">
+<ul>
+<li><a href="https://bitbucket.org/c0-lang/docs/wiki/Tutorial/" target="_blank"
+       rel="tipsy" title="An overview of the syntax of C0">C0 Tutorial</a></li>
+<li><a href="https://c0.cs.cmu.edu/docs/c0-libraries.pdf" target="_blank"
+       rel="tipsy" title="A description of all the C0 library
+       functions &mdash; very very useful">C0 Library Reference</a></li>
+<li><a href="https://c0.cs.cmu.edu/docs/c0-reference.pdf" target="_blank"
+       rel="tipsy" title="The complete C0 reference &mdash; most
+       people don't need this">C0 Language Reference</a></li>
+<li><a href="https://bitbucket.org/c0-lang/docs/wiki/Debugging_C0_Programs/" target="_blank"
+       rel="tipsy" title="Some notes about debugging &mdash; start
+       with the guides to success however">Debugging C0 Programs</a></li>
+<li><a href="handouts/misc/unit_testing_notes.pdf" target="_blank"
+       rel="tipsy" title="Some notes about testing">Testing programs</a></li>
+</ul>
+</td><td>
+<ul>
+<li><a href="https://bitbucket.org/c0-lang/docs/wiki/" target="_blank"
+       rel="tipsy" title="How to use C0 on CMU computers">C0 at CMU</a></li>
+<li><a href="https://bitbucket.org/c0-lang/docs/wiki/Downloads/" target="_blank"
+       rel="tipsy" title="Most people run C0 on CMU computers">C0 on your own laptop</a></li>
+<li><a href="https://cs122.andrew.cmu.edu/visualc0/" target="_blank"
+       rel="tipsy" title="A web-based C0 debugger with memory
+       visualization">VisualC0</a></li>
+</ul>
+</td></tr>
+</table>
+
+
+<h3>The C Language</h3>
+
+In the last five weeks, the course transitions to C in preparation for
+subsequent systems courses. Emphasis is on transferring positive
+habits developed with the use of C0, and on practical advice for
+avoiding the pitfalls and understanding the idiosyncrasies of C. We
+use the <a href="http://valgrind.org/"><code>valgrind</code></a> tool to
+test proper memory management.
+<ul>
+<li><a href="https://bitbucket.org/c0-lang/docs/wiki/From_C0_to_C_-_Basics">From C0 to C: Basics tutorial</a></li>
+<li><a href="http://www.cplusplus.com/reference/clibrary/">C Language Libraries</a>
+  <ul>
+  <li><a href="http://www.cplusplus.com/reference/clibrary/cstring/">C string library <code>&lt;string.h&gt;</code></a></li>
+  </ul></li>
+<li><a href="http://pubs.opengroup.org/onlinepubs/9699919799/">POSIX
+    library standard</a> &mdash; Unix standard library definitions
+  including a library search functionality</li>
+</ul>
+
+
+<h3>Programming Environments</h3>
+
+<p>
+  You are welcome to use any programming environment that suits you to
+  write your programming assignments.  However, all programming
+  homework will be graded by running them on a Unix system
+  using <a class="autolab" href=""></a> &mdash; you may want to make
+  sure they work
+  on <a href="https://bitbucket.org/c0-lang/docs/wiki/">Andrew
+  Unix</a>.  Popular environment choices
+  include <a href="https://code.visualstudio.com/">VSCode</a>, <a href="https://www.gnu.org/software/emacs/">emacs</a>
+  and <a href="http://www.vim.org/">vim</a>, but you should use what
+  works for you: an environment that allows you to write code quickly
+  and efficiently.  Here are some useful links:
+</p>
+
+<div class="grid-container">
+  <div class="card">
+    <div style="font-weight: bold; padding: 10px 10px 0px;">
+      Unix
+    </div>
+    <div>
+      <ul>
+        <li><a href="https://www.cs.cmu.edu/~15122/handouts/misc/linux_quickref.pdf"
+               target="_blank">Linux Commands Reference Card</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div style="font-weight: bold; padding: 10px 10px 0px;">
+      Emacs
+    </div>
+    <div>
+      <ul>
+        <li><a href="https://niveditc.github.io/pages/emacs.html"
+               target="_blank">Emacs Basics</a></li>
+        <li><a href="https://www.shortcutfoo.com/app/tutorial/emacs"
+               target="_blank">Game for learning emacs shortcuts</a></li>
+        <li><a href="https://www.gnu.org/software/emacs/manual/html_mono/emacs.html"
+               target="_blank">Emacs Help Guide</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div style="font-weight: bold; padding: 10px 10px 0px;">
+      Vim
+    </div>
+    <div>
+      <ul>
+        <li><a href="https://www.linux.com/learn/vim-101-beginners-guide-vim"
+               target="_blank">Vim Introduction</a></li>
+        <li><a href="https://vim.rtorr.com/"
+               target="_blank">Vim Cheat Sheet</a></li>
+        <li>type <code>vimtutor</code> at the terminal</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<h2 id="GRADING" class="toggle-base"><span class="toggle-label">Grading</span></h2>
+
+<div class="toggle-me">
+This is a <b>12 unit</b> course.
+
+<h3>Tasks and Percentages</h3>
+<ul>
+<li><b>25 homework assignments: 36%</b>
+  <ul>
+  <li>13 weekly <em>practice problems</em> (due
+  on <a class="gradescope" href=""></a> Thursdays at 6pm
+  Pittsburgh time &mdash; strict!)</li>
+  <li>12 weekly <em>programming assignments</em> (due on <a class="autolab" href=""></a> Sundays at 9pm Pittsburgh time &mdash; strict!)</li>
+  </ul>
+  To encourage good work and integrity, the instructors may invite
+  students to their offices to explain their solutions. Should this
+  happen, the students' explanations will become part of their grades
+  for that homework.
+</li>
+
+<li><b>12+1 check-ins: 36%</b> (in class, closed books,
+  Tuesdays at 7:00pm or 7:45pm depending on section).  The last
+  check-in of the semester is optional and may be used to
+  replace the grade of an earlier check-in.</li>
+
+<li><b>Final exam: 25%</b>, 3 hours, closed books, on <script>document.write(C.final.printDate());</script></li>
+
+<li><b>Precepts and activities: 3%</b>
+<p>
+    Each precept is worth 2.5 points given out based on effort and
+    rough correctness.
+</p><p>
+  There will be one activity worth <span style="color:green;">0.5
+  points</span> during or after each lecture.  Use
+  the <a href="activities.shtml">activities page</a> to test your
+  configuration and do the current activity (when there is one).
+<br>
+  The precepts and activities grade is calculated based on the <b>bucket
+  system</b>: <em>All you need to earn the full 3% grade for this
+  portion of the course is to accumulate <span style="color:green;">30
+  points</span> overall.</em>  There are many more points than that
+  for grabs, so no sweat if you miss a precept or a lecture.  Do the
+  math: the course has
+  <ul>
+  <li>12 graded precepts</li>
+  <li>26 lectures</li>
+  </ul></li>
+</ul>
+We are aiming to have homework and check-ins graded within
+two days of submission.
+</p>
+
+<div id="courseworkCalendar" style="page-break-inside:avoid; margin-top:1ex;"></div>
+
+
+<h3>Accessing and Monitoring your Grades</h3>
+
+Posted grades are accessible by clicking on the <a class="grades"
+                                                   href="">Grades</a>
+tab of this page.  After authenticating, you will be able to see your
+current grades and a projection of where you are headed given your
+past performance in the class.  Use this application to take action if
+the trajectory does not lead to the grade you are hoping for.
+
+
+<h3>Evaluation Criteria</h3>
+
+<p>
+Your assignments and exams are evaluated on the basis of:
+<ul>
+<li>
+  <b>Correctness</b>: Your arguments should make sense, your proofs
+  should be valid, and your program should work in the reference
+  environment.
+</li>
+<li>
+  <b>Elegance</b>: Written material should be of the same quality as
+  what a professional would write.  No typos, no bad grammar, clarity
+  is paramount.  You are also expected to write code with good
+  programming style. See the <a href="handouts.shtml#MATERIAL">Guide
+  to Success on <em>Coding with Style</em></a> about what constitutes
+  good style.
+<br style="margin-bottom: 0.5ex">
+  For a small subset of assignments, the course staff will review all
+  final submissions by hand. If there are significant style issues,
+  they may give a non-passing grade on style, accompanied by a “FIX
+  STYLE” annotations in their notes. Students who are told to fix
+  their style must address these issues and discuss their revisions
+  with a TA <b>within 5 days</b> of the homework grades being
+  posted. Any TA or instructor can do style re-grading at
+  any <a href="home.shtml#OH">office hour</a>; you do not have to go
+  to the TA that assigned the grade.
+</li>
+</ul>
+</p>
+
+<h3>Late Policy</h3>
+
+This is a fast-paced course.  The late policy has the purpose to help
+students from falling behind.
+<ul>
+<li>
+  There are <b>no late days for practice problems</b>.
+</li>
+<li>
+  Each student has <b>3 late days for programming assignments</b> and
+  you may use <b>at most one late day for each individual
+  assignment</b>.  This means that for exactly 3 programming deadlines
+  you can turn in your assignment within 24 hours after the
+  deadline. Autolab handles these late days automatically &mdash; you
+  don't have to email the course staff, just turn in the assignment
+  between 1 second late and 24 hours after the deadline.  You can find
+  how many late days you have used by clicking on "Gradebook"
+  in <a class="autolab" href=""></a>.  Once you have ran out of late
+  days, <a class="autolab" href=""></a> will accept and grade late
+  submissions but will assign them 0 points.
+  <p>
+  We strongly advise students <b>not to use late days in the first
+  half of the course</b>.  Later assignments are more challenging and
+  many courses have lots of deliverables towards the end of the
+  semester.  The second half of the semester is where late days are
+  most needed.
+</p>
+</li>
+</ul>
+Aside from this, there will be no extensions on assignments in
+general.  If you think you really <em>really</em> need an extension on
+a particular assignment, <span class="contactInstr">contact the
+  instructors</span> as soon as possible and before the deadline.
+Please be aware that extensions are entirely discretionary and will be
+granted only in exceptional circumstances outside of your control
+(e.g., due to severe illness or major personal/family emergencies, but
+not for competitions, club-related events or interviews).  The
+instructors will require confirmation from University Health Services
+or your academic advisor, as appropriate.
+
+<p>
+Nearly all situations that make you run late on an assignment
+can be avoided
+with <a href="http://www.cmu.edu/acadev/fastfact/">proper planning</a>
+&mdash; often just starting early.  Here are some examples:
+<ul>
+<li>
+  <em>I have so many deadlines this week</em>: you know your deadlines
+  ahead of time &mdash; plan accordingly.
+</li>
+<li>
+  <em>It's a minute before the deadline and the network is down</em>:
+  you always have multiple submissions &mdash; it's foolish to wait
+  for the deadline for your <em>first</em> submission.
+</li>
+<li>
+  <em>My computer crashed and I lost everything</em>: Use Dropbox or
+  similar to do real-time backup &mdash; recover your files onto AFS
+  and finish your homework from a cluster machine.
+</li>
+<li>
+  <em>My fraternity/sorority/club has that big event that is taking
+  all my time</em>: Schedule your extra-curricular activities around
+  your classes, not vice versa.
+</li>
+</ul>
+</p>
+
+
+<h3>Grade Appeals</h3>
+
+We make mistakes too!
+<br>
+After each homework assignment and practice activity is graded, you
+will be able to access your score by clicking on the
+<a class="grades" href="">Grades</a> tab of this
+page.  We will make the utmost effort to be fair and consistent in our
+grading.  If you notice any grading mistakes, proceed as follows:
+<ul>
+<li>
+  Go to <a href="home.shtml#OH">office hours</a> and describe the
+  putative grading mistake to a TA.
+</li>
+<li>
+  If the TA does not resolve the matter convincingly, you may request
+  a regrade as follows:
+
+  Write an email to
+  <script>
+    var aa = staffByRole("aa")[0];
+    document.write("<a href='mailto:"+aa.email+"?Subject=15-122 regrade request'>"+aa.name+"</a>");
+  </script>
+  explaining where and why you think there was a mistake in grading.
+  Make sure to specify which homework or exam this appeal is for.
+  Write <b>at most 3 lines</b> for each response you are disputing.
+  <!--ul>
+  <li>
+    Compose a properly typed letter explaining where and why you think
+    there was a mistake in grading.  Make sure to specify which
+    homework or exam this appeal is for.  Write <b>at most 3 lines</b>
+    for each response you are disputing.  <b>Date and sign your letter
+      by hand</b>.
+  </li>
+  <li>
+    Hand-deliver a signed <b>hardcopy</b> of this letter to <script>var aa =
+    staffByRole("aa")[0]; document.write(aa.name);</script>
+    in <script>document.write(aa.office);</script>. Slide it under her
+    door if she is not in.
+  </li>
+  </ul-->
+</li>
+</ul>
+Email requests to the course staff will not be accepted.  Please do
+not make regrade requests on <a class="qatool qatoolname" href=""></a>.
+<p>
+  All regrade requests must be received within <b>5 days</b> of the
+  work being handed back on <a class="gradescope" href=""></a>
+  or <a class="autolab" href=""></a>, which we will announce in
+  a <a class="qatool qatoolname"></a> post.</p>
+</p>
+
+<h3>Final Grades</h3>
+
+This class is not curved.  However, to ensure consistency across
+semesters, we set our grading standards in such a way as to compensate
+for the relative difficulty of exams.
+<p>
+What follows is a <b>rough guide</b> to how course grades will be
+established, not a precise formula &mdash; we will fine-tune cutoffs
+and other details as we see fit after the end of the course.  This is
+meant to help you set expectations and take action if your trajectory
+in the class does not take you to the grade you are hoping for (see
+also the <a class="grades" href="">Grades</a> tab on this page).  So,
+here's a <b>rough</b>, <b><em>very rough</em></b> heuristics about the
+correlation between final grades and total scores:
+<ul style="margin-top: 0.5ex; margin-bottom: 0.5ex;">
+<li>A: above 90%</li>
+<li>B: 80-90%</li>
+<li>C: 70-80%</li>
+<li>D: 60-70%</li>
+</ul>
+This assumes that the makeup of a student's grade is not wildly
+anomalous: exceptionally low overall scores on programming
+assignments, practice problems or check-ins will be treated
+on a case-by-case basis.  In particular, students who are unable to
+demonstrate a basic proficiency with the C language in the last few
+programming assignments will receive a D in the class (this is because
+15-122 is a prerequisite to 15-213, a very C-intensive course).
+
+<!--For reference, almost a quarter of the students who received a B in
+Fall 2014 had a 90-100% average on programming assignments, an 80-90%
+average on written homeworks, and a 70-80% average on exams.-->
+</p>
+Precise grade cutoffs will not be discussed at any point during or
+after the semester.  For students very close to grade boundaries,
+instructors may, at their discretion, consider participation in
+lecture and precepts, exam performance and overall grade trends when
+assigning the final grade.
+</div>
+
+
+<h2 id="AIP" class="toggle-base"><span class="toggle-label">Academic Integrity</span></h2>
+
+<div class="toggle-me">
+You are expected to comply with the <a href="https://www.cmu.edu/policies/student-and-student-life/academic-integrity.html">University Policy on Academic Integrity</a> (see also <a href="https://www.cmu.edu/student-affairs/theword/academic/statement-on-academic-integrity.html">The Word</a> and <a href="https://www.cmu.edu/academic-integrity/understanding/cmu.html">Understanding Academic Integrity</a>).
+The university policies and procedures on academic integrity will be
+applied rigorously.  All students are required to fill out
+a <a href="handouts/misc/acad.pdf">form</a> as part of their first assignment
+indicating that they understand and accept this policy.
+<p>
+  The value of your degree depends on the academic integrity of
+yourself and your peers in each of your classes. It is expected that,
+unless otherwise instructed, the work you submit as your own is your
+own work and not someone or something else's work or a collaboration
+between yourself and other(s).
+</p>
+ Many students who copy code or other work do so in the heat of the
+ moment and regret their actions later on, when more clear-headed.
+ You may contact the instructors by 2pm the day after a deadline
+ and ask to delete your submission for
+ an assignment, no questions asked. Deleted submissions are not
+ considered when running academic integrity checks and receive a
+ grade of 0. <b>Contact us before we contact you</b>.
+
+
+<h3>The Policy (Fall'24)</h3>
+
+<h4>Practice Problems</h4>
+<p>
+  Practice problems are intended to be <b>collaborative but
+  submissions are individual</b>.
+</p>
+<p>
+  Specifically, you are welcome to work on any aspects of a practice
+  problem with other students.  However, in order to ensure that the
+  work you submit reflects your learning, we insist that you adhere to
+  a <em>whiteboard policy</em> regarding these discussions: you are
+  not allowed to take any notes, files, pictures or other records away
+  from the discussion, nor shall you memorize answers.  For example,
+  you may work on practice problems at the whiteboard with another student,
+  but then you must erase the whiteboard, stop discussing the problem,
+  wait some time (15
+  minutes is a safe heuristic) and write up your solution individually.
+  We take your ability to recreate the solution independently as proof
+  that you understand the work that you submit.
+</p>
+
+
+<h4>Programming Assignments</h4>
+
+<p>
+  Programming assignments are <b>strictly individual</b>.
+</p>
+<p>
+  You may ask other students clarifications on the writeup
+  (e.g., <em>"What does this sentence mean?"</em>, <em>"Can you explain
+  this notation?"</em>) but you may not discusses approaches to solving
+  any aspect of the assignment (e.g., <em>"How would you do
+  this?"</em>, <em>"Can you walk me through an example?"</em>).
+</p>
+<p>
+  You are not allowed to refer to solutions and/or code written by
+  past or present students, ChatGPT or other AI-based tools, or found
+  on the web, not even to "double-check" your own solution.  You may
+  not post code from this course publicly (e.g., to Bitbucket or
+  GitHub).
+</p>
+<p>
+  We will be using the MOSS system to detect software plagiarism.
+  Whenever a programming assignment is similar to a homework from a
+  previous course edition, we will run MOSS on all submissions from
+  that edition as well. All solutions from the Web are also in MOSS
+  &mdash; you should assume that if you were able to find it, we have
+  already found it.
+</p>
+
+
+<h4>Check-ins and the Final</h4>
+
+<p>
+  Check-ins and the final exam are <b>strictly
+  individual</b>.
+
+<h4>Studying and General Help</h4>
+
+<p>
+You are welcome to freely discuss course material (lecture
+notes/slides, practice exams, precept handouts), as well as to review
+graded assignments or check-ins with students taking the
+course in the current semester.  You may give or receive help with
+computer systems, compilers, debuggers, profilers, or other facilities
+(as long as answers and/or code are <b>never visible</b>).
+</p>
+<p>
+You are not allowed to use any materials from previous iterations of the
+course, including your own.  You may not discuss or receive any help on
+homework assignments with students who have previously taken the
+course (excluding current TAs).
+</p>
+<p>
+If you are uncertain whether your actions will violate this policy,
+please reach out to a member of course staff to ask beforehand.
+</p>
+
+
+<h3>Penalties and Specifics</h3>
+
+<p>
+  Please read
+  the <a href="https://www.cmu.edu/policies/student-and-student-life/academic-integrity.html">University
+  Policy on Academic Integrity</a> carefully to understand the
+  penalties associated with academic dishonesty at Carnegie Mellon. In
+  this class, cheating/copying/plagiarism means obtaining all or part
+  of a program or homework solution from another student or tool, or
+  unauthorized source such as the Internet, having someone else do a
+  homework or take an exam for you, knowingly or by negligence giving
+  such information to another student, reusing answers or solutions
+  from previous editions of the course, or giving or receiving
+  unauthorized information during an examination. In general, each
+  solution you submit (practice problem, programming assignment,
+  check-in or final exam) must be your own work. In the
+  event that you use information written by others in your solution,
+  you must cite the source of this information (and receive prior
+  permission if unsure whether this is permitted). It is considered
+  cheating to compare complete or partial answers, copy or adapt
+  others' solutions, or sit near another person who is taking (or has
+  taken) the same course and complete the assignment together.
+  For programming assignments,
+  working on code together, showing code to another student and
+  looking at another student's code are considered cheating.  If you
+  need help debugging, make a post on <a class="qatool
+  qatoolname"></a> or go to <a href="home.shtml#OH">office hours</a>.
+  It is also considered cheating for a repeating student to reuse
+  one's solutions from a previous semester, or any instructor-provided
+  sample solution.  It is a violation of this policy to hand in work
+  for other students.
+</p>
+<p>
+  Your course instructors reserve the right to determine an
+  appropriate penalty based on the violation of academic dishonesty
+  that occurs.  Penalties go from negative points in an assignmnent
+  all the way to expulsion from Carnegie Mellon University. If you
+  have any questions about this policy and any work you are doing in
+  the course, please feel free to <span class="contactInstr">contact
+  the instructors</span> for help.
+</p>
+
+<h3>Repeat Students</h3>
+<p>
+  If you took this course in full or in part in a past semester, we
+  ask that you <b>delete all your previous work</b> so you won't look
+  at it.  In particular, copying or referencing
+  one's own solutions from an earlier
+  semester is a violation of the academic integrity policy and will be
+  handled as such.  Doing so may save time close to a deadline but it
+  will not have the effect of learning the material, which will be a
+  serious handicap in exams and in follow-up courses.
+</p>
+</div>
+
+<h2 id="POLICIES" class="toggle-base"><span class="toggle-label">Other Policies</span></h2>
+
+<div class="toggle-me">
+<h3>Class presence and participation</h3>
+
+<p>
+  Active participation by you and other students will ensure that
+  everyone has the best learning experience in this class.  We may
+  take participation in lecture and precepts into account when setting
+  final grades.  Fire safety rules require that we never exceed the
+  stated capacity of a classroom.  For this reason, we require that
+  you attend the lecture, check-in slot, and precept <em>you
+  are registered for</em>.
+</p>
+
+<h3>Laptops and mobile devices</h3>
+
+<p>
+  As research on learning shows, unexpected noises and movement
+  automatically divert and capture people's attention, which means you
+  are affecting everyone's learning experience if your cell phone,
+  laptop, etc, makes noise or is visually distracting during
+  class.  Therefore, please silence all mobile devices during
+  class. You may use laptops for note-taking only, but please do so
+  from the back of the classroom.  Do not work on assignments for this
+  or any other class while attending lecture or precept.
+</p>
+
+
+<h3>Students with disabilities</h3>
+
+<p>
+  If you wish to request an accommodation due to a documented
+  disability, please inform your instructor and
+  contact <a href="https://www.cmu.edu/disability-resources/">Disability
+  Resources</a> as soon as possible
+  (<script>document.write(eMail(MEA("access", "andrew", "cmu",
+  "edu")));</script>).  Once your accommodation has been approved, you
+  will be able to request extra-time for each exam separately
+  by <a href="https://rainier.accessiblelearning.com/cmu">filling this
+  form</a> a week in advance.
+</p>
+
+<!--
+<h3>Research to Improve the Course</h3>
+<p>
+  For this class, we are conducting research on student outcomes. This
+  research will involve your work in this course. You will not be
+  asked to do anything above and beyond the normal learning activities
+  and assignments that are part of this course. You are free not to
+  participate in this research, and your participation will have no
+  influence on your grade for this course or your academic career at
+  CMU. If you do not wish to participate or if you are under 18 years
+  of age, please send an email to Chad Hershock
+  (<script>document.write(eMail(MEA("hershock", "cmu",
+  "edu")));</script>) with your name and course number. Participants
+  will not receive any compensation. The data collected as part of
+  this research may include student grades. All analyses of data from
+  participants’ coursework will be conducted after the course is over
+  and final grades are
+  submitted. The <a href="http://www.eberly.cmu.edu/">Eberly
+  Center</a> may provide support on this research project regarding
+  data analysis and interpretation. The Eberly Center for Teaching
+  Excellence & Educational Innovation is located on the CMU-Pittsburgh
+  Campus and its mission is to support the professional development of
+  all CMU instructors regarding teaching and learning. To minimize the
+  risk of breach of confidentiality, the Eberly Center will never have
+  access to data from this course containing your personal
+  identifiers. All data will be analyzed in de-identified form and
+  presented in the aggregate, without any personal identifiers. If you
+  have questions pertaining to your rights as a research participant,
+  or to report concerns to this study, please contact Chad Hershock
+  (<script>document.write(eMail(MEA("hershock", "cmu",
+  "edu")));</script>).
+</p>
+-->
+</div>
+
+<h2 id="HELP" class="toggle-base"><span class="toggle-label">Getting Help</span></h2>
+
+<div class="toggle-me">
+<h3>Personal Health</h3>
+<b>Take care of yourself.</b>
+<p>
+Do your best to maintain a healthy lifestyle this semester by eating
+well, exercising, avoiding drugs and
+alcohol, <a href="https://www.nytimes.com/2018/08/13/well/an-underappreciated-key-to-college-success-sleep.html">getting
+    enough sleep</a> and taking some time to relax. This will help you
+achieve your goals and cope with stress.
+</p>
+<p>
+All of us benefit from support during times of struggle. You are not
+alone. There are many helpful resources available on campus and an
+important part of the college experience is learning how to ask for
+help. Asking for support sooner rather than later is often helpful.
+</p>
+<p>
+If you or anyone you know experiences any academic stress, difficult
+life events, or feelings like anxiety or depression, we strongly
+encourage you to seek support. Counseling and Psychological Services
+(CaPS) is here to help: call 412-268-2922 and visit
+their <a href="http://www.cmu.edu/counseling/">website</a>. Consider
+reaching out to a friend, faculty or family member you trust for help
+getting connected to the support that can help.
+</p><p>
+If you or someone you know is feeling suicidal or in danger of
+self-harm, call someone immediately, day or night:
+<dl compact>
+<dt style="margin-bottom: 0.75ex"><b>CaPS:</b> 412-268-2922</dt>
+<dt style="margin-bottom: 0.75ex"><b>Re:solve Crisis Network:</b> 888-796-8226</dt>
+<dt><b>If the situation is life threatening,</b> call the police:</dt>
+    <ul>
+    <li>On campus (CMU Police): 412-268-2323</li>
+    <li>Off campus: 911</li>
+    </ul>
+</dl>
+If you have questions about this or your coursework, please <span class="contactInstr">let us know</span>.
+</p>
+
+
+<h3>Communication</h3>
+
+For assistance with the written or oral communication assignments in
+this class, visit the Communication and Language Support Center within
+SASC.
+Consultants there
+can provide instruction on a range of communication topics and can
+help you improve your papers and presentations.  This is a free
+service and open to all students. Visit the
+<a href="https://www.cmu.edu/student-success/programs/index.html">SASC website</a>
+for more
+information.
+
+<!--
+For assistance with the written or oral communication assignments in
+this class, visit the Global Communication Center (GCC).  GCC tutors
+can provide instruction on a range of communication topics and can
+help you improve your papers and presentations.  The GCC is a free
+service, open to all students, and located in Hunt library.  You can
+make tutoring appointments directly on the <a href="http://www.cmu.edu/gcc">GCC
+website</a>.
+You may also visit the GCC website to find out about communication
+workshops offered throughout the academic year.
+-->
+
+
+<h3>External Academic Support</h3>
+
+<p>
+  The <a href="https://www.cmu.edu/student-success/">Student Academic
+  Success Center</a>
+  is providing various services aimed at helping
+  students master the contents of this course.  These optional
+  services are free and voluntary.  They are led by trained personnel
+  who have successfully completed the course.  Leaders are not members
+  of the course staff.  These services are are designed to supplement
+  &mdash; not replace &mdash; class lectures and precepts.  They do
+  not cover homework.
+</p>
+<dl>
+<dt><a href="https://www.cmu.edu/student-success/programs/supp-inst.html">
+        Supplemental Instruction (SI)</a></dt>
+<dd>is a weekly session in which the leader prepares review material
+  based on the current course content, but adapts the focus of the
+  session based on the attendees' questions and requests.</dd>
+
+<dt><a href="https://www.cmu.edu/student-success/programs/tutoring.html#drop-in">
+        Drop-in Tutoring</a></dt>
+<dd>Students can drop in during the slot scheduled for 15-122. No
+  appointment is necessary, just walk-in.
+</dd>
+
+<dt><a href="https://www.cmu.edu/student-success/programs/tutoring.html#by-appt">One-on-one Tutoring</a></dt>
+<dd>Students can <a href="https://cmu.mywconline.net">book an appointment</a> for a virtual tutoring session.
+
+</dl>
+<p>
+  We ask that students do not seek help from <b>upperclassmates</b>
+  who have successfully completed the course.  Doing so often leads to
+  violations of the <a href="#AIP">academic integrity policy of the
+  course</a>. In particular, upper-classmates found to violate this
+  policy will be reported and will incur a grade penalty.
+</p>
+</div>
+
+
+<h2 id="LO" class="toggle-base"><span class="toggle-label">Learning Objectives</span></h2>
+
+<div class="toggle-me">
+<style>
+/* list styling, adapted from http://www.456bereastreet.com/archive/201105/styling_ordered_list_numbers/*/
+ol.start, ol.continue, ol.sublist {
+  margin-left:   0;   /* Remove the default left margin */
+  padding-left:  0;   /* Remove the default left padding */
+}
+ol.start {
+  counter-reset: li;  /* Initiate a counter */
+}
+ol.sublist {
+  counter-reset: sublist; /* Initiate a counter */
+  margin-top: 0.25ex;
+}
+ol.start > li, ol.continue > li, ol.sublist > li {
+  position: relative; /* Create a positioning context */
+  padding: 0 8px;     /* Add some spacing around the content */
+  list-style: none;   /* Disable the normal item numbering */
+}
+ol.start > li, ol.continue > li {
+  margin: 0 0 0 2em;  /* Give each list item a left margin to make room for the numbers */
+}
+ol.sublist > li {
+  margin: 0 0 0 1.1em;  /* Give each list item a left margin to make room for the numbers */
+}
+ol.start > li:before, ol.continue > li:before, ol.sublist > li:before {
+  position: absolute;  /* Position and style the number */
+  top: 0px;
+  width: 2em;
+  padding: 0 4px;
+}
+ol.start > li:before, ol.continue > li:before {
+  content: counter(li) ". "; /* Use the counter as content */
+  counter-increment: li;     /* Increment the counter by 1 */
+  left: -2.3em;              /* Position and style the number */
+  text-align: right;
+}
+
+ol.sublist > li:before {
+  content: "(" counter(sublist, lower-alpha) ")"; /* Use the counter as content */
+  counter-increment: sublist;   /* Increment the counter by 1 */
+  left: -1.8em;             /* Position and style the number */
+  text-align: center;
+}
+</style>
+
+
+<h3>Computational Thinking</h3>
+
+Students who complete this course should be able to explain
+abstraction and other key computer science concepts, apply these
+fundamental concepts as problem-solving tools, and wield contracts as
+a tool for reasoning about the safety and correctness of programs. In
+particular, we expect students to be able to:
+<ol class="start">
+<li>develop contracts (preconditions, postconditions, assertions, and loop invariants) that establish the safety and correctness of imperative programs.</li>
+<li>develop and evaluate proofs of the safety and correctness of code with contracts.</li>
+<li>develop and evaluate informal termination arguments for programs with loops and recursion.</li>
+<li>evaluate claims of both asymptotic complexity and practical efficiency of programs by running tests on different problem sizes.</li>
+<li>define the concept of programs as data, and write programs that use the concept.</li>
+<li>defend the use of abstractions and interfaces in the presentation of algorithms and data structures.</li>
+<li>identify the difference between <em>specification</em> and <em>implementation</em>.</li>
+<li>compare different implementations of a given specification and different specifications that can be applied to a single implementation.</li>
+<li>explain data structure manipulations using data structure invariants.</li>
+<li>identify and evaluate the use of fundamental concepts in computer science as problem-solving tools:
+  <ol class="sublist">
+  <li>order (sorted or indexed data),</li>
+  <li>asymptotic worst case, average case, and amortized analysis,</li>
+  <li>randomness and (pseudo-)random number generation, and</li>
+  <li>divide-and-conquer strategies.</li>
+</ol></li>
+</ol>
+
+
+<h3>Programming Skills</h3>
+
+Students who complete this course should be able to read and write
+code for imperative algorithms and data structures. In particular, we
+expect students to be able to:
+<ol class="continue">
+<li>trace the operational behavior of small imperative programs.</li>
+<li>identify, describe, and effectively use basic features of C0 and C:
+  <ol class="sublist">
+  <li>integers as signed modular arithmetic,</li>
+  <li>integers as fixed-length bit vectors,</li>
+  <li>characters and strings,</li>
+  <li>Boolean operations with short-circuiting evaluation,</li>
+  <li>arrays,</li>
+  <li>loops (<code>while</code> and <code>for</code>),</li>
+  <li>pointers,</li>
+  <li>structs,</li>
+  <li>recursive and mutually recursive functions,</li>
+  <li><code>void</code> pointers and casts between pointer types,</li>
+  <li>generic data structures using <code>void</code> and function pointers,</li>
+  <li>contracts (in C0), and</li>
+  <li>casts between different numeric types (in C).</li>
+</ol></li>
+<li>translate between high-level algorithms and correct imperative code.</li>
+<li>translate between high-level loop invariants and data structure invariants and correct contracts.</li>
+<li>write code using external libraries when given a library interface.</li>
+<li>develop, test, rewrite, and refine code that meets a given specification or interface.</li>
+<li>develop and refine small interfaces.</li>
+<li>document code with comments and contracts.</li>
+<li>identify undefined and implementation-defined behaviors in C.</li>
+<li>write, compile, and test C programs in a Unix-based environment
+using <code>make</code>, <code>gcc</code>, and <code>valgrind</code>.</li>
+</ol>
+
+
+<h3>Algorithms and Data Structures</h3>
+
+Students who complete this course should be able to describe the
+implementation of a number of basic algorithms and data structures,
+effectively employ those algorithms and data structures, and explain
+and interpret worst-case asymptotic complexity arguments. In
+particular, we expect students to be able to:
+<ol class="continue">
+<li>determine the big-O complexity of common code patterns.</li>
+<li>compare common complexity classes like <em>O(1)</em>, <em>O(log n)</em>, <em>O(n)</em>, <em>O(n log n)</em>, <em>O(n<span class="sup">2</span>)</em>, and <em>O(2<span class="sup">n</span>)</em>.</li>
+<li>explain the structure of basic amortized analysis proofs that use potential functions.</li>
+<li>apply principles of asymptotic analysis and amortized analysis to new algorithms and data structures.</li>
+<li>recognize properties of simple self-adjusting data structures.</li>
+<li>recognize algorithms and data structures using divide-and-conquer.</li>
+<li>describe and employ a number of basic algorithms and data structures:
+  <ol class="sublist">
+  <li>integer algorithms,</li>
+  <li>linear search,</li>
+  <li>binary search,</li>
+  <li>sub-quadratic complexity sorting (mergesort and quicksort),</li>
+  <li>stacks and queues,</li>
+  <li>pseudo-random number generators,</li>
+  <li>hash tables,</li>
+  <li>priority queues,</li>
+  <li>balanced binary search trees,</li>
+  <li>disjoint-set data structures (union/find), and</li>
+  <li>simple graph algorithms.</li>
+</ol></li>
+</ol>
+
+</div>
+</div>
+
+<hr>
+<address>
+<table width=100% cellspacing=0 cellpadding=0><tr>
+<td align=left>
+  <span id="copyright">2024
+  <a href="https://cs.cmu.edu/~iliano">Iliano Cervesato</a></span>
+</td><td align=right>
+  <span id="authorEmail"></span>
+</td></tr></table>
+</address>
+
+<div style="display:none">
+<div id="invisible"></div>
+</div>
+</body></html>
+
+

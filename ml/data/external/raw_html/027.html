@@ -1,0 +1,288 @@
+<!DOCTYPE html><html lang="en">
+
+<head>
+    <meta charset="UTF-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" /><title>CAS - CalNet Authentication Service Login</title>
+    
+        <link rel="stylesheet" type="text/css" href="/cas/webjars/normalize.css/8.0.1/normalize-112272e51c80ffe5bd01becd2ce7d656.css" /><link rel="stylesheet" type="text/css" href="/cas/webjars/bootstrap/5.3.8/css/bootstrap-grid.min-895b9494c7178ac12ad9c56d81305665.css" /><link rel="stylesheet" type="text/css" href="/cas/webjars/material-components-web/14.0.0/dist/material-components-web.min-9da9033e8d04504fe54b3dbb1298fd78.css" /><link rel="stylesheet" type="text/css" href="/cas/webjars/mdi__font/7.4.47/css/materialdesignicons.min-2c83c4bce691e18f82409f87b2bf84e4.css" /><link rel="stylesheet" type="text/css" href="/cas/webjars/datatables/2.3.2/css/dataTables.dataTables-86c98d6ce5aa289ccf4492ac3a785fad.css" /><link rel="stylesheet" type="text/css" href="/cas/css/cas-a90aca7e2afb259734284377211db332.css" /><link rel="stylesheet" type="text/css" href="/cas/css/custom-f4c452be2717052669e88ca365d3d41b.css" /><link rel="shortcut icon" href="/cas/images/B-favicon-b72f8be7d6c344ef49d6e2c7e4abaa1e.svg" /></head>
+
+<body class="login mdc-typography">
+    <script type="text/javascript" src="/cas/webjars/jquery/3.7.1/jquery.min-2c872dbe60f4ba70fb85356113d8b35e.js"></script>
+<script type="text/javascript" src="/cas/webjars/datatables/2.3.2/js/dataTables-8e31487c41abe2938c55b5dcde42a604.js"></script>
+<script type="text/javascript" src="/cas/webjars/clientjs/0.2.1/dist/client.min-5b6a46b3fb2ab9307d013def98fd7289.js"></script>
+
+<script type="text/javascript" src="/cas/webjars/material-components-web/14.0.0/dist/material-components-web.min-3c99031127092dd1984f2e3aa6aeed8b.js"></script>
+<script type="text/javascript" src="/cas/js/cas-cd46228f2a9b608731f0c9dacfb9758c.js"></script>
+<script type="text/javascript" src="/cas/js/material-b55ff53584b5e775934a54f8a5dd3ba8.js"></script>
+<script type="text/javascript" src="/cas/js/custom-68f2256de5c80303b099502064d175ed.js"></script>
+<script>
+    if (typeof resourceLoadedSuccessfully === "function") {
+        resourceLoadedSuccessfully();
+    }
+    let trackGeoLocation = false;
+</script>
+
+<!-- Add a class just for IE11 --><script>
+    if (navigator.userAgent.indexOf('Trident/') > -1) {
+        document.documentElement.classList.add('ie11');
+    }
+    </script>
+    <!-- Add a class just for IE11 --><div></div>
+
+    <div class="mdc-drawer-scrim"></div>
+
+    <div class="wrapper">
+        <div id="logo"><img src="/cas/images/UCBerkeley_Logo_Berkeley.svg" class="logo" alt="UC Berkeley"></div>
+        <div id="content">
+   <div>
+
+        <!--
+        <section id="loginSidePanel"
+                 th:if="${loginFormViewable and loginFormEnabled and #cas.isTrue(#cas.theme('cas.login-side-panel.enabled'))}"
+                 class="login-section d-xs-none d-md-block card-body">
+            <div th:replace="~{fragments/loginSidePanel :: loginSidePanel}">
+                <a href="fragments/loginSidePanel.html">loginSidePanel</a>
+            </div>
+        </section>
+        --><section id="loginForm"
+                 class="login-section login-form card-body">
+            <div class="d-flex flex-column justify-content-between m-auto">
+
+        <div>
+            </div>
+
+        <div class="form-wrapper">
+
+            <form method="post" id="fm1" action="login" onsubmit="loginFormSubmission();">
+                <div id="login-form-controls">
+                    <script src="js/login.js" type="text/javascript"></script>
+                    <h2 class="title">
+    <strong>CalNet</strong> Authentication Service
+</h2>
+<section class="cas-field form-group my-3" id="usernameSection">
+                        <label for="username"
+                               class="mdc-text-field mdc-text-field--outlined control-label w-100">
+                            <span class="mdc-notched-outline">
+                                <span class="mdc-notched-outline__leading"></span>
+                                <span class="mdc-notched-outline__notch">
+                                    <span class="mdc-floating-label">CalNet ID:</span>
+                                </span>
+                                <span class="mdc-notched-outline__trailing"></span>
+                            </span>
+                            <input class="mdc-text-field__input form-control" id="username"
+                                   size="25"
+                                   type="text"
+                                   autocapitalize="none"
+                                   spellcheck="false"
+                                   aria-describedby="usernameValidationMessage"
+                                   autocomplete="username" required name="username" value=""/></label>
+
+                        <div class="mdc-text-field-helper-line invalid-feedback">
+                            <div class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg"
+                                 aria-hidden="true">
+                                <span id="usernameValidationMessage">CalNet ID is a required field.</span>
+                            </div>
+                        </div>
+
+                        <script type="text/javascript">
+                            /*<![CDATA[*/
+                            let username = "";
+                            let disabled = false;
+
+                            if (username != null && username !== "") {
+                                $("#username").val(username);
+                                if (disabled) {
+                                    $("#usernameSection").hide();
+                                }
+                            }
+                            /*]]>*/
+                        </script>
+                    </section>
+
+                    <section class="cas-field form-group my-3 mdc-input-group form-group" id="passwordSection">
+                        <div class="mdc-input-group-field mdc-input-group-field-append">
+                            <label for="password"
+                                   class="mdc-text-field caps-check mdc-text-field--outlined control-label mdc-text-field--with-trailing-icon control-label w-100">
+                                    <span class="mdc-notched-outline">
+                                        <span class="mdc-notched-outline__leading"></span>
+                                        <span class="mdc-notched-outline__notch">
+                                            <span class="mdc-floating-label">Passphrase:</span>
+                                        </span>
+                                        <span class="mdc-notched-outline__trailing"></span>
+                                    </span>
+                                <input class="mdc-text-field__input form-control pwd"
+                                       type="password"
+                                       id="password"
+                                       size="25"
+                                       required
+                                       aria-describedby="passwordValidationMessage"
+                                       autocomplete="off" name="password" value=""/></label>
+                            <div class="mdc-text-field-helper-line invalid-feedback">
+                                <div class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg"
+                                     aria-hidden="true">
+                                    <span id="passwordValidationMessage">Passphrase is a required field.</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="mdc-text-field-helper-line invalid-feedback caps-warn">
+                            <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg text-danger">
+                                <span>CAPSLOCK key is turned on!</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="cas-field form-group my-3">
+                        </section>
+
+                    <section class="cas-field">
+                        <input type="hidden" name="execution" value="65e4ca55-34d0-4239-ab9e-b8f279965b49_ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0lzSW10cFpDSTZJamN4T0RNME1qbGtMV1UzTWpFdE5HVXlaUzFoT1RSa0xXUTFOVFE1Wm1ZeE56RmxNeUo5LllDUU52VVZiM3pyT0o3RnJ6aFl2SzZGUy1WZmdIZUw2czhvaUZPd0IwMV94cW44UXlsclBUWHdlcHVUcG5MdVRlSDZIcVZ1aE5YRm0xYlJuRTF2eHJyNWpMMEZHdWx0RkZROGxnQ2V4M1FXUWhHMDNSdkZjWC1OZVduNnpqaktlaFFOWHkzV3FfLVRBMEFpUWNLSDhhMmdvQTZ0TmM2VHBTVnk3YzlQaENkNmQ5S3JGblNCOEkwbGVQU0lTSnF4NENPYTlQeFZ2b1ZNMHdaa2FnaFREUGhXSTNMMjBKaHpCS3Z0UTR6UU8waEhaVHZVcWFHekoyUnFCcEM4Y3gxVzBPTlc0NWh5WmdXUFhmYV80MlRIRXZrdGNrSWV1N1NGa3ZnX0tkaFpJU2Z3ZW5QTVNka0kzMmFISGwtOEhhR0R5M0xNT21LejhiclBnZ2ZqeG80QXp0WXZINEtHOVJpZXRGdDc2emVSaDc5LUpSUlVRNVJYR2NDNXdnV05ObkF1cjctVlptLXBaVUNFS29fOTF6TjVTTU9BYWQ1QzJJdlFxMFR2RmJHelRVOWN6MXdxWTBRejA2X3AtWXFVdWpGel8zNVdHRGtnYXhzYTlJLTJGRW9WQ1NoUDg4Rm9XV0pScWs5cWRsM0k5SWp4SFhWVm0xc2pWWmt1RlNNenEwXzhUZ3pPeUdhMm1wWEh2dzJOZTFBLWUxT3FZMTlsVnItTlhGaFdWNjJFOERFZkJELWZCNlVGYjdMWHhJRzZDNlF6MTI0ZFJyaU02U0pUTktqV01lamctWm5DMUV6VllJYWdyUy1ILU5LSEhETy1xQ29TMTMtajh5WVBSemdvWkZxdXRGX1lweW1JT3oxVEhSYkV3NE52TlJmODVtUHpmdjU3UjJ2MXJfd1YzdzB2Sm9WQWZCZHdDbkNIT2NMODhjaEtlQVAtY2hHcnpOM0NFZjJDOTY2eWVvX1Y0bGF5cUpjVk9odjhOc3ZZaExWdnVTUmZVakRvNDgwUmdpUWY0LVpQSzNENHdIcklvR1J3bXBpbVFCODlfdnNVajVoYmlhU3dBNy1LS2pyRHptXy1fakMxWnJqbGJUNDltcFdPQ3hZelVoVk1FNU1vWXV1ajZoQVgxTncxdFV3M3ZLeExiUDRCTmtxdElEaXh5UFpCRVh5RlhDMWtBblJpS08ydTRLT1YyczQ3U09Tc0tXZHAxQXRfTnltOXBWQV9vZzNrY2JqMVljOVlSeGtMUUQ4YmZ6bHJxQUFnZHdhUFVKYW5ocHJFa2N0MnJJUjMzVHdCV0hCSHRUcmlXTzhTOEMyd1VhX1NHTkVENk9xTjJCTFgyLUNPSUhlNzRZbHNlM1pjTG9xWWZERlhRQ3NOSjU0NTcyU0F6SDFXd0ZsR082Ny1ndGk4bFY2ZDVfWUR6UFRqWndVNm1hWkZDY181bWVuSl9DMzRlRzBqcDBUZXBCY096VXZHWXAwZjQ0XzhOWHJiWmJjdlJmcHBvbVJKaURacjY4YUoyTHhGWS1LVlJtbDFqVmc2UjNoMHhYMm5qUW01LUpLTVFJNEEtRzlYMGc5eWo1aXRXUHNudWR4MnpaZ1YxU2o0VWp0ZTYzRjBUM09yblNKaGRfbkJ2SHlGTlhjVlFEcE9zRzNuS0NtS0dUWXlCdHlDRHREUUJVQW8zcjF1Y1JaNGlTZUtDcHJsaTZKNzVxUTh6eFVtTTh2ekxJbHo3WjhQaWVKQXZfcUQzeGY4SW1SNFBDbElIbkYwQmk0VWYxMlVEcGZDU3dQQVMycGZYclZmc1JWUFNaV1R6SVA2NzNLZkNEUTVPc3dqVTN4ZG1qamRRRDROT09ZVVhBU1ltOFdjT3g3Y05YamRjYzhPekFocjlxU3RPb3ZFWWdXOEk2NU9tcXBidlF5am82UVpYSi16NEs5Sld1ek84V2FNQkl6LWdGOXg3TlBCMnFRbmJuMk5qM0M1MmVUSkFmUldKdHlkVTVSdHFtWkVBVndEU3J6N2xSeE9yajhDMW90QjF1MncyT1A4ZU9HY28tVEh1VEZZXzIwdFIybkl2cUs1SlZzc0hqSkFtVUFXOUx0dmRZWXpCbFhEYkt4ZEV0NjBKX1FPMi05RHJMSjBTM1pDUjZtbXNwZXpCUmRNVjZSNVFRNExQUkJnMjBmY1NCbWVJXzBEaUlncUhSdE16MTc1Nl9iazBEZXNlRVRsLVJFcmFqWVQwYXBuMTg4aGlGbmJyRHhUNlRidDE0Tl9VZmk5Q0NWUHI1VWp0dGVOMXo2SVg0V2ZKdnFaTjlJLVZiaVJVbXUydEZHRnlFY28wQjI4ZUwyeW5IbkVYQmxmWTNSWF9lZTdTMmFNdHo4SzFqZWNsWnBKVTFKOUd0YnVXVlYya2E2dDRreFZuMUQta1c0MVRKcWJGZVVWekNlQzNKWlI0b2FhdWhSeWozdEh4VzhFQmc4QXpaOVVGTmpiV1E5cWpvTUhTVzdmNW9hNFRjN1BBZWlHWW45ci1VMnFmWHdaQ0Zzc0NKREpxRXExWFFyazQzdXpEd0huU3plUlpVemd2YmxPU3NlYTAzaENJZ1BBTUlwMzg4Zi03QlozT3d6Q3dWX3JKSm5YYlhnX0xLM3JlQng5VDVJa2RlQURzQ1lhTlVWOXYxS25YX1ZNcEZOeXBwZ0VGQ3Q3OWtyVnpITHlVdDJ4Z0Qxd2pVdEtneUxpYzFFaWxKZjRjalJfdUllOFR2cnlLMHg3aTVEYjFIVU45MlZGVXZHQWM3TWFRQ28xNVRtOVAtaGgxQlFrMHIyME1STlNiR3JCZ0ZhLUg4MDI2bmItSWowUDlPSmZJWXBxTk9ncTNyMjBKdW1MN3JNaTg1UDZCNkdFZkp6dzgzQ01OeVVwcVM5a0s3WkFzNmloVlZfNkZxaFJYbjdLTHg4TFBlaXh1R3F2dWVlZW1RZXFuMWYwMTcyX2VfMEU1OHZwYWJwUkdRUVFIWVZrZTlQRnpya0pWSGRMX1ZFNER0RHhRMTB6NU9LUlplUUZvU2N3aGx2Tm5LT2ZrdDk1NkluMVIzY05SSk9ucWNXQ1VHQlhHRS01SVBSU2dEa1hrWEdtNVFNRV82cndhWmNQRGY0UmYyT3JRSDgxQUhubGtvb0hINVVVbTQ0cVg0Vk1Way13R05ralh5Ujh6RUE5bDIyMTdiak9XbFVrVjE2S3pacW9ES2xfck0yVjFDNGVpcl9GblBCMWtnTTNHMkcxblEzZWEycU5NYi1ZRW05Vl9QY0RGa0tISjY1TFQ2TURZdGpyUnJzT25SZ3MwUS1DY1JJSnkzejItZWp3Zm4zMHdjMVhTODZBSDROUDFjNFhwNVRaU3RjTFlMVERKQV90c2pSS3REZ1dqOV9YSmxaS09tWWhlZm5CeVd5T0IwemMzMklYZF9FVkp0YUlTTWRSdUV3MlllSTlHWFpWQUgtVFozejYxbXV5VmV5ZnJzdDhxeHp0cEVlS2c1VHZ2bUs0T2ZVdUw3cEpBaWJoR1FLUTFMczBCNGppTzdCaXhHSTlhOU1EbUk3OGM1NDgxbVBvRGI0ZktXS1RTR3hoWmRzQVhHZkVsY1Jxd2hZcGJqTW1LMV9OYnRNUS04blN4OF9nY29oa1g5TEtla0JTYVlHSW1sUEwwXzNaNjE2bHJ5dWhFRDh6M0RONktIa0dDaERBbWJoWUpfOEZvNzMzLTkzLTBpdkF3N2NsWWllNXJ6ckNZOWluLUtKZmlCUFNFTURsU3JZMDVpN0g1ZFpHTlRhWUhONUJqUDhfOUZIb0psYkRkZE10aE1oMW9Zbm92NE04TXk5WTBGS0VOUXJqdUNMTWtMUi01Vk1yRjU3LVYxU2tmZnNOMjdwVFBJV2lhUFdkLUxTZm9UcDJpQm9taGJlLS1DS3NIYVFLc29EZVJtMndjcnFQaW1vbngzejJ1Y3k2S2ZUeTRMM2ttX1VVZElFaWZ3ZXJBN2JaTHFRWHhwanpRWUJFNkU0WFBsOUNjNUQ0dDk1RTV4RkVtWW02RDJzSDlhZzhKR1pyQk1pQ2dvcEJ4SHdCbDJsNDU2b1JkNDRaUlg0b0xwbXNtdnFja0lRVDFwZ0VtRGxfZ1g1UWpFUWUyNUp4ZlRxZEtOcXN4UjNPRTVZQVAyNjZTUWJhZVUwUE10bEc5NjJnMEpRaDJqQ1FkNFFwQkpZcC01d1VMWkdGS1pucmFoVXBDcmZTemhGUWN3TlZMdktoR0M4Q1VGVnpROUFad1R4TmJtNGFIX0dGSEVfLTI5ZFo3cGktdnRkNDFVS1llb3ktV2JXR0t1MklSbk1xc2xvWEVYM0dDU1BtbElFclRQU3o3b3lxNUV3czhwUUI4UmVqMWdEYXBtTnJxZHJOdHlObUF4NW42YW1DVUh0TkREN1pTa0JyTEJ6WUFGdHNld0FLTlVTZDg5OC1KOGUwemZBdDNlVE0zZDdfcDBmUnNMTGtvTnlhS3ZuTjF2eEp6cFo4dGZMekFfOXhyQ1QwMDZPLWlSUWloMUV0QW5hS0NnWlM2d2dQR0I4dy0yZE1xa2FmM2kzRFRpekZpQ3RrQVJYM0s5eXBMU29mek9EWjZWcDBUaFVGY0JrWklhejE3X09rZVhwS1lDRG1hR3ZoZUloazZGbFk0bXRDVTlOVDVtclhjUHdRaWpTNjVoSkNGSlFsdUxieVFwM1h3ZE5BR3dKMW1oc3RLX1JncjRxOFphYWFRTjgwUFhpR2U2Mmh6X3NySURUTGd6UTZ1REJlSi04X01pZUEzbUpFR2oyM3ZwRmpWLXY0VERKbGJhek9zQldQcjYwSjA1UWFiZU85d3FUcHhuUHJKWDEyZE9NTlpzVHJTRThhb2gwWV9CelZVa2E4SzBFeHY5QUR5RnZkLUFyaDRZLThLSHQ1Y000djdCTUpTVnZic0REa2RkS21zUFV6ZndqQ2lPRnpMOEpHZ3VUSVo0TkNkdHVOQTN4LWhMbC14bnZxaHZYZkZDeWhwTE1YSkJLOE1rYW5fZ2VHS3Vma0N6enpWUktaWjIxYVNrTFlpMHRZYmV3VGl1R3NPSFg4eE91R1RiYW4taFB4Q3M5TVJ2eHcyZEl0RmxmZk1sdkdxV1EwcmVXWTM4aEE3MWU5dXhDWkxtSTJ3R1A0QzRwQ0tsUDlicTNucnh5OXQ1NXdTQXlFWDdnejdMNl9wcExObTNndmtHTzNqeFBGc3FCMlVubG5yTzl1b2daanhUMTRGQjlEVldEWmtRQV85NWtoWUJuNFdLbEJhWXRpclhqTk1nc0JOU0JIX2hRTkFmMDBzSFRocmZ3LXNEZk94aEs5cndxcVd5V2IxTS1Gbl9iM3ZINUFsczVpQ3lkU09IeWxSbktVSjh5eldaNkhkRDhkektjVWZLR2lKcjF1LV84VjdqQ0NiVjN5VGw1QjhqNUVWbENjRUV2M2hORnkwSDkwcXZIbjFrNmhqbDJqU3h0M2lsTWxPVXNSc1g4cFZIUEE5UTZwWFVXcW1FS21tWWw0dm9jSEZuUTdOYk9VZHhsM3prQzdMM0EzT3A3T21ZdmZfWk03eG9TSXBzeGViV0lDekJmU2dLZXpzRmtzVHY4NnZuVVBlM3lhYnJiUXozeDRfMUtSNzhFbmx3bER4SVdmQTZUamx4ZEF2T3g0QjgwZ0FEWFBtN3JPZ3YzWlRQNmpoOU9lRDlZMzJYQUlmellIOHNVbGFBNzFGZXNIRmp4VlJOeDdtT3NsZERtSnAzZ0FtRUF3UnFFaDJmZDQ0eWFOdnhiOWliZXl3UlF6NHNjQUhuT3FyNmhyRE1jVk5rdnlIUVd1aHFrS3dIaTJkUFB4TXY3MVlfajkxSFZBVjZkcG5YLVBmb2lkWjlvc1VIdTQ2ajBJemhRN2FZdWt3MktXTmxPaHJYdEdlYzRNUVBLQ2ZtNndXbUptVlc2UjBkcE5yT3N0eC1JREFGS3oxdURva3hGLWhDYWxMdkRYSWpRX3loY1JaLTBHeFEtb1BHWFRJVkpBZk9rVml5d3dWNUJKTUtQd3FxSERrQjU0dkxyRjI3c2hKR3ZKZ3prTEZNX3Ezb1dKbXNLelk1VVlyVzBQc3pqd25KQ09EUlIzcURRT2xWQWEtVzl6QkowbDlQdHNYeFlJVHI3N3VtQVY5WjVEbnpMOXJCVDVONTBmQnU2aTVIWVVHVTlhTlJVOHBCRWJHMWZraDB2RDQ1ZlE2WHpwYWZ1X1l4THRqbklNXzJTS1lxM2FLSXlid3RmUy1ZM3Q4ejh3YnQ1RG81dEtkU2psT2o3WDBBcnlzYXNGWkNoWF83dU9OVXl3aWZwLUdEMHM5U0Uwd1ZaM2lNMm84ZWNLSmFacHFUZ215TzBFUk5XS3JnVnI0WGlINUlYVFFPcERTZ25wZXFOQkxRRTNVU0plcVR2a2EwQ0d4eVdDOGUxVmRzLVFFMGJNcl9OdWdGNkNQa19fQlZNem9tWkhlR2llemxfT0hKa29lX3VsZUZzNnpLZHc3aEV3VTVsNm1SbmkxRGRqektsWEp6U1ozZUVlV2ZMUklnNDB5d0t3R294S3RTQ2JmZmQycE5XVm1PdVQyTkFXMUJnZUp4bFZua0QxaGh0TXlfUFpsWnBjd1NjdFpINWlYYU9QM052MEprTlMzTWR5d2lSbk5pY0Q5eTJoSV9SdTBqWXdmaU1EejRHTVpzS2tuNjRiS3UzejRuT0FGSWlkSmlSREgzMl9aQVdNWVc1LVdfUW1SZ0g0OWxEYmM5VFZHeE5jWmotNFRjMFY0X3FmV1NwQUxNN2dyb3BhbC1wTjBvbnlaWF9oUVBZMEpoQnA3VXdRY2o2RUZUQ3RQS0UzRFF3QjJEd25DaDI4VE9BZ2ZfbW1vTUEuTDNEYXlNR2NQQjBwejRWQTFfVmNzSWVWSWlVbk12VnpxY09md2gxYmRELVVpUmdjWTZrWk9VUVNSXzh5YWt3dzFpU2JtSXprWHEyVkk3ZzZJcDFtV0E="/><input type="hidden" name="_eventId" value="submit"/><input type="hidden" name="geolocation"/><input type="hidden" name="deviceFingerprint"/><script type="text/javascript">
+                            let client = new ClientJS();
+                            let fingerprint = client.getFingerprint();
+                            $("[name=\"deviceFingerprint\"]").val(fingerprint);
+                        </script>
+                    </section>
+
+                    <button
+                class="mdc-button mdc-button--raised btn btn-primary btn-primary"
+                name="submitBtn"
+                id="submitBtn"
+                type="submit">
+            <span class="mdc-button__label">Sign In</span>
+        </button>
+
+        <span class='help'>
+                        <a id="showHelpText" href='#' aria-owns="helpText"><span class="forScreenReaders">Show </span>HELP<span class="forScreenReaders"> below</span></a>
+                        <a id='hideHelpText' href='#' style="display: none;">Hide HELP</a>
+                    </span>
+
+                    <span>
+                        <span class="externalSiginLink">
+                <a class="" href="clientredirect?client_name=Cirrus&amp;service=https%3A%2F%2Finst.eecs.berkeley.edu%2F~cs162%2Ffa24%2Ffaq%2F"
+                        title="Cirrus saml2" autoRedirectType="none">
+                        <span>Sponsored Guest Sign In</span>
+                    </a>
+                </br>
+                </span>
+
+            <script>
+                const redirectTo = $("a[autoRedirectType=client]").attr("href");
+                if (redirectTo !== null && redirectTo !== undefined) {
+                    window.location.href = redirectTo;
+                } else {
+                    console.log("Unable to locate provider with auto-redirect");
+                }
+            </script>
+        </span>
+                </div>
+            </form>
+
+            <!-- <hr th:if="${loginFormViewable and loginFormEnabled}" class="my-4"/> --><div>
+                <div id="pmlinks" class="my-2">
+        <div class="mt-2">
+            <span><a href="https://bpr.calnet.berkeley.edu/account-manager/">Forgot CalNet ID or Passphrase? </a></span>
+        </div>
+        <div class="mt-2">
+            <span><a href="https://mycalnet.berkeley.edu">Manage my CalNet account </a></span>
+        </div>
+    </div>
+                <div id="helpTextTop">
+            <div id="helpText" class="help-copy" style="display: none" aria-hidden="true" role="complementary" tabindex="-1">
+                <div><div role="region">
+    <h3 class="calnet-help">Help</h3>
+
+    <h4 class="calnet-help">Contact</h4>
+
+    <p><a href="https://calnet.berkeley.edu/it-help-desk-and-calnet-support">Help desk information</a></p>
+
+    <p><a href="https://mycalnet.berkeley.edu">Manage my CalNet account</a>
+
+</div>
+</div>
+                <div><div role="region">
+    <h4 class="calnet-help">How to Sign In as a SPA</h4>
+    
+    <p>
+        To sign in to a Special Purpose Account (SPA) via a list, add a "<strong>+</strong>" to your CalNet ID 
+        (e.g., "<strong>+mycalnetid</strong>"), then enter your passphrase. The next screen will show a drop-down 
+        list of all the SPAs you have permission to access. Select the SPA you wish to sign in as.
+    </p>
+
+    <p>
+        To sign in directly as a SPA, enter the SPA name, "<strong>+</strong>", and your CalNet ID into 
+        the CalNet ID field (e.g., “<span style="white-space:nowrap;"><strong>spa-mydept+mycalnetid</strong></span>”), 
+        then enter your passphrase.
+    </p>
+
+    <p>
+        To view and manage your SPAs, log into the <a href="https://spa.berkeley.edu">Special Purpose Accounts</a> application with your personal credentials.
+    </p>
+
+</div>
+</div>
+            </div>
+        </div>
+            </div>
+
+            <script type="text/javascript">
+                /*<![CDATA[*/
+                var i = "One moment please..."
+                var j = "Sign In"
+                    /*]]>*/
+                    $(window).on("pageshow", function () {
+                        $(":submit").prop("disabled", false);
+                        $(":submit").attr("value", j);
+                    });
+                $(document).ready(function () {
+                    $("#fm1").submit(function () {
+                        $(":submit").attr("disabled", true);
+                        $(":submit").attr("value", i);
+                        return true;
+                    });
+                    // Next two checks added along with the labels
+                    // to support IE11 legacy browsers removing
+                    // the fancy flex-style input fields
+                    $( "#username" ).on( "keydown", function() {
+                        if (window.document.documentMode){
+                            $("#username-label").text("");
+                        }
+                    });
+                    $( "#password" ).on( "keydown", function() {
+                        if (window.document.documentMode){
+                            $("#password-label").text("");
+                        }
+                    });
+                });
+            </script>
+        </div>
+
+        <div>
+            <div></div>
+        </div>
+
+        <div id="copyright" class="copyright">
+        <small>Copyright &copy; <script type="text/javascript">
+            var theDate=new Date()
+            document.write(theDate.getFullYear())
+        </script> UC Regents. All rights reserved.</small>
+    </div>
+
+    </div>
+        </section>
+        <!--
+        <section id="loginProviders" class="login-section login-providers card-body"
+                th:if="${(#bools.isFalse(delegatedAuthenticationDynamicProviderSelection)
+                       && #bools.isFalse(delegatedAuthenticationDisabled))
+                       && (#cas.isTrue(delegatedAuthenticationProviderConfigurations)
+                       || #cas.isTrue(wsfedUrls))}">
+            <div th:replace="~{fragments/loginProviders :: loginProviders}">
+                <a href="fragments/loginProviders.html">loginProviders</a>
+            </div>
+        </section>
+        --></div>
+</div>
+    </div>
+
+    </body>
+
+</html>

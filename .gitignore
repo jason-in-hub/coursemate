@@ -2,3 +2,4 @@ ml/.venv/
 __pycache__/
 *.pyc
 .DS_Store
+ml/engine_model/minilm/

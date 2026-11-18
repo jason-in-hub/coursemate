@@ -4,6 +4,6 @@
  "max_p_diff": 2.220446049250313e-16,
  "max_conf_diff": 2.220446049250313e-16,
  "max_score_diff": 0.0,
- "min_margin": 0.02364366276758434,
+ "min_margin": 0.017445495358916707,
  "mismatches": []
 }

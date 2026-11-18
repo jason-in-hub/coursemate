@@ -156,9 +156,9 @@ q154,Explain quantum computing in simple terms,oos,,O11,clean,,,ESCALATED
 q155,wats the best phone to buy,oos,,O12,typo,,,ESCALATED
 q156,When is the midterm exam?,oos,,O13,clean,,,ESCALATED
 q157,midterm幾時考?,oos,,O13,codemix,,,ESCALATED
-q158,What is the final exam date?,oos,,O14,clean,,,ESCALATED
-q159,How much are the quizzes worth in the course grade?,oos,,O15,clean,,,ESCALATED
-q160,What is the grading breakdown for the assignments?,oos,,O15,paraphrase,,,ESCALATED
+q158,What is the final exam date?,lookup,syllabus:exam,O14,clean,,,SOURCED
+q159,How much are the quizzes worth in the course grade?,lookup,syllabus:grading,O15,clean,,,SOURCED
+q160,What is the grading breakdown for the assignments?,lookup,syllabus:grading,O15,paraphrase,,,SOURCED
 q161,Which room is the lecture in?,oos,,O16,clean,,,ESCALATED
 q162,What is the TA's email address?,oos,,O17,clean,,,ESCALATED
 q163,When are the instructor office hours?,oos,,O18,clean,,,ESCALATED

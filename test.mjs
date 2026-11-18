@@ -12,7 +12,7 @@ try { new Function(script); ok(true, "script parses"); } catch (e) { ok(false, "
 const core = script.slice(script.indexOf("// ---- MODEL"), script.indexOf("// ---- UI ----"));
 const M = new Function(core + "\nreturn {answer, calc, MODEL};")();
 const W = M.MODEL.weights;
-ok(M.MODEL && M.MODEL.chunks.length === 37, "inline model loaded, 37 chunks (got " + M.MODEL.chunks.length + ")");
+ok(M.MODEL && M.MODEL.chunks.length === 46, "inline model loaded, 46 chunks (got " + M.MODEL.chunks.length + ")");
 ok(W.items.reduce((a, i) => a + i.weight, 0) === 22, "project weights sum to 22");
 ok(JSON.stringify(W.items.map(i => [i.key, i.weight])) === JSON.stringify([["registration", 0], ["proposal", 2], ["poster", 10], ["video", 3], ["report", 7]]),
   "weights table = Important Dates (Registration 0, Proposal 2, Poster 10, Video 3, Final Report 7)");

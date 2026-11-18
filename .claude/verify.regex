@@ -1,0 +1,1 @@
+node (test\.mjs|e2e\.cjs)|run_all\.sh|parity\.py|test_calc\.py

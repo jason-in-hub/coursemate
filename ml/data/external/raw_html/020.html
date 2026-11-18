@@ -1,0 +1,43 @@
+<!doctype html>
+<!-- Served by GitHub Pages for any path the org site doesn't have.
+     Past semesters (through su26) go to
+       inst.eecs.berkeley.edu/~cs61a/<sem>/..., path preserved;
+     Assignment paths /hw/... /lab/... /disc/... and /proj/... go to
+       the equivalent page for the current semester.
+     Paths under a live semester site (/fa26/...) never reach this file.
+     GitHub routes them to that project site and its own 404 page. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CS 61A</title>
+  <script>
+    (function () {
+      var CURRENT = "fa26";  // update each semester
+      var ARCHIVE = "https://inst.eecs.berkeley.edu/~cs61a";
+      var path = location.pathname;
+
+      // Semesters through su26 live in the EECS archive. Forward there.
+      // (fa26 onward are served by Github Pages as /<sem>/ project sites)
+      var m = path.match(/^\/((fa|sp|su)(\d\d))(\/.*)?$/);
+      if (m) {
+        var key = +m[3] * 3 + { sp: 0, su: 1, fa: 2 }[m[2]];
+        if (key <= 26 * 3 + 1) {  // su26 == 79
+          location.replace(ARCHIVE + "/" + m[1] + (m[4] || "/") + location.search);
+          return;
+        }
+      }
+
+      // Forward assignment links to the current semester.
+      if (/^\/(hw|lab|disc|proj|staff|syllabus|calendar|resources|textbook)(\/|$)/.test(path)) {
+        location.replace("/" + CURRENT + path + location.search + location.hash);
+      }
+    })();
+  </script>
+</head>
+<body>
+  <h1>Page not found</h1>
+  <p>There is no page at this address. Try the current semester&rsquo;s site at
+  <a href="/fa26/">cs61a.org/fa26</a>.</p>
+</body>
+</html>

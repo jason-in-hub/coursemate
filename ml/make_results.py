@@ -131,8 +131,8 @@ def main():
           row(f"test, v1 t={V1['threshold']:.4f} (seen first)", a1), row(f"**test, v2 t={T['threshold']:.4f} (post-hoc, scored once)**", a), ""]
     over = [r for r in pred if r["split"] == "test" and r["stamp"] == "ESCALATED" and r["reason"] == "low confidence" and r["top_chunk"] in r["gold"].split(";")]
     L += [f"v2 at its threshold: every test question that should escalate did ({a['escalated_of_those']}/{a['should_escalate']}); "
-          f"{len(over)} test questions still escalate as low-confidence although their top chunk is correct. "
-          f"Test risk ({f3(a['risk'])}) is above the {T['risk_cap']} tune cap; the threshold comes from {b['n']} tune questions. "
+          f"{len(over)} test questions still escalate as low-confidence although their top chunk is correct. " +
+          (f"**Deployed threshold {T['threshold']:.4f} is a team override (target {T['team_threshold']}), set after test numbers were seen; the rule (tune risk <= {T['risk_cap']}) gives {T['rule_threshold']:.4f}.** " if T.get('team_threshold') is not None else "") + f"Test risk ({f3(a['risk'])}) is {'above' if a['risk'] > T['risk_cap'] else 'within'} the {T['risk_cap']} tune cap; the threshold comes from {b['n']} tune questions. "
           "Because v2 was designed after v1's test numbers were seen, the v2 test row is not a clean held-out estimate: see 6.8.", ""]
     for ver in ("v1", "v2"):
         L.append(f"**Sample questions, {ver}: {sum(s['intended'] for s in SB[ver])}/{len(SB[ver])} as intended.** " +

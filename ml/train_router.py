@@ -12,6 +12,7 @@ Run (from ml/): .venv/bin/python train_router.py   (needs results/retrieval.json
   coverage with risk <= RISK_CAP; ties -> the higher threshold. Then report test at that threshold.
 Writes results/router.json, results/predictions.csv, results/risk_coverage.png, artifacts/model.pkl.
 """
+import copy
 import csv
 import json
 import pickle
@@ -28,6 +29,9 @@ from pipeline import CourseMate, is_correct_answer
 from textnorm import ANALYZERS
 
 LABELS, ROUTER_ANALYZERS, RISK_CAP, SEED = ["lookup", "calc", "oos"], ["word1", "word12", "char35"], 0.10, 0
+# Team decision (2026-11-17), made AFTER test numbers were seen: trade risk for coverage so the demo answers more.
+# The rule-chosen threshold (tune risk <= RISK_CAP) is still computed and reported as rule_threshold. None = use the rule.
+TEAM_THRESHOLD = 0.526
 V2_MODES = ["margin", "ideal", "p"]  # candidate lookup-confidence forms for v2, tie-break order
 CONF_FORMULA = {"v1": "router p × s1/(s1+K)", "margin": "router p × top1/(top1+top2)",
                 "ideal": "router p × min(1, top1 / Σ idf(query terms))", "p": "router p"}
@@ -110,7 +114,9 @@ def main():
     def tune_mode(mode):
         cm = CourseMate(v, lr, r, chunks, K, threshold=0.0, conf_mode=mode)
         pts = rc_points(S["tune"], [cm.answer(q["q"]) for q in S["tune"]])
-        cm.t = choose(pts)["t"]
+        # threshold sits 1e-9 below the chosen conf value: a question whose conf equals it is answered in
+        # Python and in the JS page alike (exact float ties broke Python/JS parity).
+        cm.t = choose(pts)["t"] - 1e-9
         return cm, pts
 
     # v1: kept for the record (its test numbers were seen before v2 was designed)
@@ -128,7 +134,10 @@ def main():
         cm, pts = tune_mode(mode)
         sel2[mode] = {"cm": cm, "pts": pts, "tune": at(cm, "tune")[1]}
     mode2 = sorted(V2_MODES, key=lambda m: (-sel2[m]["tune"]["coverage"], sel2[m]["tune"]["risk"], V2_MODES.index(m)))[0]
-    cm2 = sel2[mode2]["cm"]
+    cm2 = copy.copy(sel2[mode2]["cm"])  # copy: the override must not change the reported tune selection
+    rule_t = cm2.t
+    if TEAM_THRESHOLD is not None:  # team override: nearest tune candidate, same 1e-9 tie offset
+        cm2.t = min((p["t"] for p in sel2[mode2]["pts"]), key=lambda x: abs(x - TEAM_THRESHOLD)) - 1e-9
     # v2 test, reported once
     cm2_test0 = CourseMate(v, lr, r, chunks, K, threshold=0.0, conf_mode=mode2)
     pts2_test = rc_points(S["test"], [cm2_test0.answer(q["q"]) for q in S["test"]])
@@ -143,7 +152,7 @@ def main():
            "retriever": ret, "K": K, "risk_cap": RISK_CAP,
            "v2_selection_tune": {m: {"threshold": sel2[m]["cm"].t, **{k: sel2[m]["tune"][k] for k in ("coverage", "risk", "answered", "wrong")}}
                                  for m in V2_MODES},
-           "conf_mode": mode2, "conf_formula": CONF_FORMULA[mode2], "threshold": t,
+           "conf_mode": mode2, "conf_formula": CONF_FORMULA[mode2], "threshold": t, "rule_threshold": rule_t, "team_threshold": TEAM_THRESHOLD,
            "tune_at_threshold": at(cm2, "tune")[1], "test_at_threshold": at(cm2, "test")[1],
            "test_no_threshold": p0("test"), "tune_no_threshold": p0("tune"), "curves": pts, "v1": v1}
     (RESULTS / "router.json").write_text(json.dumps(res, indent=1))

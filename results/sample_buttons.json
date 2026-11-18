@@ -6,7 +6,7 @@
    "intended": false,
    "stamp": "ESCALATED",
    "reason": "low confidence",
-   "conf": 0.40515231354427006,
+   "conf": 0.42372017934566775,
    "top_chunk": "canvas:proposal-report"
   },
   {
@@ -15,7 +15,7 @@
    "intended": true,
    "stamp": "CALCULATED",
    "reason": null,
-   "conf": 0.9930920629847535,
+   "conf": 0.993290465571196,
    "top_chunk": "page:important-dates:0"
   },
   {
@@ -24,7 +24,7 @@
    "intended": true,
    "stamp": "ESCALATED",
    "reason": "out of scope",
-   "conf": 0.4948116238035991,
+   "conf": 0.5830902986717215,
    "top_chunk": "page:group-formation:0"
   },
   {
@@ -33,8 +33,8 @@
    "intended": false,
    "stamp": "ESCALATED",
    "reason": "low confidence",
-   "conf": 0.28949368811596415,
-   "top_chunk": "page:submission:0"
+   "conf": 0.38321820434294385,
+   "top_chunk": "syllabus:ai_policy"
   },
   {
    "q": "When is the poster link due?",
@@ -42,7 +42,7 @@
    "intended": true,
    "stamp": "SOURCED",
    "reason": null,
-   "conf": 0.515950129126817,
+   "conf": 0.5258523466262508,
    "top_chunk": "page:important-dates:0"
   }
  ],
@@ -53,7 +53,7 @@
    "intended": true,
    "stamp": "SOURCED",
    "reason": null,
-   "conf": 0.5460369583876297,
+   "conf": 0.5915060549865785,
    "top_chunk": "canvas:proposal-report"
   },
   {
@@ -62,7 +62,7 @@
    "intended": true,
    "stamp": "CALCULATED",
    "reason": null,
-   "conf": 0.9930920629847535,
+   "conf": 0.993290465571196,
    "top_chunk": "page:important-dates:0"
   },
   {
@@ -71,7 +71,7 @@
    "intended": true,
    "stamp": "ESCALATED",
    "reason": "out of scope",
-   "conf": 0.4948116238035991,
+   "conf": 0.5830902986717215,
    "top_chunk": "page:group-formation:0"
   },
   {
@@ -80,8 +80,8 @@
    "intended": false,
    "stamp": "ESCALATED",
    "reason": "low confidence",
-   "conf": 0.4922695132733868,
-   "top_chunk": "page:submission:0"
+   "conf": 0.4473712687136145,
+   "top_chunk": "syllabus:ai_policy"
   },
   {
    "q": "When is the poster link due?",
@@ -89,7 +89,7 @@
    "intended": true,
    "stamp": "SOURCED",
    "reason": null,
-   "conf": 0.7371607284588948,
+   "conf": 0.7479114808694528,
    "top_chunk": "page:important-dates:0"
   }
  ]
