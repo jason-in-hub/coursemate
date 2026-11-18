@@ -6,6 +6,8 @@ The page runs a real ML pipeline in the browser: a TF-IDF + logistic-regression 
 
 Results, with every number tied to the script that produced it: [results/RESULTS.md](results/RESULTS.md).
 
+**Demo (recommended):** serve the folder over http, e.g. `python3 -m http.server 8000` and open http://127.0.0.1:8000/index.html (first visit needs internet for transformers.js and pdf.js from jsDelivr). Served this way, COMP1945 mode also loads the fine-tuned MiniLM as a second opinion: a lookup that BM25 would escalate for low confidence is answered when MiniLM picks the same passage, and escalations show the best-matching passages. On 34 natural demo questions (`ml/data/demo_questions.csv`, 21 not seen during development) this raises right answers from 11 to 17 with no new wrong answers (`node demo_eval.cjs ml/data/demo_questions.csv <url> mini`); on the labelled tune and test splits, right answers go 15 -> 19 and 13 -> 14 with the same 3 wrong answers each (`ml/eval_agree.py` -> `results/agree.json`). Opened from disk (file://), the page runs BM25 only.
+
 ## Open locally
 
 Double-click `index.html`, or `open index.html` (macOS).

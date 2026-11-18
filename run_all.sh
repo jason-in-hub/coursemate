@@ -18,4 +18,5 @@ echo "== 8. mutate_parity.sh";  ./mutate_parity.sh | grep -e "---" -e MISMATCH -
 echo "== 9. node test.mjs";     (cd .. && node test.mjs | grep -e KNOWN -e FAIL -e "sample questions" -e conf_mode -e GREEN -e RED)
 echo "== 10. eval_holdout.py";  $PY eval_holdout.py
 echo "== 11. make_results.py";  $PY make_results.py
+echo "== 12. eval_agree.py";    if [ -d engine_model/minilm ]; then $PY eval_agree.py 2>/dev/null | tail -1; else echo "skipped: engine_model/minilm not built (train_engine.py)"; fi
 echo "ALL DONE"
