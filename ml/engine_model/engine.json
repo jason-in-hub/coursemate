@@ -10,7 +10,7 @@
  "question_bank": [
   "4.1 Can I audit the course?",
   "4.2 Is it possible to take the course pass/fail?",
-  "4.3 How will I know how I\u2019m doing in the class?",
+  "4.3 How will I know how I’m doing in the class?",
   "4.4 Does the 432 course assume we have completed 431?",
   "4.5 Do I have to be in Cleveland to take this course?",
   "4.6 Will all class materials be available to me online?",
@@ -25,7 +25,7 @@
   "Are there alternate exams?",
   "Are there any extra credit components in this course?",
   "Are we permitted to use laptops during lecture?",
-  "But my code runs on my computer \u2014 why does the autograder fail it?",
+  "But my code runs on my computer — why does the autograder fail it?",
   "Can I audit CS50?",
   "Can I audit the class?",
   "Can I audit the course?",
@@ -53,7 +53,7 @@
   "Can I use VS Code on my device instead of on the web?",
   "Can I use a language other than Python?",
   "Can I use my laptop in class?",
-  "Can I watch CS50\u2019s lectures online if they conflict with some other academic or athletic commitment?",
+  "Can I watch CS50’s lectures online if they conflict with some other academic or athletic commitment?",
   "Can I work with classmates?",
   "Can a regrade raise my score above 90%?",
   "Can first years take both CS50 and a Freshman Seminar SAT/UNS?",
@@ -92,7 +92,7 @@
   "How can I check the status of my Grading Basis Change Request?",
   "How can I have a more productive visit at office hours?",
   "How can I request that my exam be regraded?",
-  "How can I see my exam after I\u2019ve received a grade?",
+  "How can I see my exam after I’ve received a grade?",
   "How can I study for the class ahead of time?",
   "How can I take advantage of American Council on Education (ACE) credit recommendation?",
   "How can we know our progress on zyBooks?",
@@ -145,9 +145,9 @@
   "I am not able to attend the live lectures and/or labs. Can I still take the course?",
   "I am not able to attend the live lectures, labs, and/or discussions. Can I still take the course?",
   "I am on the waitlist, so how can I keep up with the course?",
-  "I clicked the assignment link, but why can\u2019t I find my assignment in Datahub?",
+  "I clicked the assignment link, but why can’t I find my assignment in Datahub?",
   "I completed an assignment or this course in a prior year. Why does my Gradebook no longer show my prior progress?",
-  "I do not see the \u201cCSW 8\u201d course on Gradescope and/or Piazza. What can I do?",
+  "I do not see the “CSW 8” course on Gradescope and/or Piazza. What can I do?",
   "I don't agree with a grade I got, what do I do?",
   "I have a 0 on Gradescope for a lab that I attended and got checked off. Why is this?",
   "I have a 80/100 on my grade report for a lab that I attended and got checked off. Why is this?",
@@ -164,18 +164,18 @@
   "I plan to declare CS this fall. Can I enroll in the class after I declare?",
   "I plan to declare and enroll later. Can I keep up with assignments before I officially enroll?",
   "I see an Autograder that gave me a grade. Does that count as part of my score?",
-  "I submitted a project, but nothing is showing up in my Gradebook yet showing that I\u2019ve submitted. Why?",
-  "I watched all the videos in edX or on YouTube: Why don\u2019t I have a certificate?",
+  "I submitted a project, but nothing is showing up in my Gradebook yet showing that I’ve submitted. Why?",
+  "I watched all the videos in edX or on YouTube: Why don’t I have a certificate?",
   "I would like to apply for a (u)GSI position for this course. What should I do?",
   "If I did 70% of the problems, do I get a certificate?",
-  "If I don\u2019t finish the course before end-of-day 30 June 2027, what will happen?",
+  "If I don’t finish the course before end-of-day 30 June 2027, what will happen?",
   "If I get a 90% once, can I ignore that topic later?",
   "If I paid for a verified certificate after I completed the course, do I need to tell you?",
   "If I paid for a verified certificate before this calendar year, do I need to pay again?",
   "If I submitted a problem and did not reach the 70% passing grade, can I resubmit?",
   "If I want an edX verified certificate in the future, do I have to pay for verification before starting the course?",
   "If my check50 score is not as expected, why might that be?",
-  "If my laptop isn\u2019t working, can I borrow one?",
+  "If my laptop isn’t working, can I borrow one?",
   "If my style score is not as expected, why might that be?",
   "If we submit our labs onto Gradescope multiple times, will the newest version be the one graded?",
   "Is AI allowed for debugging?",
@@ -198,15 +198,15 @@
   "Is there a project in the course?",
   "Is there a template for the final report?",
   "Is there a textbook or other resource I could use to supplement my learning?",
-  "I\u2019m a CGOE student. Can I come present in person?",
-  "I\u2019m a concurrent enrollment student. When can I enroll in the class?",
-  "I\u2019m deciding between CS229, CS129, CS221, CS224N, CS231N, etc. Which should I take?",
-  "I\u2019m going to be late / absent for a class! Who do I notify?",
-  "I\u2019m not a declared Computer Science, EECS, or College of Engineering major. Can I enroll in the class?",
-  "I\u2019m positive I have the right answer, but the test fails. Is there a mistake in the test?",
-  "I\u2019m unavailable on the poster session day (or the midterm day). Can I submit a video (or take the exam at another time)?",
+  "I’m a CGOE student. Can I come present in person?",
+  "I’m a concurrent enrollment student. When can I enroll in the class?",
+  "I’m deciding between CS229, CS129, CS221, CS224N, CS231N, etc. Which should I take?",
+  "I’m going to be late / absent for a class! Who do I notify?",
+  "I’m not a declared Computer Science, EECS, or College of Engineering major. Can I enroll in the class?",
+  "I’m positive I have the right answer, but the test fails. Is there a mistake in the test?",
+  "I’m unavailable on the poster session day (or the midterm day). Can I submit a video (or take the exam at another time)?",
   "My codespace is behaving strangely. What should I do?",
-  "My notebook won\u2019t load. Is Datahub down?",
+  "My notebook won’t load. Is Datahub down?",
   "Should I skip CS50 if I already took AP CS A?",
   "Should I skip CS50 if I already took AP CSP?",
   "Should I take CS50 SAT/UNS or for a letter grade?",
@@ -231,14 +231,14 @@
   "What can I expect from the staff regarding academic integrity?",
   "What computing resources are available?",
   "What constitutes good style?",
-  "What counts as a \u201ctopic\u201d?",
+  "What counts as a “topic”?",
   "What do the PA, CA and LA mean on the zybook, where are they found? How do I know when they are completed?",
   "What does a project question look like?",
   "What does it mean when I see an error like isinstance(..., numbers.Integral) ?",
   "What does this Python error message mean?",
-  "What does \u201ccode must compile to be graded\u201d mean?",
-  "What does \u201clate submission without penalty\u201d mean?",
-  "What does \u201cmastery with replacement\u201d mean?",
+  "What does “code must compile to be graded” mean?",
+  "What does “late submission without penalty” mean?",
+  "What does “mastery with replacement” mean?",
   "What if I do not clear the prerequisite exam?",
   "What if I get sick during the semester?",
   "What if I get sick right before an exam?",
@@ -247,7 +247,7 @@
   "What if I miss an assignment deadline?",
   "What if I registered late? When are things due?",
   "What if something serious happens after the extension deadline?",
-  "What is CS50\u2019s grade distribution?",
+  "What is CS50’s grade distribution?",
   "What is Ed?",
   "What is considered to be an appropriate question?",
   "What is considered to be an inappropriate question?",
@@ -269,7 +269,7 @@
   "What is the prerequisite exam?",
   "What is the quiz schedule and format?",
   "What is the structure of the class?",
-  "What is the \u201cLab Checkpoint\u201d score in gradebook?",
+  "What is the “Lab Checkpoint” score in gradebook?",
   "What name will appear on my certificate?",
   "What prototyping tools are suggested?",
   "What should I ask and not ask in tutor hours?",
@@ -282,10 +282,10 @@
   "What topics are allowed for the project?",
   "What version of Python do I need to download?",
   "What will the reflection be like and how long do they take?",
-  "What\u2019s the difference between a verified certificate and a CS50 Certificate?",
-  "What\u2019s the difference between normal office hours and project office hours?",
-  "What\u2019s the difference between \u201cless comfortable\u201d and \u201cmore comfortable\u201d problems? Do I have to do both?",
-  "What\u2019s the exam grade/solution turnaround?",
+  "What’s the difference between a verified certificate and a CS50 Certificate?",
+  "What’s the difference between normal office hours and project office hours?",
+  "What’s the difference between “less comfortable” and “more comfortable” problems? Do I have to do both?",
+  "What’s the exam grade/solution turnaround?",
   "When and how are lectures and discussions run?",
   "When and where are exams held?",
   "When are assignments due?",
@@ -316,20 +316,20 @@
   "Which version of my assignment will be graded?",
   "Who makes the decision for a regrade request?",
   "Who should I contact for enrollment-related questions?",
-  "Why can\u2019t I log in to Datahub?",
+  "Why can’t I log in to Datahub?",
   "Why did I not get my verified certificate after 30 days?",
   "Why did I not pass my final project?",
-  "Why did a Gradescope test fail, when all the notebook\u2019s tests passed?",
+  "Why did a Gradescope test fail, when all the notebook’s tests passed?",
   "Why do I get an error saying grader is not defined?",
   "Why does CS50 use C?",
-  "Why does a notebook test fail now, when it passed before and I didn\u2019t change my code?",
+  "Why does a notebook test fail now, when it passed before and I didn’t change my code?",
   "Why does edX think my grade is 0%?",
   "Why does grader.check_all() fail, if all previous tests passed?",
   "Why does it seem like content or third-party services related to this course are blocked?",
-  "Why does my edX dashboard say I can \u201cresume\u201d the course even though I have completed it?",
+  "Why does my edX dashboard say I can “resume” the course even though I have completed it?",
   "Why does running a particular cell cause my kernel to die?",
   "Why does the Gradebook say that I am not enrolled?",
-  "Why isn\u2019t pair programming allowed on homework?",
+  "Why isn’t pair programming allowed on homework?",
   "Why should I have good coding style?",
   "Why these rules?",
   "Will I be allowed to take the course remotely?",
@@ -341,7 +341,493 @@
   "Will there be a poster session?",
   "Will there be review sessions for the exams?",
   "Will there be sections?",
-  "Will we be tested on material in \u201coptional\u201d labs?",
+  "Will we be tested on material in “optional” labs?",
   "edX is requiring me to pay to register for the course: How do I get a free certificate?"
- ]
+ ],
+ "intents": [
+  {
+   "id": "grading",
+   "q": "How is the course graded?",
+   "para": [
+    "What is the grade breakdown for the course?",
+    "How much is each assignment worth?",
+    "What percentage of my grade is the final exam?",
+    "What are the course components and their weights?"
+   ],
+   "kw": [
+    "grading",
+    "grades",
+    "grade breakdown",
+    "assessment",
+    "evaluation"
+   ],
+   "cue": "\\d+\\s?%|percent|weight|points|worth"
+  },
+  {
+   "id": "late",
+   "q": "What is the late submission policy?",
+   "para": [
+    "What happens if I submit an assignment late?",
+    "How do late days work?",
+    "Is there a penalty for late homework?",
+    "Can I submit after the deadline?"
+   ],
+   "kw": [
+    "late",
+    "lateness",
+    "late days",
+    "slip days"
+   ],
+   "cue": "\\blate\\b|lateness|penalt|deduct|grace day|slip day|late day"
+  },
+  {
+   "id": "extension",
+   "q": "Can I get an extension on a deadline?",
+   "para": [
+    "How do extensions work?",
+    "What if I get sick and cannot meet a deadline?",
+    "Who do I ask for an extension?"
+   ],
+   "kw": [
+    "extension",
+    "extensions",
+    "illness",
+    "emergencies"
+   ],
+   "cue": "extension|extend|emergenc|illness|\\bsick"
+  },
+  {
+   "id": "deadlines",
+   "q": "When are assignments due?",
+   "para": [
+    "What time of day are assignments due?",
+    "Where do I find the due dates?",
+    "When are the deadlines?"
+   ],
+   "kw": [
+    "due dates",
+    "deadlines",
+    "schedule"
+   ],
+   "cue": "\\bdue\\b|deadline|11:59|midnight|\\d{1,2}(:\\d\\d)?\\s?(am|pm)\\b"
+  },
+  {
+   "id": "collab",
+   "q": "Can I work with other students on assignments?",
+   "para": [
+    "What is the collaboration policy?",
+    "Are assignments individual or group work?",
+    "Can I discuss homework with classmates?"
+   ],
+   "kw": [
+    "collaboration",
+    "working together",
+    "partners"
+   ],
+   "cue": "collaborat|partner|individual|work together|discuss|group"
+  },
+  {
+   "id": "integrity",
+   "q": "What is the academic integrity policy?",
+   "para": [
+    "What counts as cheating or plagiarism?",
+    "What happens if I copy code from someone?",
+    "What is the honor code for this course?"
+   ],
+   "kw": [
+    "academic integrity",
+    "academic honesty",
+    "honor code",
+    "plagiarism",
+    "cheating"
+   ],
+   "cue": "integrity|honest|plagiar|cheat|honor code|misconduct|copy"
+  },
+  {
+   "id": "ai",
+   "q": "Can I use AI tools like ChatGPT?",
+   "para": [
+    "What is the policy on generative AI?",
+    "Am I allowed to use ChatGPT or Copilot for assignments?",
+    "Can I use AI for debugging?"
+   ],
+   "kw": [
+    "ai policy",
+    "artificial intelligence",
+    "generative ai",
+    "chatgpt",
+    "llm"
+   ],
+   "cue": "\\bAI\\b|chatgpt|generative|copilot|\\bllms?\\b|artificial intelligence"
+  },
+  {
+   "id": "exam_when",
+   "q": "When are the exams?",
+   "para": [
+    "When is the midterm?",
+    "When is the final exam?",
+    "How many exams are there?"
+   ],
+   "kw": [
+    "exams",
+    "midterm",
+    "final exam"
+   ],
+   "cue": "midterm|final exam|\\bexams?\\b.{0,80}(\\d|week|monday|tuesday|wednesday|thursday|friday|saturday|sunday|january|february|march|april|may|june|july|august|september|october|november|december)"
+  },
+  {
+   "id": "exam_format",
+   "q": "What is the exam format?",
+   "para": [
+    "Are exams open book?",
+    "What can I bring to the exam?",
+    "Are exams in person or online?"
+   ],
+   "kw": [
+    "exam format",
+    "exams",
+    "cheat sheet"
+   ],
+   "cue": "closed[- ]book|open[- ]book|notes|cheat sheet|on paper|in[- ]person|multiple choice|written|computer"
+  },
+  {
+   "id": "exam_miss",
+   "q": "What if I miss an exam?",
+   "para": [
+    "Are there alternate exam times?",
+    "I have a conflict with the final exam. What should I do?",
+    "Is there a makeup exam?"
+   ],
+   "kw": [
+    "alternate exams",
+    "missed exams",
+    "conflicts",
+    "makeup"
+   ],
+   "cue": "make-?up|alternate|conflict|\\bmiss|excused|reschedul"
+  },
+  {
+   "id": "attendance",
+   "q": "Is attendance required?",
+   "para": [
+    "Is lecture attendance mandatory?",
+    "Do I have to attend section or lab?",
+    "Does participation count toward my grade?"
+   ],
+   "kw": [
+    "attendance",
+    "participation"
+   ],
+   "cue": "attend|participation|mandatory|required to (come|be present)|absen"
+  },
+  {
+   "id": "textbook",
+   "q": "Is there a required textbook?",
+   "para": [
+    "What books or course materials do I need?",
+    "Do I need to buy a textbook?"
+   ],
+   "kw": [
+    "textbook",
+    "books",
+    "readings",
+    "materials"
+   ],
+   "cue": "textbook|\\bbooks?\\b|reading|required|recommended"
+  },
+  {
+   "id": "prereq",
+   "q": "What are the prerequisites for this course?",
+   "para": [
+    "What background do I need to take this course?",
+    "Do I need prior programming experience?"
+   ],
+   "kw": [
+    "prerequisites",
+    "prerequisite",
+    "background"
+   ],
+   "cue": "prerequisite|prior (programming )?experience|background|co-?requisite|no experience"
+  },
+  {
+   "id": "oh",
+   "q": "When are office hours?",
+   "para": [
+    "How do I get help in this course?",
+    "Where can I get help with assignments?"
+   ],
+   "kw": [
+    "office hours",
+    "getting help",
+    "help"
+   ],
+   "cue": "office hours?|\\bOH\\b|help hours|tutoring"
+  },
+  {
+   "id": "contact",
+   "q": "How do I contact the instructor or TAs?",
+   "para": [
+    "Who should I email with questions?",
+    "What is the course staff email?"
+   ],
+   "kw": [
+    "contact",
+    "staff",
+    "instructors",
+    "teaching assistants"
+   ],
+   "cue": "e-?mail|@|contact|message|reach (us|the)"
+  },
+  {
+   "id": "forum",
+   "q": "Where should I post questions about the course?",
+   "para": [
+    "Is there an online discussion forum for the class?",
+    "Where are course announcements posted?"
+   ],
+   "kw": [
+    "discussion forum",
+    "forum",
+    "announcements",
+    "communication"
+   ],
+   "cue": "forum|\\bEd\\b|piazza|campuswire|slack|discord|post (your )?questions|announcement"
+  },
+  {
+   "id": "regrade",
+   "q": "How do I request a regrade?",
+   "para": [
+    "What if I think my assignment was graded incorrectly?",
+    "When can I submit regrade requests?"
+   ],
+   "kw": [
+    "regrades",
+    "regrade requests"
+   ],
+   "cue": "regrade|re-grade|dispute|grading (error|mistake)"
+  },
+  {
+   "id": "accom",
+   "q": "What accommodations are available for students with disabilities?",
+   "para": [
+    "How do I request academic accommodations?",
+    "Who do I contact about accessibility needs?"
+   ],
+   "kw": [
+    "accommodations",
+    "accessibility",
+    "disability"
+   ],
+   "cue": "accommodat|disabilit|accessib|access(ible)? education"
+  },
+  {
+   "id": "submit",
+   "q": "How do I submit my assignments?",
+   "para": [
+    "Where do I hand in homework?",
+    "How do I submit my code?"
+   ],
+   "kw": [
+    "submission",
+    "submitting",
+    "turning in"
+   ],
+   "cue": "submit|submission|upload|hand in|turn in|gradescope|canvas"
+  },
+  {
+   "id": "software",
+   "q": "What software or programming language does the course use?",
+   "para": [
+    "What do I need to install on my computer?",
+    "Which programming language will we use?"
+   ],
+   "kw": [
+    "software",
+    "programming language",
+    "tools",
+    "computing"
+   ],
+   "cue": "python|java\\b|c\\+\\+|\\bC\\b|install|software|ide\\b|vs ?code|jupyter|matlab|programming language"
+  },
+  {
+   "id": "audit",
+   "q": "Can I audit the course?",
+   "para": [
+    "Can I take this course pass/fail?",
+    "Can I sit in on lectures without enrolling?"
+   ],
+   "kw": [
+    "auditing",
+    "audit",
+    "pass/fail"
+   ],
+   "cue": "audit|pass/fail|pass-fail|credit/no|cr/nc|satisfactory"
+  },
+  {
+   "id": "project",
+   "q": "What is the final project?",
+   "para": [
+    "How is the final project graded?",
+    "Can I work in a group on the final project?",
+    "What are the final project deliverables?"
+   ],
+   "kw": [
+    "final project",
+    "project"
+   ],
+   "cue": "project"
+  },
+  {
+   "id": "assignments",
+   "q": "What are the homework assignments like?",
+   "para": [
+    "How many assignments are there?",
+    "How often are problem sets released?"
+   ],
+   "kw": [
+    "assignments",
+    "homework",
+    "problem sets"
+   ],
+   "cue": "assignment|homework|problem set|pset"
+  },
+  {
+   "id": "quiz",
+   "q": "Are there quizzes in this course?",
+   "para": [
+    "What if I miss a quiz?",
+    "How are quizzes graded?"
+   ],
+   "kw": [
+    "quizzes",
+    "quiz"
+   ],
+   "cue": "quiz"
+  },
+  {
+   "id": "lectures",
+   "q": "Are lectures recorded?",
+   "para": [
+    "Where can I watch the lecture videos?",
+    "Can I attend lectures online?"
+   ],
+   "kw": [
+    "lectures",
+    "recordings",
+    "videos"
+   ],
+   "cue": "record|video|youtube|panopto|livestream|zoom|online"
+  },
+  {
+   "id": "section",
+   "q": "What happens in discussion sections or labs?",
+   "para": [
+    "What are sections and labs for?",
+    "How do I sign up for a section?"
+   ],
+   "kw": [
+    "sections",
+    "discussion sections",
+    "labs",
+    "recitation"
+   ],
+   "cue": "section|recitation|\\blabs?\\b|discussion"
+  },
+  {
+   "id": "drop",
+   "q": "Is the lowest score dropped?",
+   "para": [
+    "Are any homework or quiz scores dropped?"
+   ],
+   "kw": [
+    "dropped",
+    "lowest score"
+   ],
+   "cue": "drop|lowest|dropped"
+  },
+  {
+   "id": "topics",
+   "q": "What topics does the course cover?",
+   "para": [
+    "What will I learn in this course?",
+    "What are the learning goals of the course?"
+   ],
+   "kw": [
+    "course description",
+    "topics",
+    "goals",
+    "learning objectives",
+    "overview"
+   ],
+   "cue": "cover|topics?|learn|introduc|goals?|objectives?"
+  },
+  {
+   "id": "meet",
+   "q": "When and where does the class meet?",
+   "para": [
+    "What are the lecture times and location?"
+   ],
+   "kw": [
+    "class meeting times",
+    "meeting times",
+    "location",
+    "logistics"
+   ],
+   "cue": "\\d{1,2}(:\\d\\d)?\\s?(am|pm)|\\broom\\b|hall|building|auditorium|(mon|tues|wednes|thurs|fri)day"
+  },
+  {
+   "id": "cutoffs",
+   "q": "What are the letter grade cutoffs?",
+   "para": [
+    "Is the course graded on a curve?",
+    "What score do I need for an A?"
+   ],
+   "kw": [
+    "grade cutoffs",
+    "letter grades",
+    "curve"
+   ],
+   "cue": "\\b[A-D][+-]?\\b.{0,30}\\d|cutoff|curve|letter grade"
+  },
+  {
+   "id": "extra",
+   "q": "Is there extra credit?",
+   "para": [
+    "Can I earn bonus points?"
+   ],
+   "kw": [
+    "extra credit",
+    "bonus"
+   ],
+   "cue": "extra credit|bonus"
+  },
+  {
+   "id": "enroll",
+   "q": "How do I enroll or get off the waitlist?",
+   "para": [
+    "Can I enroll in the course late?",
+    "How does the waitlist work?"
+   ],
+   "kw": [
+    "enrollment",
+    "waitlist",
+    "enrolment"
+   ],
+   "cue": "enrol|waitlist|wait list|register"
+  },
+  {
+   "id": "workload",
+   "q": "How much work is this course?",
+   "para": [
+    "How many hours per week should I expect to spend?"
+   ],
+   "kw": [
+    "workload",
+    "time commitment"
+   ],
+   "cue": "hours? (per|a|each) week|workload|time commitment|units"
+  }
+ ],
+ "faq_threshold": 0.3,
+ "faq_kw_bonus": 0.05
 }

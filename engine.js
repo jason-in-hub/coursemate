@@ -6,6 +6,7 @@ const TJS = 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1';
 const PDFJS = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@5.7.284/build/';
 const BASE = new URL('ml/engine_model/', import.meta.url).href;
 const MAX_BYTES = 20 * 1024 * 1024, MAX_TOKENS = 256, BATCH = 16;
+const MAX_WORDS = 120, MUTUAL = 3, MIN_WORDS = 12;  // engine.Engine defaults (chosen on DEV syllabi, ml/eval_faq.py)
 
 // Python str semantics the chunker relies on: str.split()/strip() whitespace and str.splitlines() separators
 const WS = '\\t\\n\\v\\f\\r\\x1c-\\x1f \\x85\\xa0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000';
@@ -14,6 +15,11 @@ const strip = s => s.replace(STRIP, '');
 const words = s => { s = strip(s); return s ? s.split(SPLIT) : []; };
 const splitlines = s => s.split(/\r\n|[\n\r\v\f\x1c\x1d\x1e\x85\u2028\u2029]/);
 const isUpper = ch => !!ch && ch !== ch.toLowerCase() && ch === ch.toUpperCase();
+
+const HMARK = '\u{241E}';  // marks a heading line that came from an HTML heading tag (engine.HMARK)
+const HEADS = 'h1,h2,h3,h4,h5,h6,dt,summary,caption';
+const INLINE = 'a,b,strong,em,i,u,code,span,small,sup,sub,abbr,mark,kbd,var,q,cite,time,font';
+const textJoin = (node, sep) => { const w = node.ownerDocument.createTreeWalker(node, NodeFilter.SHOW_TEXT), out = []; while (w.nextNode()) out.push(w.currentNode.data); return out.join(sep); };
 
 /** Bytes of a .pdf/.html/.htm/.md/.txt file -> plain text with line breaks kept (engine.read_text). */
 export async function readText(name, data) {
@@ -34,11 +40,53 @@ export async function readText(name, data) {
   if (n.endsWith('.html') || n.endsWith('.htm')) {
     const d = new DOMParser().parseFromString(t, 'text/html');
     d.querySelectorAll('script,style,nav,footer').forEach(x => x.remove());
+    // v2: heading tags (and a bold lead-in ending in ':') become one marked line; inline tags are unwrapped
+    d.querySelectorAll(HEADS).forEach(h => { const t = words(textJoin(h, ' ')).join(' '); h.textContent = '\n' + HMARK + t + '\n'; });
+    d.querySelectorAll('strong,b').forEach(b => {
+      if (!b.isConnected) return;
+      const t = strip(textJoin(b, ' ')), p = b.parentElement;
+      if (t.endsWith(':') && words(t).length <= 8 && p && (p.tagName === 'P' || p.tagName === 'LI') && strip(p.textContent).startsWith(t)) b.textContent = '\n' + HMARK + words(t).join(' ') + '\n';
+    });
+    d.querySelectorAll(INLINE).forEach(x => { if (x.isConnected) x.replaceWith(...x.childNodes); });
+    d.normalize();
     const w = d.createTreeWalker(d, NodeFilter.SHOW_TEXT), out = [];
     while (w.nextNode()) out.push(w.currentNode.data);
     return out.join('\n');  // BeautifulSoup get_text('\n')
   }
   return t;
+}
+
+const SENT = /(?<=[.!?])\s+(?=[A-Z0-9("\u{201C}])/u;
+const isHeadLine = line => words(line).length <= 8 && !/[.,;]$/.test(line) && isUpper(String.fromCodePoint(line.codePointAt(0)));
+
+/** v2 chunks (engine.chunk_v2): sections from marked HTML headings when present, else the heading heuristic; each section
+ *  body packed sentence by sentence into windows of <= maxWords; a short last sentence starts the next window too. */
+export function chunkV2(text, maxWords = 120) {
+  const marked = text.includes(HMARK), secs = []; let cur = [], head = '';
+  for (const raw of splitlines(text)) {
+    let line = strip(raw); if (!line) continue;
+    let isHead;
+    if (marked) { isHead = line.startsWith(HMARK); line = strip(line.replace(/^\u{241E}+/u, '')); if (!line) continue; }
+    else isHead = isHeadLine(line);
+    if (isHead && cur.length) { secs.push([head, cur.join(' ')]); cur = []; }
+    if (isHead) head = strip(line.replace(/:+$/, '')); else cur.push(line);
+  }
+  if (cur.length) secs.push([head, cur.join(' ')]);
+  const out = [], nw = s => words(s).length;
+  for (const [h, body] of secs) {
+    const pieces = []; let win = [];
+    for (const s of words(body).join(' ').split(SENT)) {
+      if (!s) continue;
+      if (win.length && nw([...win, s].join(' ')) > maxWords) { pieces.push(win.join(' ')); win = nw(win[win.length - 1]) < Math.floor(maxWords / 2) ? win.slice(-1) : []; }
+      win.push(s);
+    }
+    if (win.length) pieces.push(win.join(' '));
+    for (const p of pieces) {
+      const w = words(p);
+      for (let i = 0; i < w.length; i += maxWords) { const piece = w.slice(i, i + maxWords).join(' '); if (nw(piece) >= 5) out.push({ section: h, text: (h ? h + ': ' : '') + piece }); }
+    }
+  }
+  return out;
 }
 
 /** Paragraph-aware chunks: short lines that look like headings start a new section; long sections are windowed (engine.chunk). */
@@ -102,16 +150,46 @@ export async function createEngine(onStatus = () => {}, opts = {}) {
   // drop questions tied to one course (codes like "CS 289", "Data 8", "COMP1945", or named tools)
   const specific = /\b[A-Z]{2,5} ?\d{2,4}\b|\bData ?8\b|check50|submit50|edX|Ed\b|Gradescope|JupyterHub|Piazza|DataHub|Canvas|okpy|\bOH\b/i;
   const bank = cfg.question_bank.filter(q => !specific.test(q));
-  onStatus('Embedding ' + bank.length + ' common questions');
-  const t1 = performance.now(), bankEmb = await encode(bank);
-  const E = { t: cfg.threshold, bank, backend, loadMs: performance.now() - t0, bankMs: performance.now() - t1, chunks: [], emb: null, faq: [], encode };
+  // the legacy bank is only needed by the v1 FAQ path (no intents in engine.json): embed it lazily
+  const t1 = performance.now(); let bankEmb = null;
+  const getBankEmb = async () => bankEmb || (bankEmb = await encode(bank));
+  if (!(cfg.intents || []).length) { onStatus('Embedding ' + bank.length + ' common questions'); await getBankEmb(); }
+  // v2 FAQ: canonical student intents, each with phrasings and an answer cue (engine.Engine.faq_v2)
+  const intents = cfg.intents || [], phIntent = [], phText = [];
+  intents.forEach((it, k) => [it.q, ...it.para].forEach(p => { phIntent.push(k); phText.push(p); }));
+  if (phText.length) onStatus('Embedding ' + phText.length + ' student-question phrasings');
+  const phEmb = phText.length ? await encode(phText) : [];
+  const E = { t: cfg.threshold, tFaq: cfg.faq_threshold ?? cfg.threshold, kwBonus: cfg.faq_kw_bonus ?? 0, intents, bank, backend, loadMs: performance.now() - t0, bankMs: performance.now() - t1, chunks: [], emb: null, faq: [], encode };
+  const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\  const E = { t: cfg.threshold, bank, backend, loadMs: performance.now() - t0, bankMs: performance.now() - t1, chunks: [], emb: null, faq: [], encode };');
+  E.faqV2 = (maxFaq = 25) => {
+    const K = intents.length, C = E.chunks.length, S = Array.from({ length: K }, () => new Float64Array(C).fill(-Infinity));
+    phEmb.forEach((pe, p) => { const k = phIntent[p]; for (let j = 0; j < C; j++) { const s = dot(pe, E.emb[j]); if (s > S[k][j]) S[k][j] = s; } });
+    intents.forEach((it, k) => {
+      const kws = it.kw.map(w => new RegExp('\\b' + reEsc(w) + '\\b')), cue = new RegExp(it.cue || '.', 'i');
+      E.chunks.forEach((c, j) => {
+        const h = c.section.toLowerCase();
+        if (h && kws.some(r => r.test(h))) S[k][j] += E.kwBonus;
+        const body = c.section ? c.text.slice(c.section.length + 2) : c.text;
+        if (words(body).length < MIN_WORDS || !cue.test(body)) S[k][j] = -1;
+      });
+    });
+    const faq = [];
+    for (let k = 0; k < K; k++) {
+      let j = 0; for (let x = 1; x < C; x++) if (S[k][x] > S[k][j]) j = x;
+      const s = S[k][j]; let rank = 0; for (let q = 0; q < K; q++) if (S[q][j] > s) rank++;
+      if (s >= E.tFaq && rank < MUTUAL) faq.push({ q: intents[k].q, a: E.chunks[j].text, section: E.chunks[j].section, conf: round3(s), intent: intents[k].id, chunk: j });
+    }
+    faq.sort((a, b) => b.conf - a.conf || (a.intent < b.intent ? -1 : a.intent > b.intent ? 1 : 0));
+    return faq.slice(0, maxFaq);
+  };
   E.ingest = async (name, data, maxFaq = 25) => {
     if (data.length > MAX_BYTES) throw new Error('file too large (20 MB max)');
-    const chunks = chunk(await readText(name, data));
+    const chunks = chunkV2(await readText(name, data), MAX_WORDS);
     if (!chunks.length) throw new Error('no text found in ' + name);
     const emb = await encode(chunks.map(c => c.text));
     E.chunks = chunks; E.emb = emb;
-    const top = bankEmb.map(q => argmax(emb, q)), order = top.map((_, i) => i).sort((a, b) => top[b][1] - top[a][1]);
+    if (intents.length) { E.faq = E.faqV2(maxFaq); return { chunks: chunks.length, faq: E.faq, threshold: E.t }; }
+    const top = (await getBankEmb()).map(q => argmax(emb, q)), order = top.map((_, i) => i).sort((a, b) => top[b][1] - top[a][1]);
     const faq = [], used = new Set();
     for (const i of order) {  // best-scoring bank question per chunk, above threshold
       const [j, s] = top[i];
@@ -125,6 +203,8 @@ export async function createEngine(onStatus = () => {}, opts = {}) {
   };
   E.ask = async q => {
     if (!E.emb) throw new Error('no syllabus loaded');
+    const nq = words(q.toLowerCase()).join(' '), hit = E.faq.find(f => words(f.q.toLowerCase()).join(' ') === nq);
+    if (hit) return { stamp: 'SOURCED', answer: hit.a, section: hit.section, conf: hit.conf, reason: 'faq' };  // the FAQ already shows this passage
     const [i, conf] = argmax(E.emb, (await encode([q]))[0]);
     if (conf < E.t) return { stamp: 'ESCALATED', answer: 'Please ask the TA', conf: round3(conf), reason: 'low confidence' };
     const c = E.chunks[i];
